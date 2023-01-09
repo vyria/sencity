@@ -14,7 +14,7 @@ namespace BNG {
             EditorWindow.GetWindow(typeof(IntegrationsEditor));
         }
 
-        void OnGUI() {
+        private void OnGUI() {
             GUILayout.Label("VRIF Integration Settings", EditorStyles.boldLabel);
 
             VRIFSettings.XRITIntegration = EditorGUILayout.Toggle("XR Interaction Toolkit Integration", VRIFSettings.XRITIntegration);
@@ -98,7 +98,7 @@ namespace BNG {
             }
         }
 
-        static void AddDefineSymbol(string symbolName) {
+        private static void AddDefineSymbol(string symbolName) {
             string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
 
             // Already included
@@ -114,7 +114,7 @@ namespace BNG {
             PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, result);
         }
 
-        static void RemoveDefineSymbol(string symbolName) {
+        private static void RemoveDefineSymbol(string symbolName) {
             string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
 
             if(definesString.Contains(symbolName + ";")) {

@@ -43,15 +43,13 @@ namespace BNG {
         /// <summary>
         /// This is the start point of a line for UI purposes. We may want to move this around if we change models or controllers.        
         /// </summary>
-        UIPointer uiPoint;
+        private UIPointer uiPoint;
+        private List<Transform> leftHandModels = default;
+        private Transform activatedLeftModel = default;
+        private List<Transform> rightHandModels = default;
+        private Transform activatedRightModel = default;
 
-        List<Transform> leftHandModels = default;
-        Transform activatedLeftModel = default;
-
-        List<Transform> rightHandModels = default;
-        Transform activatedRightModel = default;
-
-        void Start() {
+        private void Start() {
             uiPoint = GetComponentInChildren<UIPointer>();
 
             CacheHandModels();
@@ -65,7 +63,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
             // Cycle through hand models with Right Thumbstick
             if (ToggleHandsInput.GetDown()) {
                 ChangeHandsModel(_selectedHandGFX + 1, LoadHandSelectionFromPrefs);

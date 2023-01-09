@@ -12,8 +12,7 @@ namespace BNG {
         /// </summary>
         [Tooltip("Default locomotion to use if nothing stored in playerprefs. 0 = Teleport. 1 = SmoothLocomotion")]
         public LocomotionType DefaultLocomotion = LocomotionType.Teleport;
-
-        LocomotionType selectedLocomotion = LocomotionType.Teleport;
+        private LocomotionType selectedLocomotion = LocomotionType.Teleport;
         public LocomotionType SelectedLocomotion {
             get { return selectedLocomotion; }
         }
@@ -31,12 +30,11 @@ namespace BNG {
 
         [Tooltip("The action used to toggle locomotion type")]
         public InputActionReference LocomotionToggleAction;
+        private BNGPlayerController player;
+        private PlayerTeleport teleport;
+        private SmoothLocomotion smoothLocomotion;
 
-        BNGPlayerController player;
-        PlayerTeleport teleport;
-        SmoothLocomotion smoothLocomotion;
-
-        void Start() {
+        private void Start() {
             player = GetComponentInChildren<BNGPlayerController>();
             teleport = GetComponentInChildren<PlayerTeleport>();
 
@@ -49,9 +47,9 @@ namespace BNG {
             }
         }
 
-        bool actionToggle = false;
+        private bool actionToggle = false;
 
-        void Update() {
+        private void Update() {
             // Make sure we don't double toggle our inputs
             if(!actionToggle) {
                 CheckControllerToggleInput();
@@ -69,14 +67,14 @@ namespace BNG {
             }
         }
 
-        void OnEnable() {
+        private void OnEnable() {
             if(LocomotionToggleAction) {
                 LocomotionToggleAction.action.Enable();
                 LocomotionToggleAction.action.performed += OnLocomotionToggle;
             }
         }
 
-        void OnDisable() {
+        private void OnDisable() {
             if (LocomotionToggleAction) {
                 LocomotionToggleAction.action.Disable();
                 LocomotionToggleAction.action.performed -= OnLocomotionToggle;
@@ -124,7 +122,7 @@ namespace BNG {
             toggleSmoothLocomotion(selectedLocomotion == LocomotionType.SmoothLocomotion);
         }
 
-        void toggleTeleport(bool enabled) {
+        private void toggleTeleport(bool enabled) {
             if (enabled) {
                 teleport.EnableTeleportation();
             }
@@ -133,7 +131,7 @@ namespace BNG {
             }
         }
 
-        void toggleSmoothLocomotion(bool enabled) {
+        private void toggleSmoothLocomotion(bool enabled) {
             if (smoothLocomotion) {
                 smoothLocomotion.enabled = enabled;
             }

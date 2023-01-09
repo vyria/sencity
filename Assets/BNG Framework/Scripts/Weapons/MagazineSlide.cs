@@ -29,24 +29,21 @@ namespace BNG {
         public float EjectForce = 1f;
 
         public Grabbable HeldMagazine = null;
-        Collider HeldCollider = null;
+        private Collider HeldCollider = null;
 
         public float MagazineDistance = 0f;
-
-        bool magazineInPlace = false;
+        private bool magazineInPlace = false;
 
         // Lock in place for physics
-        bool lockedInPlace = false;
+        private bool lockedInPlace = false;
 
         public AudioClip ClipAttachSound;
         public AudioClip ClipDetachSound;
+        private RaycastWeapon parentWeapon;
+        private GrabberArea grabClipArea;
+        private float lastEjectTime;
 
-        RaycastWeapon parentWeapon;
-        GrabberArea grabClipArea;
-
-        float lastEjectTime;
-
-        void Awake() {
+        private void Awake() {
             grabClipArea = GetComponentInChildren<GrabberArea>();
 
             if (transform.parent != null) {
@@ -57,9 +54,9 @@ namespace BNG {
             if(HeldMagazine != null) {
                 AttachGrabbableMagazine(HeldMagazine, HeldMagazine.GetComponent<Collider>());
             }
-        }        
+        }
 
-        void LateUpdate() {
+        private void LateUpdate() {
 
             // Are we trying to grab the clip from the weapon
             CheckGrabClipInput();
@@ -113,11 +110,11 @@ namespace BNG {
             }
         }
 
-        bool recentlyEjected() {
+        private bool recentlyEjected() {
             return Time.time - lastEjectTime < 0.1f;
         }
 
-        void moveMagazine(Vector3 localPosition) {
+        private void moveMagazine(Vector3 localPosition) {
             HeldMagazine.transform.localPosition = localPosition;
         }
 
@@ -145,7 +142,7 @@ namespace BNG {
             }
         }
 
-        void attachMagazine()
+        private void attachMagazine()
         {
             // Drop Item
             var grabber = HeldMagazine.GetPrimaryGrabber();
@@ -189,7 +186,7 @@ namespace BNG {
         /// Detach Magazine from it's parent. Removes joint, re-enables collider, and calls events
         /// </summary>
         /// <returns>Returns the magazine that was ejected or null if no magazine was attached</returns>
-        Grabbable detachMagazine() {
+        private Grabbable detachMagazine() {
 
             if(HeldMagazine == null) {
                 return null;
@@ -241,7 +238,7 @@ namespace BNG {
             StartCoroutine(EjectMagRoutine(ejectedMag));
         }
 
-        IEnumerator EjectMagRoutine(Grabbable ejectedMag) {
+        private IEnumerator EjectMagRoutine(Grabbable ejectedMag) {
 
             if (ejectedMag != null && ejectedMag.GetComponent<Rigidbody>() != null) {
 
@@ -301,7 +298,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             Grabbable grab = other.GetComponent<Grabbable>();
             if (HeldMagazine == null && grab != null && grab.transform.name.Contains(AcceptableMagazineName)) {
                 AttachGrabbableMagazine(grab, other);

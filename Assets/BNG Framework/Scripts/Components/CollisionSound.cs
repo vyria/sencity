@@ -10,12 +10,10 @@ namespace BNG {
     public class CollisionSound : MonoBehaviour {
 
         public AudioClip CollisionAudio;
-        AudioSource audioSource;
-        float startTime;
-
-        Collider col;
-
-        Grabbable grab;
+        private AudioSource audioSource;
+        private float startTime;
+        private Collider col;
+        private Grabbable grab;
 
         /// <summary>
         /// Volume will never be played below this amount. 0-1
@@ -28,11 +26,10 @@ namespace BNG {
         public float MaximumVolume = 1f;
 
         public bool RecentlyPlayedSound = false;
-
-        float lastPlayedSound;
+        private float lastPlayedSound;
         public float LastRelativeVelocity = 0;
 
-        void Start() {
+        private void Start() {
             audioSource = GetComponent<AudioSource>();
 
             if(audioSource == null) {
@@ -98,7 +95,7 @@ namespace BNG {
             }
         }
 
-        void resetLastPlayedSound() {
+        private void resetLastPlayedSound() {
             RecentlyPlayedSound = false;
         }
     }

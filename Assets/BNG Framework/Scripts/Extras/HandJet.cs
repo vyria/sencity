@@ -19,15 +19,13 @@ namespace BNG {
         
         [Tooltip("If true the player will float in the air when not jetting. (Works for Rigidbody player only)")]
         public bool DisableGravityWhileHeld = true;
+        private CharacterController characterController;
+        private SmoothLocomotion smoothLocomotion;
+        private PlayerGravity playerGravity;
+        private Rigidbody playerRigid;
+        private AudioSource audioSource;
 
-        CharacterController characterController;
-        SmoothLocomotion smoothLocomotion;
-        PlayerGravity playerGravity;
-        Rigidbody playerRigid;
-
-        AudioSource audioSource;
-
-        void Start() {
+        private void Start() {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
             if(player) {
@@ -87,10 +85,10 @@ namespace BNG {
             }
         }
 
-        Vector3 moveDirection;
-        Vector3 addRigidForce;
+        private Vector3 moveDirection;
+        private Vector3 addRigidForce;
 
-        void doJet(float triggerValue) {
+        private void doJet(float triggerValue) {
             moveDirection = transform.forward * JetForce;
 
             // Use smooth loco method if available
@@ -138,7 +136,7 @@ namespace BNG {
             }
         }
 
-        void stopJet() {
+        private void stopJet() {
 
             if (audioSource.isPlaying) {
                 audioSource.Stop();

@@ -19,13 +19,13 @@ namespace BNG {
         public Color GizmoColor = new Color(255f, 255f, 255f, 0.5f);
 
         public bool ShowTransformNames = false;
+        private bool isQuiting;
 
-        bool isQuiting;
-        void OnApplicationQuit() {
+        private void OnApplicationQuit() {
             isQuiting = true;
         }
 
-        void OnDestroy() {
+        private void OnDestroy() {
             if (isQuiting) {
                 return;
             }
@@ -41,7 +41,7 @@ namespace BNG {
         }
 
 #if UNITY_EDITOR
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
 
             // Show Gizmos indicating bones / joints
             if (ShowGizmos) {
@@ -92,7 +92,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             // Update every frame even while in editor
             if (!Application.isPlaying) {
                 UnityEditor.EditorApplication.QueuePlayerLoopUpdate();

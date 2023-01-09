@@ -7,11 +7,8 @@ namespace BNG {
     public class HandPoseSaveAs : EditorWindow {
 
         public string PoseName = "HandPose";
-
-        
-
-        HandPoser inspectedPoser;
-        GUIStyle rt;
+        private HandPoser inspectedPoser;
+        private GUIStyle rt;
 
         // [MenuItem("VRIF/HandPose Save As...")]
         public void ShowWindow(HandPoser poser) {
@@ -75,8 +72,7 @@ namespace BNG {
             }
         }
 
-
-        void OnGUI() {
+        private void OnGUI() {
 
             GUI.changed = false;
 

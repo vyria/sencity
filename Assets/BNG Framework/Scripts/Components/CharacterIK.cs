@@ -54,19 +54,17 @@ namespace BNG {
         /// The player our Body will follow
         /// </summary>
         public CharacterController FollowPlayer;
-
-        Transform headBone;
-        Transform leftShoulderJoint;
-        Transform rightShoulderJoint;
-        Transform leftHandJoint;
-        Transform rightHandJoint;
-
-        Animator animator;
+        private Transform headBone;
+        private Transform leftShoulderJoint;
+        private Transform rightShoulderJoint;
+        private Transform leftHandJoint;
+        private Transform rightHandJoint;
+        private Animator animator;
 
         public float HipOffset = 0;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             animator = GetComponent<Animator>();
 
             headBone = animator.GetBoneTransform(HumanBodyBones.Head);
@@ -78,7 +76,7 @@ namespace BNG {
 
         public Vector3 hideBoneScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
 
-        void Update() {
+        private void Update() {
 
             // Hide Headbone
             if (headBone != null) {
@@ -110,8 +108,8 @@ namespace BNG {
 
             Transform hipJoint = animator.GetBoneTransform(HumanBodyBones.RightShoulder);            
         }
-               
-        void OnAnimatorIK() {
+
+        private void OnAnimatorIK() {
             if (animator) {                
 
                 //if the IK is active, set the position and rotation directly to the goal. 

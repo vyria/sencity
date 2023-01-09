@@ -58,10 +58,9 @@ namespace BNG {
         public Vector2 LeverVector;
         public float angleX;
         public float angleY;
+        private Quaternion originalRot = Quaternion.identity;
 
-        Quaternion originalRot = Quaternion.identity;
-
-        void Update() {
+        private void Update() {
             if(JoystickGrabbable != null) {
                 if(JoystickGrabbable.BeingHeld) {
                     Transform lookAt = JoystickGrabbable.GetPrimaryGrabber().transform;

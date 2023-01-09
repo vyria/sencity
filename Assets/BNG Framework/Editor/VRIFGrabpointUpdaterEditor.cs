@@ -9,10 +9,9 @@ namespace BNG {
     [CustomEditor(typeof(VRIFGrabpointUpdater))]
     [CanEditMultipleObjects]
     public class VRIFGrabpointUpdaterEditor : Editor {
+        private VRIFGrabpointUpdater updater;
 
-        VRIFGrabpointUpdater updater;
-
-        void OnEnable() {
+        private void OnEnable() {
            
         }
 

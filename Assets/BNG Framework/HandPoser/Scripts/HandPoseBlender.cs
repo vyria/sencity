@@ -39,11 +39,11 @@ namespace BNG {
 
         protected HandPoser handPoser;
 
-        void Start() {
+        private void Start() {
             handPoser = GetComponent<HandPoser>();
         }
 
-        void Update() {
+        private void Update() {
             if (UpdatePose) {
                 UpdatePoseFromInputs();
             }

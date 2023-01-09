@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace BNG {
     public class VRTextInput : MonoBehaviour {
-
-        UnityEngine.UI.InputField thisInputField;
+        private UnityEngine.UI.InputField thisInputField;
 
         public bool AttachToVRKeyboard = true;
 
@@ -13,10 +12,9 @@ namespace BNG {
         public bool DeactivateKeyboardOnDeselect = false;
 
         public VRKeyboard AttachedKeyboard;
+        private bool isFocused, wasFocused = false;
 
-        bool isFocused, wasFocused = false;
-
-        void Awake() {
+        private void Awake() {
             thisInputField = GetComponent<UnityEngine.UI.InputField>();
             
             if(thisInputField && AttachedKeyboard != null) {
@@ -24,7 +22,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
 
             isFocused = thisInputField != null && thisInputField.isFocused;
 
@@ -56,7 +54,7 @@ namespace BNG {
         }
 
         // Assign the AttachedKeyboard variable when adding the component to a GameObject for the first time
-        void Reset() {
+        private void Reset() {
             var keyboard = GameObject.FindObjectOfType<VRKeyboard>();
             if(keyboard) {
                 AttachedKeyboard = keyboard;

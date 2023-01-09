@@ -55,7 +55,7 @@ namespace BNG {
         public Grabber ClosestGrabber;
         [HideInInspector]
         public Arrow GrabbedArrow;
-        Grabbable arrowGrabbable;
+        private Grabbable arrowGrabbable;
         [HideInInspector]
         public Grabber arrowGrabber; // Which grabber is Grabbing the Arrow
         [HideInInspector]
@@ -70,21 +70,18 @@ namespace BNG {
         private float _lastDrawHaptic;
         private float _lastDrawHapticTime; // Last time.time we played a haptic
         private bool playedDrawSound = false;
-
-        Vector3 initialKnockPosition;
-
-        bool holdingArrow = false;
-        Grabbable bowGrabbable;
+        private Vector3 initialKnockPosition;
+        private bool holdingArrow = false;
+        private Grabbable bowGrabbable;
 
         [Header("Debug Text")]
         public Text PercentageUI;
 
         // Used for bow haptics
-        List<DrawDefinition> drawDefs;
+        private List<DrawDefinition> drawDefs;
+        private AudioSource audioSource;
 
-        AudioSource audioSource;
-
-        void Start() {
+        private void Start() {
             initialKnockPosition = ArrowKnock.localPosition;
             bowGrabbable = GetComponent<Grabbable>();
             audioSource = GetComponent<AudioSource>();
@@ -102,7 +99,7 @@ namespace BNG {
             };
         }
 
-        void Update() {
+        private void Update() {
 
             updateDrawDistance();
 
@@ -167,7 +164,7 @@ namespace BNG {
             alignBow();
         }
 
-        Transform getArrowRest() {
+        private Transform getArrowRest() {
 
             if(bowGrabbable.GetPrimaryGrabber() != null && bowGrabbable.GetPrimaryGrabber().HandSide == ControllerHand.Right && ArrowRestLeftHanded != null) {
                 return ArrowRestLeftHanded;
@@ -176,7 +173,7 @@ namespace BNG {
             return ArrowRest;
         }
 
-        bool canGrabArrowFromKnock() {
+        private bool canGrabArrowFromKnock() {
 
             // Setting override
             if(!CanGrabArrowFromKnock) {
@@ -189,7 +186,7 @@ namespace BNG {
             return CanGrabArrow && getTriggerInput(hand) > 0.75f && !holdingArrow;
         }
 
-        float getGrabArrowInput() {
+        private float getGrabArrowInput() {
             // If we are holding an arrow, check the arrow details for input
             if (arrowGrabber != null && arrowGrabbable != null) {
 
@@ -208,7 +205,7 @@ namespace BNG {
             return 0;
         }
 
-        float getGripInput(ControllerHand handSide) {
+        private float getGripInput(ControllerHand handSide) {
             if (handSide == ControllerHand.Left) {
                 return input.LeftGrip;
             }
@@ -219,7 +216,7 @@ namespace BNG {
             return 0;
         }
 
-        float getTriggerInput(ControllerHand handSide) {
+        private float getTriggerInput(ControllerHand handSide) {
             if (handSide == ControllerHand.Left) {
                 return input.LeftTrigger;
             }
@@ -230,7 +227,7 @@ namespace BNG {
             return 0;
         }
 
-        void setKnockPosition() {
+        private void setKnockPosition() {
 
             // Set knock to hand if within range
             if(StringDistance <= MaxStringDistance) {
@@ -256,14 +253,14 @@ namespace BNG {
             }
         }
 
-        void checkDrawSound() {
+        private void checkDrawSound() {
             if(holdingArrow && !playedDrawSound && DrawPercent > 30f) {
                 playBowDraw();
                 playedDrawSound = true;
             }
         }
-        
-        void updateDrawDistance() {
+
+        private void updateDrawDistance() {
             _lastDrawPercent = DrawPercent;
 
             float knockDistance = Math.Abs(Vector3.Distance(ArrowKnock.localPosition, initialKnockPosition));
@@ -274,7 +271,7 @@ namespace BNG {
             }
         }
 
-        void checkBowHaptics() {
+        private void checkBowHaptics() {
 
             // If we aren't pulling back then skip the check
             // Only apply haptics on pull back
@@ -300,7 +297,7 @@ namespace BNG {
 
         }
 
-        void resetStringPosition() {
+        private void resetStringPosition() {
             ArrowKnock.localPosition = Vector3.Lerp(ArrowKnock.localPosition, initialKnockPosition, Time.deltaTime * 100);
         }
 
@@ -407,7 +404,7 @@ namespace BNG {
         }
 
         // Make sure all starting values are reset
-        void resetArrowValues() {
+        private void resetArrowValues() {
             GrabbedArrow = null;
             arrowGrabbable = null;
             arrowGrabber = null;
@@ -415,7 +412,7 @@ namespace BNG {
             playedDrawSound = false;
         }
 
-        void playSoundInterval(float fromSeconds, float toSeconds, float volume) {
+        private void playSoundInterval(float fromSeconds, float toSeconds, float volume) {
             if(audioSource) {
 
                 if(audioSource.isPlaying) {
@@ -430,11 +427,11 @@ namespace BNG {
             }
         }
 
-        void playBowDraw() {
+        private void playBowDraw() {
             playSoundInterval(0, 1.66f, 0.4f);
         }
 
-        void playBowRelease() {
+        private void playBowRelease() {
             playSoundInterval(1.67f, 2.2f, 0.3f);
         }
     }

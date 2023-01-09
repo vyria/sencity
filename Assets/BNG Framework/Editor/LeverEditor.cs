@@ -7,11 +7,10 @@ namespace BNG {
 
     [CustomEditor(typeof(Lever))]
     public class LeverEditor : Editor {
+        private SerializedProperty minimumXRotation;
+        private SerializedProperty maximumXRotation;
 
-        SerializedProperty minimumXRotation;
-        SerializedProperty maximumXRotation;
-
-        void OnEnable() {
+        private void OnEnable() {
             minimumXRotation = serializedObject.FindProperty("MinimumXRotation");
             maximumXRotation = serializedObject.FindProperty("MaximumXRotation");
         }

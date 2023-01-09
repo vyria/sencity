@@ -14,7 +14,7 @@ namespace BNG {
         public float scaleSpeed = 0.1f;
 
         // Scale using Right Thumbstick axis
-        void Update() {
+        private void Update() {
             if (InputBridge.Instance.RightThumbstickAxis.y < -0.5f || Input.GetKey(KeyCode.H)) {
                 Scale -= Time.deltaTime * 1;
             }

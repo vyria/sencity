@@ -26,19 +26,19 @@ namespace BNG {
         public bool UseUpdate = false;
         public bool UseLateUpdate = true;
 
-        void Update() {
+        private void Update() {
             if (UseUpdate) {
                 lookAt();
             }
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
             if (UseLateUpdate) {
                 lookAt();
             }
         }
 
-        void lookAt() {
+        private void lookAt() {
 
             if (LookAt != null) {
 

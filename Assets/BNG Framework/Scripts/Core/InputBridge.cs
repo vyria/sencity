@@ -342,8 +342,7 @@ namespace BNG {
             }
         }
         private float _downThreshold = 0.2f;
-
-        bool SteamVRSupport = false;
+        private bool SteamVRSupport = false;
 
         [Header("HMD / Hardware")]
         public ControllerType ConnectedControllerType;
@@ -382,7 +381,7 @@ namespace BNG {
         public bool SupportsThumbTouch;
 
 #if UNITY_2019_3_OR_NEWER
-        static List<InputDevice> devices = new List<InputDevice>();
+        private static List<InputDevice> devices = new List<InputDevice>();
 #endif
 
         #endregion
@@ -404,29 +403,28 @@ namespace BNG {
         #endregion
 
         #region Unity Input Actions
-        UnityEngine.InputSystem.InputAction leftGrip;
-        UnityEngine.InputSystem.InputAction leftTrigger;
-        UnityEngine.InputSystem.InputAction leftTriggerNear;
-        UnityEngine.InputSystem.InputAction rightGrip;
-        UnityEngine.InputSystem.InputAction rightTrigger;
-        UnityEngine.InputSystem.InputAction rightTriggerNear;
-        UnityEngine.InputSystem.InputAction leftThumbstick;
-        UnityEngine.InputSystem.InputAction leftThumbstickDown;
-        UnityEngine.InputSystem.InputAction leftThumbNear;        
-        UnityEngine.InputSystem.InputAction leftTouchpad;
-        UnityEngine.InputSystem.InputAction leftTouchpadDown;
-        UnityEngine.InputSystem.InputAction rightThumbstick;
-        UnityEngine.InputSystem.InputAction rightThumbstickDown;
-        UnityEngine.InputSystem.InputAction rightThumbNear;
-        UnityEngine.InputSystem.InputAction rightTouchpad;
-        UnityEngine.InputSystem.InputAction rightTouchpadDown;
-        UnityEngine.InputSystem.InputAction aButton;
-        UnityEngine.InputSystem.InputAction bButton;
-        UnityEngine.InputSystem.InputAction xButton;
-        UnityEngine.InputSystem.InputAction yButton;
-
-        UnityEngine.InputSystem.InputAction startButton;
-        UnityEngine.InputSystem.InputAction backButton;
+        private UnityEngine.InputSystem.InputAction leftGrip;
+        private UnityEngine.InputSystem.InputAction leftTrigger;
+        private UnityEngine.InputSystem.InputAction leftTriggerNear;
+        private UnityEngine.InputSystem.InputAction rightGrip;
+        private UnityEngine.InputSystem.InputAction rightTrigger;
+        private UnityEngine.InputSystem.InputAction rightTriggerNear;
+        private UnityEngine.InputSystem.InputAction leftThumbstick;
+        private UnityEngine.InputSystem.InputAction leftThumbstickDown;
+        private UnityEngine.InputSystem.InputAction leftThumbNear;
+        private UnityEngine.InputSystem.InputAction leftTouchpad;
+        private UnityEngine.InputSystem.InputAction leftTouchpadDown;
+        private UnityEngine.InputSystem.InputAction rightThumbstick;
+        private UnityEngine.InputSystem.InputAction rightThumbstickDown;
+        private UnityEngine.InputSystem.InputAction rightThumbNear;
+        private UnityEngine.InputSystem.InputAction rightTouchpad;
+        private UnityEngine.InputSystem.InputAction rightTouchpadDown;
+        private UnityEngine.InputSystem.InputAction aButton;
+        private UnityEngine.InputSystem.InputAction bButton;
+        private UnityEngine.InputSystem.InputAction xButton;
+        private UnityEngine.InputSystem.InputAction yButton;
+        private UnityEngine.InputSystem.InputAction startButton;
+        private UnityEngine.InputSystem.InputAction backButton;
 
 
         #endregion
@@ -453,7 +451,7 @@ namespace BNG {
             setDeviceProperties();
         }
 
-        void Start() {
+        private void Start() {
 
             SetTrackingOriginMode(TrackingOrigin);
 
@@ -477,7 +475,7 @@ namespace BNG {
 #endif
         }
 
-        void OnEnable() {
+        private void OnEnable() {
 #if UNITY_2019_3_OR_NEWER
             InputDevices.deviceConfigChanged += onDeviceChanged;
             InputDevices.deviceConnected += onDeviceChanged;
@@ -485,18 +483,18 @@ namespace BNG {
 #endif
             CreateUnityInputActions();
             EnableActions();
-        }        
+        }
 
-        void OnDisable() {
+        private void OnDisable() {
 #if UNITY_2019_3_OR_NEWER
             InputDevices.deviceConfigChanged -= onDeviceChanged;
             InputDevices.deviceConnected -= onDeviceChanged;
             InputDevices.deviceDisconnected -= onDeviceChanged;
 #endif
             DisableActions();
-        }        
+        }
 
-        void Update() {
+        private void Update() {
             UpdateDeviceActive();
             UpdateInputs();
         }
@@ -613,11 +611,11 @@ namespace BNG {
         #region XR Input
 #if UNITY_2019_3_OR_NEWER
         #region XRInputVariables
-        InputDevice primaryLeftController;
-        InputDevice primaryRightController;
-        InputFeatureUsage<Vector2> thumbstickAxis;
-        InputFeatureUsage<Vector2> thumbstickAxisSecondary;
-        InputFeatureUsage<bool> thumbstickAxisClick;
+        private InputDevice primaryLeftController;
+        private InputDevice primaryRightController;
+        private InputFeatureUsage<Vector2> thumbstickAxis;
+        private InputFeatureUsage<Vector2> thumbstickAxisSecondary;
+        private InputFeatureUsage<bool> thumbstickAxisClick;
 #endregion
 #endif
 
@@ -1058,7 +1056,7 @@ namespace BNG {
         /// </summary>
         /// <param name="inputValue"></param>
         /// <returns></returns>
-        float correctValue(float inputValue) {
+        private float correctValue(float inputValue) {
             return (float)System.Math.Round(inputValue * 1000f) / 1000f;
         }
 
@@ -1129,7 +1127,7 @@ namespace BNG {
             return Vector3.zero;
         }
 
-        Vector2 ApplyDeadZones(Vector2 pos, float deadZoneX, float deadZoneY) {
+        private Vector2 ApplyDeadZones(Vector2 pos, float deadZoneX, float deadZoneY) {
 
             if (Mathf.Abs(pos.x) < deadZoneX) {
                 pos.x = 0f;
@@ -1143,14 +1141,14 @@ namespace BNG {
         }
 
         // Called when an input device has changed (connect / disconnect, etc.)
-        void onDeviceChanged(InputDevice inputDevice) {
+        private void onDeviceChanged(InputDevice inputDevice) {
 
             setDeviceProperties();
 
             SetTrackingOriginMode(TrackingOrigin);
         }
 
-        void setDeviceProperties() {
+        private void setDeviceProperties() {
 
             // Update device properties such as device name, controller properties, etc.
             // We only want to update this information if a device has changed in order to skip unnecessary checks every frame
@@ -1441,14 +1439,14 @@ namespace BNG {
         }
 
 #if UNITY_2019_2_OR_NEWER
-        float getFeatureUsage(InputDevice device, InputFeatureUsage<float> usage, bool clamp = true) {
+        private float getFeatureUsage(InputDevice device, InputFeatureUsage<float> usage, bool clamp = true) {
             float val;
             device.TryGetFeatureValue(usage, out val);
 
             return Mathf.Clamp01(val);
         }
 
-        bool getFeatureUsage(InputDevice device, InputFeatureUsage<bool> usage) {
+        private bool getFeatureUsage(InputDevice device, InputFeatureUsage<bool> usage) {
             bool val;
             if (device.TryGetFeatureValue(usage, out val)) {
                 return val;
@@ -1457,7 +1455,7 @@ namespace BNG {
             return val;
         }
 
-        Vector2 getFeatureUsage(InputDevice device, InputFeatureUsage<Vector2> usage) {
+        private Vector2 getFeatureUsage(InputDevice device, InputFeatureUsage<Vector2> usage) {
             Vector2 val;
             if (device.TryGetFeatureValue(usage, out val)) {
                 return val;
@@ -1466,7 +1464,7 @@ namespace BNG {
             return val;
         }
 
-        Vector3 getFeatureUsage(InputDevice device, InputFeatureUsage<Vector3> usage) {
+        private Vector3 getFeatureUsage(InputDevice device, InputFeatureUsage<Vector3> usage) {
             Vector3 val;
             if (device.TryGetFeatureValue(usage, out val)) {
                 return val;
@@ -1476,7 +1474,7 @@ namespace BNG {
         }
 #endif
 
-        bool setTrackingOrigin = false;
+        private bool setTrackingOrigin = false;
         public virtual void SetTrackingOriginMode(TrackingOriginModeFlags trackingOrigin) {
             // 2019.4 Needs to use XRDevice.SetTrackingSpaceType; TrySetTrackingOriginMode does not function properly.
             // *Removed from VRIF  v1.6 as XR plugin should properly set tracking space
@@ -1490,7 +1488,7 @@ namespace BNG {
             StartCoroutine(changeOriginModeRoutine(trackingOrigin));
         }
 
-        IEnumerator changeOriginModeRoutine(TrackingOriginModeFlags trackingOrigin) {
+        private IEnumerator changeOriginModeRoutine(TrackingOriginModeFlags trackingOrigin) {
 
             // Wait one frame as Unity has an issue with calling this immediately
             yield return null;
@@ -1558,7 +1556,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator Vibrate(float frequency, float amplitude, float duration, ControllerHand hand) {
+        private IEnumerator Vibrate(float frequency, float amplitude, float duration, ControllerHand hand) {
 #if OCULUS_INTEGRATION
             // Start vibration
             if (hand == ControllerHand.Right) {

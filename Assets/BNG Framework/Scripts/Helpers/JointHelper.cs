@@ -20,22 +20,20 @@ namespace BNG {
         public bool LockXRotation = false;
         public bool LockYRotation = false;
         public bool LockZRotation = false;
+        private Vector3 initialPosition;
+        private Vector3 initialRotation;
+        private Vector3 initialScale;
+        private Vector3 currentPosition;
+        private Vector3 currentScale;
+        private Vector3 currentRotation;
 
-        Vector3 initialPosition;
-        Vector3 initialRotation;
-        Vector3 initialScale;
-
-        Vector3 currentPosition;
-        Vector3 currentScale;
-        Vector3 currentRotation;
-
-        void Start() {
+        private void Start() {
             initialPosition = transform.localPosition;
             initialRotation = transform.localEulerAngles;
             initialScale = transform.localScale;
         }
 
-        void lockPosition() {
+        private void lockPosition() {
             if (LockXPosition || LockYPosition || LockZPosition) {
                 currentPosition = transform.localPosition;
                 transform.localPosition = new Vector3(LockXPosition ? initialPosition.x : currentPosition.x, LockYPosition ? initialPosition.y : currentPosition.y, LockZPosition ? initialPosition.z : currentPosition.z);
@@ -52,11 +50,11 @@ namespace BNG {
             }
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
             lockPosition();
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             lockPosition();
         }
     }

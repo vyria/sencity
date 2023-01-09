@@ -14,15 +14,14 @@ namespace BNG {
         public Transform LaserEnd;
 
         public bool Active = true;
-
-        LineRenderer line;
+        private LineRenderer line;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             line = GetComponent<LineRenderer>();
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
             if(Active) {
 
                 line.enabled = true;

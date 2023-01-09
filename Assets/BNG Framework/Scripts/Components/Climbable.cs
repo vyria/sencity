@@ -8,10 +8,9 @@ namespace BNG {
     /// Allows the Player to climb objects by Grabbing them
     /// </summary>
     public class Climbable : Grabbable {
+        private PlayerClimbing playerClimbing;
 
-        PlayerClimbing playerClimbing;
-
-        void Start() {
+        private void Start() {
             // Make sure Climbable is set to dual grab
             SecondaryGrabBehavior = OtherGrabBehavior.DualGrab;
 

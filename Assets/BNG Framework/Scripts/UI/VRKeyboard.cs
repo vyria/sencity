@@ -13,10 +13,9 @@ namespace BNG {
 
         [Header("Sound FX")]
         public AudioClip KeyPressSound;
+        private List<VRKeyboardKey> KeyboardKeys;
 
-        List<VRKeyboardKey> KeyboardKeys;
-
-        void Awake() {
+        private void Awake() {
             KeyboardKeys = transform.GetComponentsInChildren<VRKeyboardKey>().ToList();
         }
 
@@ -118,13 +117,13 @@ namespace BNG {
             }
         }
 
-        IEnumerator IncreaseInputFieldCareteRoutine() {
+        private IEnumerator IncreaseInputFieldCareteRoutine() {
             yield return new WaitForEndOfFrame();
             AttachedInputField.caretPosition = AttachedInputField.caretPosition + 1;
             AttachedInputField.ForceLabelUpdate();
         }
 
-        IEnumerator DecreaseInputFieldCareteRoutine() {
+        private IEnumerator DecreaseInputFieldCareteRoutine() {
             yield return new WaitForEndOfFrame();
             AttachedInputField.caretPosition = AttachedInputField.caretPosition - 1;
             AttachedInputField.ForceLabelUpdate();

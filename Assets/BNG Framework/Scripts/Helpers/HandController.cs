@@ -24,7 +24,7 @@ namespace BNG {
         public AutoPoser autoPoser;
 
         // We can use the HandPoseBlender to blend between an open and closed hand pose, using controller inputs such as grip and trigger as the blend values
-        HandPoseBlender poseBlender;
+        private HandPoseBlender poseBlender;
 
         [Tooltip("How to handle the hand when nothing is being grabbed / idle. Ex : Can use an Animator to control the hand via blending, a HandPoser to control via blend states, AutoPoser to continually auto pose while nothing is being held, or 'None' if you want to handle the idle state yourself.")]
         public HandPoserType IdlePoseType = HandPoserType.HandPoser;
@@ -67,13 +67,12 @@ namespace BNG {
         private float _gripValue = 0f;
 
         public int PoseId;
+        private ControllerOffsetHelper offset;
+        private InputBridge input;
+        private Rigidbody rigid;
+        private Transform offsetTransform;
 
-        ControllerOffsetHelper offset;
-        InputBridge input;
-        Rigidbody rigid;
-        Transform offsetTransform;
-
-        Vector3 offsetPosition {
+        private Vector3 offsetPosition {
             get {
                 if(offset) {
                     return offset.OffsetPosition;
@@ -82,7 +81,7 @@ namespace BNG {
             }
         }
 
-        Vector3 offsetRotation {
+        private Vector3 offsetRotation {
             get {
                 if (offset) {
                     return offset.OffsetRotation;
@@ -91,7 +90,7 @@ namespace BNG {
             }
         }
 
-        void Start() {
+        private void Start() {
 
             rigid = GetComponent<Rigidbody>();
             offset = GetComponent<ControllerOffsetHelper>();
@@ -380,7 +379,7 @@ namespace BNG {
             }
         }
 
-        void setAnimatorBlend(float min, float max, float input, int animationLayer) {
+        private void setAnimatorBlend(float min, float max, float input, int animationLayer) {
             HandAnimator.SetLayerWeight(animationLayer, min + (input) * max - min);
         }
 

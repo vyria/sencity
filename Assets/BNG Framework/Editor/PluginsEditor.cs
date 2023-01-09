@@ -7,40 +7,32 @@ using UnityEditor.PackageManager;
 
 [InitializeOnLoad]
 public class PluginsEditor : EditorWindow {
-
-    static ListRequest ListRequest;
-    static AddRequest AddRequest;
-
-    static bool LoadingData = false;
-
-    static bool UsingOculusXR = false;
-    static bool UsingOculusAndroid = false;
-    static bool UsingOculusDesktop = false;
-    static bool UsingOpenVRDesktop = false;
-    static bool UsingOpenXR = false;
-    static bool UsingXRManagement = false;
-
-    static bool UsingURP = false;
-    static bool UsingHDRP = false;
-
-    static bool IsUnity2019 = false;
-    static bool IsUnity2020 = false;
-    static bool IsUnity2021 = false;
-
-    static bool InstallingOpenXR = false;
+    private static ListRequest ListRequest;
+    private static AddRequest AddRequest;
+    private static bool LoadingData = false;
+    private static bool UsingOculusXR = false;
+    private static bool UsingOculusAndroid = false;
+    private static bool UsingOculusDesktop = false;
+    private static bool UsingOpenVRDesktop = false;
+    private static bool UsingOpenXR = false;
+    private static bool UsingXRManagement = false;
+    private static bool UsingURP = false;
+    private static bool UsingHDRP = false;
+    private static bool IsUnity2019 = false;
+    private static bool IsUnity2020 = false;
+    private static bool IsUnity2021 = false;
+    private static bool InstallingOpenXR = false;
 
     public static PluginsEditor Instance { get; private set; }
     public static bool IsOpen {
         get { return Instance != null; }
     }
 
-    static bool DoCheckFirstRun = true;
-    static bool FirstRun = true;
-
-    static bool ShowedFirstRunWindow = false;
-
-    static Texture logo;
-    static GUIStyle rt;
+    private static bool DoCheckFirstRun = true;
+    private static bool FirstRun = true;
+    private static bool ShowedFirstRunWindow = false;
+    private static Texture logo;
+    private static GUIStyle rt;
 
     static PluginsEditor() {
         if(DoCheckFirstRun) {
@@ -48,7 +40,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    static void CheckFirstRun() {
+    private static void CheckFirstRun() {
 
         // Only call this once
         EditorApplication.update -= CheckFirstRun;
@@ -60,7 +52,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    void OnEnable() { 
+    private void OnEnable() { 
         Instance = this;
 
         logo = Resources.Load("v_64") as Texture;
@@ -106,13 +98,13 @@ public class PluginsEditor : EditorWindow {
     }
 
     [UnityEditor.Callbacks.DidReloadScripts]
-    static void OnScriptsReloaded() {
+    private static void OnScriptsReloaded() {
        if(IsOpen) {
             RefreshWindow();
         }
     }
 
-    void OnGUI() {
+    private void OnGUI() {
 
         // Sanity check on rich text style
         if(rt == null) {
@@ -190,13 +182,13 @@ public class PluginsEditor : EditorWindow {
         AddLink("SteamVR SDK", "https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647");
     }
 
-    static void AddLink(string label, string url) {
+    private static void AddLink(string label, string url) {
         if (GUILayout.Button(label, EditorStyles.linkLabel)) {
             Application.OpenURL(url);
         }
     }
 
-    static string OpenXRMessage;
+    private static string OpenXRMessage;
 
     public static void DrawUILine(Color color, int thickness = 1, int padding = 10) {
         Rect r = EditorGUILayout.GetControlRect(GUILayout.Height(padding + thickness));
@@ -207,7 +199,7 @@ public class PluginsEditor : EditorWindow {
         EditorGUI.DrawRect(r, color);
     }
 
-    static void CheckNoPluginsInstalled() {
+    private static void CheckNoPluginsInstalled() {
         // Not using any plugins
         bool noPluginsInstalled = !UsingOculusXR && !UsingOculusAndroid && !UsingOculusDesktop && !UsingOpenVRDesktop && !UsingOpenXR;
         if (noPluginsInstalled) {
@@ -216,7 +208,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    static void AddOpenXRContent() {
+    private static void AddOpenXRContent() {
 
         GUIStyle rt = new GUIStyle(EditorStyles.label);
         rt.richText = true;
@@ -264,8 +256,8 @@ public class PluginsEditor : EditorWindow {
             }
         }
     }
-    
-    static void RefreshWindow() {
+
+    private static void RefreshWindow() {
         if (!LoadingData) {
             LoadingData = true;
 
@@ -275,7 +267,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    static string GetLabel(bool active) {
+    private static string GetLabel(bool active) {
         if(active) {
             return "<color=green><b>True</b></color>";
         }
@@ -283,7 +275,7 @@ public class PluginsEditor : EditorWindow {
         return "<color=gray><b>False</b></color>"; 
     }
 
-    static void ListProgress() {
+    private static void ListProgress() {
         if (ListRequest.IsCompleted) {
             if (ListRequest.Status == StatusCode.Success) {
                 foreach (var package in ListRequest.Result) {
@@ -323,7 +315,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    static void AddProgress() {
+    private static void AddProgress() {
         if (AddRequest.IsCompleted) {
 
             if (AddRequest.Status == StatusCode.Success) {
@@ -339,7 +331,7 @@ public class PluginsEditor : EditorWindow {
         }
     }
 
-    static void InstallOpenXR() {
+    private static void InstallOpenXR() {
         InstallingOpenXR = true;
 
         AddRequest = Client.Add("com.unity.xr.openxr");

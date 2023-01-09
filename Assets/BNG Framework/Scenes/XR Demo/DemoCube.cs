@@ -14,15 +14,14 @@ namespace BNG {
         public Material ActiveMaterial;
 
         // Currently activating the object?
-        bool active = false;
+        private bool active = false;
 
         // Currently hovering over the object?
-        bool hovering = false;
+        private bool hovering = false;
+        private Material initialMaterial;
+        private MeshRenderer render;
 
-        Material initialMaterial;
-        MeshRenderer render;
-
-        void Start() {
+        private void Start() {
             render = GetComponent<MeshRenderer>();
             initialMaterial = render.sharedMaterial;
         }        

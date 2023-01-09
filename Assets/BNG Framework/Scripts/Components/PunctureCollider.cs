@@ -33,22 +33,21 @@ namespace BNG {
 
         [Tooltip("How far (in meters) our object has been embedded into")]
         public float PunctureValue;
-        float previousPunctureValue;
-
-        Collider col;
-        Collider hitCollilder;
-        Collider[] ignoreColliders;
-        Rigidbody rigid;
-        GameObject jointHelper;
-        Rigidbody jointHelperRigid;
-        ConfigurableJoint jointHelperJoint;
-        Grabbable thisGrabbable;
-        FixedJoint fj;
+        private float previousPunctureValue;
+        private Collider col;
+        private Collider hitCollilder;
+        private Collider[] ignoreColliders;
+        private Rigidbody rigid;
+        private GameObject jointHelper;
+        private Rigidbody jointHelperRigid;
+        private ConfigurableJoint jointHelperJoint;
+        private Grabbable thisGrabbable;
+        private FixedJoint fj;
 
         // Used to store min / max puncture values
-        float yPuncture, yPunctureMin, yPunctureMax;
+        private float yPuncture, yPunctureMin, yPunctureMax;
 
-        void Start() {
+        private void Start() {
             col = GetComponent<Collider>();
             rigid = col.attachedRigidbody;
             ignoreColliders = GetComponentsInChildren<Collider>();
@@ -303,7 +302,7 @@ namespace BNG {
             return true;
         }
 
-        void OnCollisionEnter(Collision collision) {
+        private void OnCollisionEnter(Collision collision) {
 
             ContactPoint contact = collision.contacts[0];
             Vector3 hitPosition = contact.point;

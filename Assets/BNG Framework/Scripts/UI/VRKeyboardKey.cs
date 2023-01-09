@@ -5,11 +5,9 @@ using UnityEngine;
 namespace BNG {
 
     public class VRKeyboardKey : MonoBehaviour {
-
-        UnityEngine.UI.Button thisButton;
-        UnityEngine.UI.Text thisButtonText;
-
-        VRKeyboard vrKeyboard;
+        private UnityEngine.UI.Button thisButton;
+        private UnityEngine.UI.Text thisButtonText;
+        private VRKeyboard vrKeyboard;
 
         public string Keycode;
 
@@ -18,7 +16,7 @@ namespace BNG {
         [HideInInspector]
         public bool UseShiftKey = false;
 
-        void Awake() {
+        private void Awake() {
             thisButton = GetComponent<UnityEngine.UI.Button>();
             thisButtonText = GetComponentInChildren<UnityEngine.UI.Text>();
 

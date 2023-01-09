@@ -4,14 +4,14 @@ using UnityEngine.ProBuilder;
 
 namespace ProBuilder.Examples
 {
-	/// <summary>
-	/// Creates a cube on start and colors it's vertices programatically.
-	/// </summary>
-	sealed class HueCube : MonoBehaviour
+    /// <summary>
+    /// Creates a cube on start and colors it's vertices programatically.
+    /// </summary>
+    internal sealed class HueCube : MonoBehaviour
 	{
-		ProBuilderMesh m_Mesh;
+        private ProBuilderMesh m_Mesh;
 
-		void Start()
+        private void Start()
 		{
 			// Create a new ProBuilder cube to work with.
 			m_Mesh = ShapeGenerator.CreateShape(ShapeType.Cube);

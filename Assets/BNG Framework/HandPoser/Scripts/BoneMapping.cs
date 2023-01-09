@@ -17,7 +17,7 @@ namespace BNG {
         [Header("Shown for Debug : ")]
         public bool ShowGizmos = true;
 
-        void Update() {
+        private void Update() {
             if (Weight <= 0f) {
                 return;
             }
@@ -44,7 +44,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
             if (!ShowGizmos || Fingers == null) {
                 return;
             }

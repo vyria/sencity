@@ -18,7 +18,7 @@ namespace BNG {
 
         public Renderer Renderer;
 
-        void Start() {
+        private void Start() {
             if(Renderer == null) {
                 Renderer = GetComponentInChildren<Renderer>();
             }

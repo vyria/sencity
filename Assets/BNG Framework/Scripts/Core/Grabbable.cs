@@ -32,7 +32,7 @@ namespace BNG {
             }
         }
 
-        List<Grabber> validGrabbers;
+        private List<Grabber> validGrabbers;
 
         /// <summary>
         /// The grabber that is currently holding us. Null if not being held
@@ -292,7 +292,7 @@ namespace BNG {
         public bool AddControllerVelocityOnDrop = true;
 
         // Total distance between the Grabber and Grabbable.
-        float journeyLength;
+        private float journeyLength;
 
         public Vector3 OriginalScale { get; private set; }
 
@@ -349,7 +349,7 @@ namespace BNG {
         [HideInInspector]
         public Transform LocalOffsetTransform;
 
-        Vector3 grabPosition {
+        private Vector3 grabPosition {
             get {
                 if (primaryGrabOffset != null) {
                     return primaryGrabOffset.position;
@@ -806,15 +806,15 @@ namespace BNG {
             }
         }
 
+        private bool initiatedFlick = false;
 
-        bool initiatedFlick = false;
         // Angular Velocity required to start the flick force
-        float flickStartVelocity = 1.5f;
+        private float flickStartVelocity = 1.5f;
 
         /// <summary>
         /// How long in seconds the object should take to jump to the grabber when using the Flick remote grab type
         /// </summary>
-        float FlickSpeed = 0.5f;
+        private float FlickSpeed = 0.5f;
 
         public float lastFlickTime;
 
@@ -994,7 +994,7 @@ namespace BNG {
             }
         }
 
-        void setPositionSpring(float spring, float damper) {
+        private void setPositionSpring(float spring, float damper) {
 
             if(connectedJoint == null) {
                 return;
@@ -1016,7 +1016,7 @@ namespace BNG {
             connectedJoint.zDrive = zDrive;
         }
 
-        void setSlerpDrive(float slerp, float damper) {
+        private void setSlerpDrive(float slerp, float damper) {
             if(connectedJoint) {
                 JointDrive slerpDrive = connectedJoint.slerpDrive;
                 slerpDrive.positionSpring = slerp;
@@ -1057,7 +1057,7 @@ namespace BNG {
         /// <summary>
         /// Apply a velocity on our Grabbable towards our Grabber
         /// </summary>
-        void moveWithVelocity() {
+        private void moveWithVelocity() {
 
             if(rigid == null) { return; }
             
@@ -1078,10 +1078,10 @@ namespace BNG {
             }            
         }
 
-        float angle;
-        Vector3 axis, angularTarget, angularMovement;
+        private float angle;
+        private Vector3 axis, angularTarget, angularMovement;
 
-        void rotateWithVelocity() {
+        private void rotateWithVelocity() {
 
             if(rigid == null) {
                 return;
@@ -1295,7 +1295,7 @@ namespace BNG {
             }
         }
 
-        void checkParentHands(Grabber g) {            
+        private void checkParentHands(Grabber g) {            
 
             if (ParentHandModel && g != null) {
 
@@ -1344,7 +1344,7 @@ namespace BNG {
         }
 
         // Can this object be moved towards an object, or is it fixed in place / attached to something else
-        bool canBeMoved() {
+        private bool canBeMoved() {
 
             if (GetComponent<Rigidbody>() == null) {
                 return false;
@@ -1357,7 +1357,7 @@ namespace BNG {
             return true;
         }
 
-        void checkSecondaryLook() {
+        private void checkSecondaryLook() {
 
             // Create transform to look at if we are looking at a precise grab
             if (BeingHeldWithTwoHands) {
@@ -1420,7 +1420,7 @@ namespace BNG {
             }
         }
 
-        void rotateGrabber(bool lerp = false) {
+        private void rotateGrabber(bool lerp = false) {
             Grabber heldBy = GetPrimaryGrabber();
             if (heldBy != null) {
                 Transform grabberTransform = heldBy.transform;
@@ -1848,7 +1848,7 @@ namespace BNG {
             BeingHeld = heldByGrabbers != null && heldByGrabbers.Count > 0;            
         }
 
-        void clearLookAtTransform() {
+        private void clearLookAtTransform() {
             if (SecondaryLookAtTransform != null && SecondaryLookAtTransform.transform.name == "LookAtTransformTemp") {
                 GameObject.Destroy(SecondaryLookAtTransform.gameObject);
             }
@@ -1856,7 +1856,7 @@ namespace BNG {
             SecondaryLookAtTransform = null;
         }
 
-        void callEvents(Grabber g) {
+        private void callEvents(Grabber g) {
             if (events.Any()) {
                 ControllerHand hand = g.HandSide;
 
@@ -2110,7 +2110,7 @@ namespace BNG {
             }
         }
 
-        void setupConfigJoint(Grabber g) {
+        private void setupConfigJoint(Grabber g) {
             connectedJoint = g.GetComponent<ConfigurableJoint>();
             connectedJoint.autoConfigureConnectedAnchor = false;
             connectedJoint.connectedBody = rigid;
@@ -2118,14 +2118,14 @@ namespace BNG {
             connectedJoint.connectedAnchor = GrabPositionOffset;
         }
 
-        void removeConfigJoint() {
+        private void removeConfigJoint() {
             if (connectedJoint != null) {
                 connectedJoint.anchor = Vector3.zero;
                 connectedJoint.connectedBody = null;
             }
         }
 
-        void addGrabber(Grabber g) {
+        private void addGrabber(Grabber g) {
             if (heldByGrabbers == null) {
                 heldByGrabbers = new List<Grabber>();
             }
@@ -2135,7 +2135,7 @@ namespace BNG {
             }
         }
 
-        void removeGrabber(Grabber g) {
+        private void removeGrabber(Grabber g) {
             if (heldByGrabbers == null) {
                 heldByGrabbers = new List<Grabber>();
             }
@@ -2160,7 +2160,7 @@ namespace BNG {
         /// <summary>
         /// Moves the Grabbable using MovePosition if rigidbody present. Otherwise use transform.position
         /// </summary>
-        void movePosition(Vector3 worldPosition) {
+        private void movePosition(Vector3 worldPosition) {
             if (rigid) {
                 rigid.MovePosition(worldPosition);
             }
@@ -2172,7 +2172,7 @@ namespace BNG {
         /// <summary>
         /// Rotates the Grabbable using MoveRotation if rigidbody present. Otherwise use transform.rotation
         /// </summary>
-        void moveRotation(Quaternion worldRotation) {
+        private void moveRotation(Quaternion worldRotation) {
             if (rigid) {
                 rigid.MoveRotation(worldRotation);
             }
@@ -2224,7 +2224,7 @@ namespace BNG {
             return grabTransform.rotation;
         }
 
-        void filterCollisions() {
+        private void filterCollisions() {
             for (int x = 0; x < collisions.Count; x++) {
                 if (collisions[x] == null || !collisions[x].enabled || !collisions[x].gameObject.activeSelf) {
                     collisions.Remove(collisions[x]);
@@ -2282,8 +2282,8 @@ namespace BNG {
             }
         }
 
-        bool subscribedToEvents = false;
-        bool grabbableIsLocked = false;
+        private bool subscribedToEvents = false;
+        private bool grabbableIsLocked = false;
 
         /// <summary>
         /// Subscribe to any movement-related events that might cause our Grabbable to suddenly move far away.
@@ -2359,8 +2359,8 @@ namespace BNG {
         private Quaternion _priorLocalOffsetRotation;
 
         private Grabber _priorPrimaryGrabber;
-        bool lockPos, lockRot;
-        int lockRequests = 0;
+        private bool lockPos, lockRot;
+        private int lockRequests = 0;
 
         public virtual void LockGrabbable() {
             // By default only lock position
@@ -2531,18 +2531,19 @@ namespace BNG {
             }
         }
 
-        bool quitting = false;
-        void OnApplicationQuit() {
+        private bool quitting = false;
+
+        private void OnApplicationQuit() {
             quitting = true;
         }
 
-        void OnDestroy() {
+        private void OnDestroy() {
             if(BeingHeld && !quitting) {
                 DropItem(false, false);
             }
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             // Show Grip Points
             Gizmos.color = new Color(0, 1, 0, 0.5f);
 

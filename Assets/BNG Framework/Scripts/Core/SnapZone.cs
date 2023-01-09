@@ -41,7 +41,7 @@ namespace BNG {
         private float _scaleTo;
 
         public bool DisableColliders = true;
-        List<Collider> disabledColliders = new List<Collider>();
+        private List<Collider> disabledColliders = new List<Collider>();
 
         [Tooltip("If true the item inside the SnapZone will be duplicated, instead of removed, from the SnapZone.")]
         public bool DuplicateItemOnGrab = false;
@@ -86,20 +86,17 @@ namespace BNG {
         /// Optional Unity Event to be called when something has been detached from this SnapZone. Passes in the Grabbable is being detattached.
         /// </summary>
         public GrabbableEvent OnDetachEvent;
-
-        GrabbablesInTrigger gZone;
-
-        Rigidbody heldItemRigid;
-        bool heldItemWasKinematic;
-        Grabbable trackedItem; // If we can't drop the item, track it separately
+        private GrabbablesInTrigger gZone;
+        private Rigidbody heldItemRigid;
+        private bool heldItemWasKinematic;
+        private Grabbable trackedItem; // If we can't drop the item, track it separately
 
         // Closest Grabbable in our trigger
         [HideInInspector]
         public Grabbable ClosestGrabbable;
+        private SnapZoneOffset offset;
 
-        SnapZoneOffset offset;
-
-        void Start() {
+        private void Start() {
             gZone = GetComponent<GrabbablesInTrigger>();
             _scaleTo = ScaleItem;
 
@@ -115,7 +112,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
 
             ClosestGrabbable = getClosestGrabbable();
 
@@ -153,7 +150,7 @@ namespace BNG {
             }
         }
 
-        Grabbable getClosestGrabbable() {
+        private Grabbable getClosestGrabbable() {
 
             Grabbable closest = null;
             float lastDistance = 9999f;
@@ -313,7 +310,7 @@ namespace BNG {
             LastSnapTime = Time.time;
         }
 
-        void disableGrabbable(Grabbable grab) {
+        private void disableGrabbable(Grabbable grab) {
 
             if (DisableColliders) {
                 disabledColliders = grab.GetComponentsInChildren<Collider>(false).ToList();

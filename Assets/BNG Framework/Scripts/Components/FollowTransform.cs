@@ -8,7 +8,7 @@ namespace BNG {
         public Transform FollowTarget;
         public bool MatchRotation = true;
 
-        void Update() {
+        private void Update() {
             if(FollowTarget) {
                 transform.position = FollowTarget.position;
 

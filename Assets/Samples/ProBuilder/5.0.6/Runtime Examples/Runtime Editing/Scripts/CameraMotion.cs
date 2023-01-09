@@ -36,38 +36,34 @@ namespace ProBuilder.Examples
 	 * 	- "Horizontal", "Vertical", "CameraUp", with Gravity and Sensitivity set to 3.
 	 */
 	[RequireComponent(typeof(Camera))]
-	sealed class CameraMotion : MonoBehaviour
+    internal sealed class CameraMotion : MonoBehaviour
 	{
 		public ViewTool cameraState { get; private set; }
 
 #pragma warning disable 649
 		[SerializeField]
-		Texture2D panCursor;
+        private Texture2D panCursor;
 
 		[SerializeField]
-		Texture2D orbitCursor;
+        private Texture2D orbitCursor;
 
 		[SerializeField]
-		Texture2D dollyCursor;
+        private Texture2D dollyCursor;
 
 		[SerializeField]
-		Texture2D lookCursor;
+        private Texture2D lookCursor;
 #pragma warning restore 649
 
-		Texture2D m_CurrentCursor;
-
-		const int k_CursorIconSize = 64;
-
-		const string k_InputMouseScrollwheel = "Mouse ScrollWheel";
-		const string k_InputMouseHorizontal = "Mouse X";
-		const string k_InputMouseVertical = "Mouse Y";
-
-		const int k_LeftMouse = 0;
-		const int k_RightMouse = 1;
-		const int k_MiddleMouse = 2;
-
-		const float k_MinCameraDistance = 1f;
-		const float k_MaxCameraDistance = 100f;
+        private Texture2D m_CurrentCursor;
+        private const int k_CursorIconSize = 64;
+        private const string k_InputMouseScrollwheel = "Mouse ScrollWheel";
+        private const string k_InputMouseHorizontal = "Mouse X";
+        private const string k_InputMouseVertical = "Mouse Y";
+        private const int k_LeftMouse = 0;
+        private const int k_RightMouse = 1;
+        private const int k_MiddleMouse = 2;
+        private const float k_MinCameraDistance = 1f;
+        private const float k_MaxCameraDistance = 100f;
 
 #if USE_DELTA_TIME
 		public float moveSpeed = 15f;
@@ -91,21 +87,19 @@ namespace ProBuilder.Examples
 		public float zoomSpeed = .1f;
 #endif
 
-		bool m_UseEvent;
-		Camera m_CameraComponent;
-		Transform m_Transform;
-		Vector3 m_ScenePivot = Vector3.zero;
-		float m_DistanceToCamera = 10f;
+        private bool m_UseEvent;
+        private Camera m_CameraComponent;
+        private Transform m_Transform;
+        private Vector3 m_ScenePivot = Vector3.zero;
+        private float m_DistanceToCamera = 10f;
 
-		// Store the mouse position from the last frame. Used in calculating deltas for mouse movement.
-		Vector3 m_PreviousMousePosition = Vector3.zero;
+        // Store the mouse position from the last frame. Used in calculating deltas for mouse movement.
+        private Vector3 m_PreviousMousePosition = Vector3.zero;
+        private Rect m_MouseCursorRect = new Rect(0, 0, k_CursorIconSize, k_CursorIconSize);
+        private Rect m_ScreenCenterRect = new Rect(0, 0, k_CursorIconSize, k_CursorIconSize);
+        private bool m_CurrentActionValid = true;
 
-		Rect m_MouseCursorRect = new Rect(0, 0, k_CursorIconSize, k_CursorIconSize);
-		Rect m_ScreenCenterRect = new Rect(0, 0, k_CursorIconSize, k_CursorIconSize);
-
-		bool m_CurrentActionValid = true;
-
-		void Awake()
+        private void Awake()
 		{
 			m_CameraComponent = GetComponent<Camera>();
 			Assert.IsNotNull(m_CameraComponent);
@@ -113,7 +107,7 @@ namespace ProBuilder.Examples
 			m_ScenePivot = m_Transform.forward * m_DistanceToCamera;
 		}
 
-		void OnGUI()
+        private void OnGUI()
 		{
 			float screenHeight = Screen.height;
 
@@ -150,7 +144,7 @@ namespace ProBuilder.Examples
 			get { return cameraState != ViewTool.None || m_UseEvent || Input.GetKey(KeyCode.LeftAlt); }
 		}
 
-		bool CheckMouseOverGUI()
+        private bool CheckMouseOverGUI()
 		{
 			return EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject();
 		}
@@ -301,15 +295,15 @@ namespace ProBuilder.Examples
 			m_PreviousMousePosition = Input.mousePosition;
 		}
 
-		Vector3 CalculateCameraPosition(Vector3 target)
+        private Vector3 CalculateCameraPosition(Vector3 target)
 		{
 			return transform.localRotation * (Vector3.forward * -m_DistanceToCamera) + target;
 		}
 
-		bool m_Zooming = false;
-		float m_ZoomProgress = 0f;
-		Vector3 m_PreviousPosition = Vector3.zero;
-		Vector3 m_TargetPosition = Vector3.zero;
+        private bool m_Zooming = false;
+        private float m_ZoomProgress = 0f;
+        private Vector3 m_PreviousPosition = Vector3.zero;
+        private Vector3 m_TargetPosition = Vector3.zero;
 
 		/// <summary>
 		/// Lerp the camera to the current selection
@@ -338,14 +332,14 @@ namespace ProBuilder.Examples
 			m_Zooming = true;
 		}
 
-		float ScreenToWorldDistance(float screenDistance, float distanceFromCamera)
+        private float ScreenToWorldDistance(float screenDistance, float distanceFromCamera)
 		{
 			Vector3 start = m_CameraComponent.ScreenToWorldPoint(Vector3.forward * distanceFromCamera);
 			Vector3 end = m_CameraComponent.ScreenToWorldPoint( new Vector3(screenDistance, 0f, distanceFromCamera));
 			return CopySign(Vector3.Distance(start, end), screenDistance);
 		}
 
-		static float CalcSignedMouseDelta(Vector2 lhs, Vector2 rhs)
+        private static float CalcSignedMouseDelta(Vector2 lhs, Vector2 rhs)
 		{
 			float delta = Vector2.Distance(lhs, rhs);
 			float scale = 1f / Mathf.Min(Screen.width, Screen.height);
@@ -357,7 +351,7 @@ namespace ProBuilder.Examples
 			return delta * scale * ( (lhs.y-rhs.y) > 0f ? 1f : -1f );
 		}
 
-		static float CalcMinDistanceToBounds(Camera cam, Bounds bounds)
+        private static float CalcMinDistanceToBounds(Camera cam, Bounds bounds)
 		{
 			float frustumHeight = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z);
 			float distance = frustumHeight * .5f / Mathf.Tan(cam.fieldOfView * .5f * Mathf.Deg2Rad);
@@ -365,10 +359,10 @@ namespace ProBuilder.Examples
 			return distance;
 		}
 
-		/// <summary>
-		/// Return the magnitude of X with the sign of Y.
-		/// </summary>
-		float CopySign(float x, float y)
+        /// <summary>
+        /// Return the magnitude of X with the sign of Y.
+        /// </summary>
+        private float CopySign(float x, float y)
 		{
 			if(x < 0f && y < 0f || x > 0f && y > 0f || x == 0f || y == 0f)
 				return x;

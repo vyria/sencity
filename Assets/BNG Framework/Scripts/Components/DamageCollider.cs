@@ -41,8 +41,7 @@ namespace BNG {
         /// How much damage to apply if colliding with something at speed
         /// </summary>
         public float CollisionDamage = 5;
-
-        Damageable thisDamageable;
+        private Damageable thisDamageable;
 
         private void Start() {
             if (ColliderRigidbody == null) {

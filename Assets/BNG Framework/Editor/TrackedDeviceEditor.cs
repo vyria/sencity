@@ -8,8 +8,7 @@ namespace BNG {
     [CustomEditor(typeof(TrackedDevice))]
     [CanEditMultipleObjects]
     public class TrackedDeviceEditor : Editor {
-
-        TrackedDevice device;
+        private TrackedDevice device;
 
         public override void OnInspectorGUI() {
 

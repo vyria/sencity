@@ -13,20 +13,20 @@ using UnityEngine.Rendering;
 namespace ProBuilder.ExampleActions
 {
 	[ProBuilderMenuAction]
-	sealed class CreateShadowObject : MenuAction
+    internal sealed class CreateShadowObject : MenuAction
 	{
 		public override ToolbarGroup group { get { return ToolbarGroup.Object; } }
 		public override Texture2D icon { get { return null; } }
 		public override TooltipContent tooltip { get { return k_Tooltip; } }
 
-		static readonly GUIContent k_VolumeSize = new GUIContent("Volume Size", "How far the shadow volume extends from " +
+        private static readonly GUIContent k_VolumeSize = new GUIContent("Volume Size", "How far the shadow volume extends from " +
 			"the base mesh.  To visualize, imagine the width of walls.\n\nYou can also select the child ShadowVolume " +
 			"object and turn the Shadow Casting Mode to \"One\" or \"Two\" sided to see the resulting mesh.");
 
-		// What to show in the hover tooltip window.  TooltipContent is similar to GUIContent, with the exception
-		// that it also includes an optional params[] char list in the constructor to define shortcut keys
-		// (ex, CMD_CONTROL, K).
-		static readonly TooltipContent k_Tooltip = new TooltipContent(
+        // What to show in the hover tooltip window.  TooltipContent is similar to GUIContent, with the exception
+        // that it also includes an optional params[] char list in the constructor to define shortcut keys
+        // (ex, CMD_CONTROL, K).
+        private static readonly TooltipContent k_Tooltip = new TooltipContent(
 			"Gen Shadow Obj",
 			"Creates a new ProBuilder mesh child with inverted normals that only exists to cast shadows. Use to " +
 			"create lit interior scenes with shadows from directional lights.\n\nNote that this exists largely as " +
@@ -34,7 +34,7 @@ namespace ProBuilder.ExampleActions
 			""
 		);
 
-		static bool showPreview
+        private static bool showPreview
 		{
 			get { return EditorPrefs.GetBool("pb_shadowVolumePreview", true); }
 			set { EditorPrefs.SetBool("pb_shadowVolumePreview", value); }

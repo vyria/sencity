@@ -21,17 +21,15 @@ namespace BNG {
 
         [Tooltip("Wait X seconds before fading scene in")]
         public float SceneFadeInDelay = 1f;
+        private GameObject fadeObject;
+        private RectTransform fadeObjectRect;
+        private Canvas fadeCanvas;
+        private CanvasGroup canvasGroup;
+        private Image fadeImage;
+        private IEnumerator fadeRoutine;
+        private string faderName = "ScreenFader";
 
-        GameObject fadeObject;
-        RectTransform fadeObjectRect;
-        Canvas fadeCanvas;
-        CanvasGroup canvasGroup;
-        Image fadeImage;
-        IEnumerator fadeRoutine;
-        string faderName = "ScreenFader";
-
-
-        void Awake() {
+        private void Awake() {
             initialize();
         }
 
@@ -73,15 +71,15 @@ namespace BNG {
             }
         }
 
-        void OnEnable() {
+        private void OnEnable() {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        void OnDisable() {
+        private void OnDisable() {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
 
             if (FadeOnSceneLoaded && fadeObject != null) {
                 // Start screen at fade
@@ -91,7 +89,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator fadeOutWithDelay(float delaySeconds) {
+        private IEnumerator fadeOutWithDelay(float delaySeconds) {
             yield return new WaitForSeconds(delaySeconds);
 
             DoFadeOut();
@@ -141,7 +139,7 @@ namespace BNG {
             StartCoroutine(fadeRoutine);
         }
 
-        IEnumerator doFade(float alphaFrom, float alphaTo) {
+        private IEnumerator doFade(float alphaFrom, float alphaTo) {
 
             float alpha = alphaFrom;
 

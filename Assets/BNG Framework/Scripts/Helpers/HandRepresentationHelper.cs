@@ -19,7 +19,7 @@ namespace BNG {
         [Tooltip("Distance required to show this Transform in meters")]
         public float DistanceToShow = 0.1f;
 
-        void Update() {
+        private void Update() {
 
             if(Vector3.Distance(HandToToggle.position, OtherHandTransform.position) >= DistanceToShow) {
                 HandToToggle.gameObject.SetActive(true);

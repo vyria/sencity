@@ -9,11 +9,10 @@ namespace BNG {
 	/// This CharacterConstraint will keep the size the Character Capsule along with the camera if not colliding with anything
 	/// </summary>
 	public class CharacterConstraint : MonoBehaviour {
+        private BNGPlayerController bngController;
+        private CharacterController character;
 
-		BNGPlayerController bngController;
-		CharacterController character;
-
-		void Awake() {
+        private void Awake() {
 			character = GetComponent<CharacterController>();
 			bngController = transform.GetComponentInParent<BNGPlayerController>();
 		}

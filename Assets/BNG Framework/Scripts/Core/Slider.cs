@@ -24,13 +24,12 @@ namespace BNG {
         /// Event to call if slider's value changes
         /// </summary>
         public FloatEvent onSliderChange;
-        
-        float lastSliderPercentage;
-        float slideRangeLow = -0.15f;
-        float slideRangeHigh = 0.15f;
-        float slideRange;
+        private float lastSliderPercentage;
+        private float slideRangeLow = -0.15f;
+        private float slideRangeHigh = 0.15f;
+        private float slideRange;
 
-        void Start() {
+        private void Start() {
             ConfigurableJoint cj = GetComponent<ConfigurableJoint>();
             if (cj) {
                 slideRangeLow = cj.linearLimit.limit * -1;
@@ -40,7 +39,7 @@ namespace BNG {
             slideRange = slideRangeHigh - slideRangeLow;
         }
 
-        void Update() {
+        private void Update() {
             
             _slidePercentage = ( (transform.localPosition.x - 0.001f) + slideRangeHigh) / slideRange;
             _slidePercentage = Mathf.Ceil(_slidePercentage * 100);

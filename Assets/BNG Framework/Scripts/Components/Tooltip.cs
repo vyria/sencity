@@ -23,13 +23,13 @@ namespace BNG {
         /// <summary>
         /// Hide this if farther than MaxViewDistance
         /// </summary>
-        Transform childTransform;
+        private Transform childTransform;
 
         public Transform DrawLineTo;
-        LineToTransform lineTo;
-        Transform lookAt;
-        
-        void Start() {
+        private LineToTransform lineTo;
+        private Transform lookAt;
+
+        private void Start() {
             lookAt = Camera.main.transform;
             lineTo = GetComponentInChildren<LineToTransform>();
 
@@ -40,7 +40,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
             UpdateTooltipPosition();
         }
 

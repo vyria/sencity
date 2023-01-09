@@ -15,11 +15,9 @@ namespace BNG {
 
         [Tooltip("Amount of Gravity to apply to the CharacterController or Rigidbody. Default is 'Physics.gravity'.")]
         public Vector3 Gravity = Physics.gravity;
-
-        CharacterController characterController;
-        SmoothLocomotion smoothLocomotion;
-
-        Rigidbody playerRigidbody;
+        private CharacterController characterController;
+        private SmoothLocomotion smoothLocomotion;
+        private Rigidbody playerRigidbody;
 
         private float _movementY;
         private Vector3 _initialGravityModifier;
@@ -27,7 +25,7 @@ namespace BNG {
         // Save us a null check in FixedUpdate
         private bool _validRigidBody = false;
 
-        void Start() {
+        private void Start() {
             characterController = GetComponent<CharacterController>();
             smoothLocomotion = GetComponentInChildren<SmoothLocomotion>();
             playerRigidbody = GetComponent<Rigidbody>();
@@ -38,7 +36,7 @@ namespace BNG {
         }
 
         // Apply Gravity in LateUpdate to ensure it gets applied after any character movement is applied in Update
-        void LateUpdate() {
+        private void LateUpdate() {
 
             // Apply Gravity to Character Controller
             if (GravityEnabled && characterController != null && characterController.enabled) {
@@ -60,7 +58,7 @@ namespace BNG {
             }
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             // Apply Gravity to Rigidbody Controller
             if (_validRigidBody && GravityEnabled) {
                 //playerRigidbody.AddRelativeForce(Gravity, ForceMode.VelocityChange);

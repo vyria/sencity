@@ -21,11 +21,11 @@ namespace BNG {
         public float LocalZMin = -1f;
         public float LocalZMax = 1f;
 
-        void Update() {
+        private void Update() {
             doConstrain();
         }
 
-        void doConstrain() {
+        private void doConstrain() {
             // Save a lookup
             if (!ConstrainLocalX && !ConstrainLocalY && !ConstrainLocalZ) {
                 return;

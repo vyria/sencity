@@ -18,17 +18,16 @@ namespace BNG {
         /// </summary>
         public float MinDrawDistance = 0.02f;
         public float ReuseTolerance = 0.001f;
-
-        bool IsNewDraw = false;
-        Vector3 lastDrawPoint;
-        LineRenderer LineRenderer;
+        private bool IsNewDraw = false;
+        private Vector3 lastDrawPoint;
+        private LineRenderer LineRenderer;
 
         // Use this to store our Marker's LineRenderers
-        Transform root;
-        Transform lastTransform;
-        Coroutine drawRoutine = null;
-        float lastLineWidth = 0;
-        int renderLifeTime = 0;
+        private Transform root;
+        private Transform lastTransform;
+        private Coroutine drawRoutine = null;
+        private float lastLineWidth = 0;
+        private int renderLifeTime = 0;
 
 
         public override void OnGrab(Grabber grabber) {
@@ -47,7 +46,7 @@ namespace BNG {
             base.OnRelease();
         }
 
-        IEnumerator WriteRoutine() {
+        private IEnumerator WriteRoutine() {
             while (true) {
                 if (Physics.Raycast(RaycastStart.position, RaycastStart.up, out RaycastHit hit, RaycastLength, DrawingLayers, QueryTriggerInteraction.Ignore)) {
                     float tipDistance = Vector3.Distance(hit.point, RaycastStart.transform.position);
@@ -64,7 +63,7 @@ namespace BNG {
             }
         }
 
-        void InitDraw(Vector3 position, Quaternion rotation, float lineWidth, Color lineColor) {
+        private void InitDraw(Vector3 position, Quaternion rotation, float lineWidth, Color lineColor) {
             if (IsNewDraw) {
                 lastDrawPoint = position;
                 DrawPoint(lastDrawPoint, position, lineWidth, lineColor, rotation);
@@ -78,7 +77,7 @@ namespace BNG {
             }
         }
 
-        Vector3 DrawPoint(Vector3 lastDrawPoint, Vector3 endPosition, float lineWidth, Color lineColor, Quaternion rotation) {
+        private Vector3 DrawPoint(Vector3 lastDrawPoint, Vector3 endPosition, float lineWidth, Color lineColor, Quaternion rotation) {
             var dif = Mathf.Abs(lastLineWidth - lineWidth);
             lastLineWidth = lineWidth;
             if (dif > ReuseTolerance || renderLifeTime >= 98) {
@@ -130,7 +129,7 @@ namespace BNG {
             return endPosition;
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             // Show Grip Point
             Gizmos.color = Color.green;
             Gizmos.DrawLine(RaycastStart.position, RaycastStart.position + RaycastStart.up * RaycastLength);

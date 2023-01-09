@@ -77,10 +77,9 @@ namespace BNG {
         public bool SendDamageToInvector = true;
 #endif
 
-        bool destroyed = false;
-
-        Rigidbody rigid;
-        bool initialWasKinematic;
+        private bool destroyed = false;
+        private Rigidbody rigid;
+        private bool initialWasKinematic;
 
         private void Start() {
             _startingHealth = Health;
@@ -185,7 +184,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator RespawnRoutine(float seconds) {
+        private IEnumerator RespawnRoutine(float seconds) {
 
             yield return new WaitForSeconds(seconds);
 

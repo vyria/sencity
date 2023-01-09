@@ -24,7 +24,7 @@ namespace ProBuilder.Examples
 		// The nearest face to this sphere.
 		private Face nearest = null;
 
-		void Start()
+        private void Start()
 		{
 			// Generate a 50x50 plane with 25 subdivisions, facing up, with no smoothing applied.
 			target = ShapeGenerator.GeneratePlane(PivotLocation.Center, travel, travel, 25, 25, Axis.Up);
@@ -43,7 +43,7 @@ namespace ProBuilder.Examples
 			cam.transform.localRotation = Quaternion.Euler(new Vector3(65f, 0f, 0f));
 		}
 
-		void Update()
+        private void Update()
 		{
 			float time = Time.time * speed;
 

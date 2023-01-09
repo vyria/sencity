@@ -35,7 +35,7 @@ namespace BNG {
         [Tooltip("This is the local rotation of the NEW hand model that is currently defined in your xr rig, as well as what is used in the previewer.")]
         public Vector3 NewModelOffsetLeftRotation = new Vector3(-6, -0.43f, 90);
 
-        void Start() {
+        private void Start() {
             ApplyGrabPointUpdate();
         }
 

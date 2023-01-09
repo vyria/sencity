@@ -26,7 +26,7 @@ namespace BNG {
             StartCoroutine(explosionRoutine());
         }
 
-        IEnumerator explosionRoutine() {
+        private IEnumerator explosionRoutine() {
 
             // Get all objects in explosion radius
             Collider[] colliders = Physics.OverlapSphere(transform.position, ExplosionRadius);
@@ -71,13 +71,13 @@ namespace BNG {
             yield return null;
         }
 
-        IEnumerator dealDelayedDamaged(Damageable damageable, float delayTime) {
+        private IEnumerator dealDelayedDamaged(Damageable damageable, float delayTime) {
             yield return new WaitForSeconds(delayTime);
 
             damageable.DealDamage(ExplosionDamage);
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             // Draw a yellow sphere at the transform's position
             if(ShowExplosionRadius) {
                 Gizmos.color = Color.yellow;

@@ -9,13 +9,14 @@ namespace BNG {
     /// </summary>
     public class LineToTransform : MonoBehaviour {
         public Transform ConnectTo;
-        LineRenderer line;
+        private LineRenderer line;
 
-        void Start() {
+        private void Start() {
             
             
         }
-        void LateUpdate() {
+
+        private void LateUpdate() {
             UpdateLine();
         }
 
@@ -35,7 +36,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
             UpdateLine();
         }
     }

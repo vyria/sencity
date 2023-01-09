@@ -130,7 +130,7 @@ namespace BNG {
 
         private Vector3 _initialPosition;
 
-        void Start() {
+        private void Start() {
             characterController = GetComponentInChildren<CharacterController>();
             playerRigid = GetComponent<Rigidbody>();
             playerCapsule = GetComponent<CapsuleCollider>();
@@ -151,7 +151,7 @@ namespace BNG {
             playerClimbing = GetComponentInChildren<PlayerClimbing>();
         }
 
-        void Update() {
+        private void Update() {
 
             // Sanity check for camera
             if (mainCamera == null && Camera.main != null) {
@@ -190,8 +190,8 @@ namespace BNG {
                 RotateTrackingSpaceToCamera();
             }
         }
-       
-        void FixedUpdate() {
+
+        private void FixedUpdate() {
 
             UpdateDistanceFromGround();
 
@@ -392,7 +392,7 @@ namespace BNG {
             }
         }
 
-        Vector3 moveTest;
+        private Vector3 moveTest;
 
         public virtual void CheckRigidbodyCapsuleMove(Vector3 movePosition) {
 

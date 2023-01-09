@@ -48,9 +48,9 @@ namespace BNG {
         public bool MakingFist;
 
         // Colliders to keep track of
-        List<Collider> handColliders;
+        private List<Collider> handColliders;
 
-        void Start() {
+        private void Start() {
             handColliders = new List<Collider>();
             var tempColliders = GetComponentsInChildren<Collider>(true);
 
@@ -62,7 +62,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
             if(!EnableHandCollision) {
                 return;
             }

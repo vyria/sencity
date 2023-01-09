@@ -25,7 +25,7 @@ namespace BNG {
 
         public List<ControllerOffset> ControllerOffsets;
 
-        void Start() {
+        private void Start() {
             if(ControllerOffsets == null) {
                 ControllerOffsets = new List<ControllerOffset>();
             }
@@ -33,7 +33,7 @@ namespace BNG {
             StartCoroutine(checkForController());
         }
 
-        IEnumerator checkForController() {
+        private IEnumerator checkForController() {
 
             while(string.IsNullOrEmpty(thisControllerModel)) {
 

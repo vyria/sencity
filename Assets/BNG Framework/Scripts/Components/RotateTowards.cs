@@ -7,7 +7,7 @@ namespace BNG {
 
         public Transform TargetTransform;
 
-        void Update() {
+        private void Update() {
             transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.right, TargetTransform.position - transform.position, Time.deltaTime * 1f, 0.0f));
         }
     }

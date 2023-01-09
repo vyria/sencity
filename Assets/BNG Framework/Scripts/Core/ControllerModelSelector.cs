@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace BNG {
     public class ControllerModelSelector : MonoBehaviour {
+        private int disableIndex = 0;
 
-        int disableIndex = 0;
-        
-        void OnEnable() {
+        private void OnEnable() {
             // Subscribe to input events
             InputBridge.OnControllerFound += UpdateControllerModel;
         }
@@ -37,7 +36,7 @@ namespace BNG {
             disableIndex = childIndex;
         }
 
-        void OnDisable() {
+        private void OnDisable() {
             if (isQuitting) {
                 return;
             }
@@ -46,8 +45,9 @@ namespace BNG {
             InputBridge.OnControllerFound -= UpdateControllerModel;
         }
 
-        bool isQuitting = false;
-        void OnApplicationQuit() {
+        private bool isQuitting = false;
+
+        private void OnApplicationQuit() {
             isQuitting = true;
         }
     }

@@ -18,8 +18,7 @@ namespace BNG {
         public float VibrateFrequency = 0.3f;
         public float VibrateAmplitude = 0.1f;
         public float VibrateDuration = 0.1f;
-
-        Grabber currentGrabber;
+        private Grabber currentGrabber;
 
         public override void OnGrab(Grabber grabber) {
             // Store grabber so we can use it if we need to vibrate the controller
@@ -48,7 +47,7 @@ namespace BNG {
             }
         }
 
-        void doHaptics(ControllerHand touchingHand) {
+        private void doHaptics(ControllerHand touchingHand) {
             if(input) {
                 input.VibrateController(VibrateFrequency, VibrateAmplitude, VibrateDuration, touchingHand);
             }

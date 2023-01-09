@@ -10,7 +10,7 @@ namespace BNG {
 
         public HandModelSelector hms;
 
-        void Start() {
+        private void Start() {
             if(hms == null) {
                 hms = FindObjectOfType<HandModelSelector>();
             }

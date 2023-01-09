@@ -13,12 +13,12 @@ namespace BNG {
         public Color BaseColor = new Color(255f, 255f, 255f, 0.1f);
 
 #if UNITY_EDITOR
-        void OnEnable() {
+        private void OnEnable() {
             this.gameObject.hideFlags = HideFlags.None;
             this.gameObject.GetComponent<EditorHandle>().hideFlags = HideFlags.HideInInspector;
         }
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
 
             var outlineColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, BaseColor.a - 0.025f);
             var innerColor = new Color(BaseColor.r, BaseColor.g, BaseColor.b, BaseColor.a);

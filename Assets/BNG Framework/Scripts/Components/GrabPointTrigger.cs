@@ -34,13 +34,12 @@ namespace BNG {
 
         [Tooltip("Grab Points to move towards when the grabber is within the Trigger area.")]
         public List<GrabPoint> GrabPoints;
+        private Grabber currentGrabber;
+        private Grabbable dummyGrabbable;
+        private GrabPoint closestPoint;
+        private Grabber grabberInTrigger;
 
-        Grabber currentGrabber;
-        Grabbable dummyGrabbable;
-        GrabPoint closestPoint;
-        Grabber grabberInTrigger;
-
-        void Start() {
+        private void Start() {
             if(dummyGrabbable == null) {
                 var go = new GameObject("Dummy Grabbable");
                 dummyGrabbable = go.AddComponent<Grabbable>();
@@ -69,7 +68,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
 
             // holding this object
             if(dummyGrabbable != null && currentGrabber != null) {
@@ -139,7 +138,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
 
             // Object isn't being held, ignore this
             if(OtherGrabbableMustBeHeld != null && !OtherGrabbableMustBeHeld.BeingHeld) {
@@ -179,7 +178,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             Grabber grab = other.GetComponent<Grabber>();
 
             // No longer inside trigger
@@ -193,7 +192,7 @@ namespace BNG {
             }
         }
 
-        void setGrabber(Grabber theGrabber) {
+        private void setGrabber(Grabber theGrabber) {
             currentGrabber = theGrabber;
 
             dummyGrabbable.CanBeDropped = false;

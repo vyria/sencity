@@ -47,20 +47,17 @@ namespace BNG {
         }
 
         // Colliders that live in the hand model
-        List<Collider> handColliders;
-        Rigidbody rigid;
-        ConfigurableJoint configJoint;
-        Grabbable heldGrabbable;
+        private List<Collider> handColliders;
+        private Rigidbody rigid;
+        private ConfigurableJoint configJoint;
+        private Grabbable heldGrabbable;
+        private List<Collider> collisions = new List<Collider>();
+        private LineRenderer line;
+        private Vector3 localHandOffset;
+        private Vector3 localHandOffsetRotation;
+        private bool wasHoldingObject = false;
 
-        List<Collider> collisions = new List<Collider>();
-        LineRenderer line;
-
-        Vector3 localHandOffset;
-        Vector3 localHandOffsetRotation;
-
-        bool wasHoldingObject = false;
-
-        void Start() {
+        private void Start() {
 
             rigid = GetComponent<Rigidbody>();
             configJoint = GetComponent<ConfigurableJoint>();
@@ -92,7 +89,7 @@ namespace BNG {
             transform.parent = null;
         }
 
-        void Update() {
+        private void Update() {
             updateHandGraphics();
 
             // Line indicating our object is far away
@@ -133,7 +130,7 @@ namespace BNG {
             wasHoldingObject = HoldingObject;
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
 
             // Move object directly to our hand since the hand joint is controlling movement now
             if (HoldingObject && ThisGrabber.HeldGrabbable.DidParentHands) {
@@ -167,7 +164,7 @@ namespace BNG {
             collisions = new List<Collider>();
         }
 
-        void initHandColliders() {
+        private void initHandColliders() {
             handColliders = new List<Collider>();
 
             // Only accept non-trigger colliders.
@@ -193,8 +190,9 @@ namespace BNG {
             }
         }
 
-        Grabbable remoteIgnoredGrabbable;
-        void checkRemoteCollision() {
+        private Grabbable remoteIgnoredGrabbable;
+
+        private void checkRemoteCollision() {
             // Should we unignore this object if we are no longer pulling it towards us?
             if(remoteIgnoredGrabbable != null && ThisGrabber.RemoteGrabbingGrabbable != remoteIgnoredGrabbable) {
                 // If we are holding this object then let the settings take care of it
@@ -216,7 +214,7 @@ namespace BNG {
         }
 
         // Line indicating our object is far away
-        void drawDistanceLine() {
+        private void drawDistanceLine() {
             if (line) {
                 if (Vector3.Distance(transform.position, AttachTo.position) > 0.05f) {
                     line.enabled = true;
@@ -227,15 +225,15 @@ namespace BNG {
                     line.enabled = false;
                 }
             }
-        }        
+        }
 
-        void checkBreakDistance() {
+        private void checkBreakDistance() {
             if (SnapBackDistance > 0 && Vector3.Distance(transform.position, AttachTo.position) > SnapBackDistance) {
                 transform.position = AttachTo.position;
             }
         }
 
-        void updateHandGraphics() {
+        private void updateHandGraphics() {
 
             bool holdingObject = ThisGrabber.HeldGrabbable != null;
             if (!holdingObject) {
@@ -256,7 +254,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator UnignoreAllCollisions() {
+        private IEnumerator UnignoreAllCollisions() {
 
             var thisGrabbable = heldGrabbable;
             heldGrabbable = null;
@@ -310,7 +308,7 @@ namespace BNG {
             }
         }
 
-        Transform _priorParent;
+        private Transform _priorParent;
 
         public virtual void LockLocalPosition() {
             _priorParent = transform.parent;
@@ -337,7 +335,7 @@ namespace BNG {
             heldGrabbable = null;
         }
 
-        void OnEnable() {
+        private void OnEnable() {
             if(DisableGrabber) {
                 DisableGrabber.enabled = false;
             }
@@ -362,7 +360,7 @@ namespace BNG {
             SmoothLocomotion.OnAfterMove += UnlockOffset;
         }
 
-        Vector3 _priorLocalOffsetPosition;
+        private Vector3 _priorLocalOffsetPosition;
 
         public virtual void LockOffset() {
             _priorLocalOffsetPosition = AttachTo.InverseTransformPoint(transform.position);
@@ -377,7 +375,7 @@ namespace BNG {
             }
         }
 
-        void OnDisable() {
+        private void OnDisable() {
             if (ThisGrabber) {
                 ThisGrabber.enabled = false;
             }
@@ -405,7 +403,7 @@ namespace BNG {
             SmoothLocomotion.OnAfterMove -= UnlockOffset;
         }
 
-        void OnCollisionStay(Collision collision) {
+        private void OnCollisionStay(Collision collision) {
             for (int x = 0; x < collision.contacts.Length; x++) {
                 ContactPoint contact = collision.contacts[x];
                 // Keep track of how many objects we are colliding with

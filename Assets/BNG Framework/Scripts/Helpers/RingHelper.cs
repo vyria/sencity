@@ -45,27 +45,24 @@ namespace BNG {
         /// </summary>
         [Tooltip("How fast to lerp the opacity if being hidden / shown")]
         public float RingFadeSpeed = 5;
-
-        Canvas canvas;
-        Text text;
-        CanvasScaler scaler;
+        private Canvas canvas;
+        private Text text;
+        private CanvasScaler scaler;
 
         /// <summary>
         /// Used to determine if hands are full
         /// </summary>
-        Grabber leftGrabber;
-        Grabber rightGrabber;
-        Grabber closestGrabber;
-
-        bool handsFull = false;
+        private Grabber leftGrabber;
+        private Grabber rightGrabber;
+        private Grabber closestGrabber;
+        private bool handsFull = false;
 
         // Animate opacity
         private float _initalOpacity;
         private float _currentOpacity;
+        private Transform mainCam;
 
-        Transform mainCam;
-
-        void Start() {
+        private void Start() {
             AssignCamera();
 
             if (grabbable == null) {
@@ -87,7 +84,7 @@ namespace BNG {
             AssignGrabbers();            
         }
 
-        void Update() {
+        private void Update() {
 
             // Double check for mainCam 
             AssignCamera();
@@ -214,7 +211,7 @@ namespace BNG {
             }
         }
 
-        Color getSelectedColor() {
+        private Color getSelectedColor() {
 
             // Use secondary color if closest grabber is on the left hand
             closestGrabber = grabbable.GetClosestGrabber();

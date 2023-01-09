@@ -27,7 +27,7 @@ namespace BNG {
         public float PressInSpeed = 15f;
 
         // The Unity Button to invoke events on
-        UnityEngine.UI.Button uiButton;
+        private UnityEngine.UI.Button uiButton;
 
         protected int itemsInTrigger = 0;
 
@@ -40,7 +40,7 @@ namespace BNG {
         protected BoxCollider boxCollider;
         protected float colliderInitialCenterZ = 0;
 
-        void Awake() {
+        private void Awake() {
             uiButton = GetComponentInParent<UnityEngine.UI.Button>();
             boxCollider = GetComponent<BoxCollider>();
             if (boxCollider) {
@@ -48,7 +48,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
 
             if (itemsInTrigger > 0) {
 
@@ -98,14 +98,14 @@ namespace BNG {
             }
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             //if (other.GetComponent<UITrigger>() != null || other.GetComponent<Grabber>() != null) {
             if (other.GetComponent<UITrigger>() != null) {
                 itemsInTrigger++;
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             if (other.GetComponent<UITrigger>() != null) {
                 itemsInTrigger--;
             }

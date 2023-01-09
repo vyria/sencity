@@ -25,7 +25,7 @@ namespace BNG {
         public bool RotateX = true;
         public bool RotateZ = false;
 
-        void Start() {
+        private void Start() {
             _startRotation = Quaternion.Euler(transform.localEulerAngles);
 
             if(RotateX) {
@@ -38,7 +38,7 @@ namespace BNG {
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
 
             if (BowItem.DrawPercent >= BowPercentStart) {
                 transform.localRotation = Quaternion.RotateTowards(transform.localRotation, _endRotation, Speed * Time.deltaTime);

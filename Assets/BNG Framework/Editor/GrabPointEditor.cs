@@ -10,10 +10,10 @@ namespace BNG {
     public class GrabPointEditor : Editor {
 
         public GameObject LeftHandPreview;
-        bool showingLeftHand = false;
+        private bool showingLeftHand = false;
 
         public GameObject RightHandPreview;
-        bool showingRightHand = false;
+        private bool showingRightHand = false;
 
         // Define a texture and GUIContent
         private Texture buttonLeftTexture;
@@ -24,23 +24,21 @@ namespace BNG {
         private Texture buttonRightTextureSelected;
 
         private GUIContent buttonRightContent;
+        private GrabPoint grabPoint;
+        private SerializedProperty handPoseType;
+        private SerializedProperty SelectedHandPose;
+        private SerializedProperty HandPose;
+        private SerializedProperty LeftHandIsValid;
+        private SerializedProperty RightHandIsValid;
+        private SerializedProperty HandPosition;
+        private SerializedProperty MaxDegreeDifferenceAllowed;
+        private SerializedProperty IndexBlendMin;
+        private SerializedProperty IndexBlendMax;
+        private SerializedProperty ThumbBlendMin;
+        private SerializedProperty ThumbBlendMax;
+        private SerializedProperty ShowAngleGizmo;
 
-        GrabPoint grabPoint;
-
-        SerializedProperty handPoseType;
-        SerializedProperty SelectedHandPose;
-        SerializedProperty HandPose;
-        SerializedProperty LeftHandIsValid;
-        SerializedProperty RightHandIsValid;
-        SerializedProperty HandPosition;
-        SerializedProperty MaxDegreeDifferenceAllowed;
-        SerializedProperty IndexBlendMin;
-        SerializedProperty IndexBlendMax;
-        SerializedProperty ThumbBlendMin;
-        SerializedProperty ThumbBlendMax;
-        SerializedProperty ShowAngleGizmo;
-
-        void OnEnable() {
+        private void OnEnable() {
             handPoseType = serializedObject.FindProperty("handPoseType");
             SelectedHandPose = serializedObject.FindProperty("SelectedHandPose");
             HandPose = serializedObject.FindProperty("HandPose");
@@ -55,7 +53,7 @@ namespace BNG {
             ShowAngleGizmo = serializedObject.FindProperty("ShowAngleGizmo");
         }
 
-        HandPoseType previousType;
+        private HandPoseType previousType;
 
         
 
@@ -242,7 +240,7 @@ namespace BNG {
             }
         }
 
-        void updateEditorAnimation() {
+        private void updateEditorAnimation() {
 
             if (LeftHandPreview) {
                 var anim = LeftHandPreview.GetComponentInChildren<Animator>();
@@ -272,7 +270,7 @@ namespace BNG {
             }
         }
 
-        void updateAnimator(Animator anim, int handPose) {
+        private void updateAnimator(Animator anim, int handPose) {
             if (anim != null && anim.isActiveAndEnabled && anim.gameObject.activeSelf) {
 
                 // Do Fist Pose
@@ -316,7 +314,7 @@ namespace BNG {
             Selection.activeObject = grabPoint;
         }
 #endif
-        void checkForExistingPreview() {
+        private void checkForExistingPreview() {
             if (LeftHandPreview == null && !showingLeftHand) {
                 Transform lt = grabPoint.transform.Find("LeftHandModelsEditorPreview");
                 if (lt) {

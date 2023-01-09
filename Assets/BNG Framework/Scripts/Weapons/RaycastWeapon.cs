@@ -37,7 +37,7 @@ namespace BNG {
         /// </summary>
         [Tooltip("Ex : 0.2 = 5 Shots per second")]
         public float FiringRate = 0.2f;
-        float lastShotTime;
+        private float lastShotTime;
 
         [Tooltip("Amount of force to apply to a Rigidbody once damaged")]
         public float BulletImpactForce = 1000f;
@@ -93,8 +93,7 @@ namespace BNG {
 
         [Tooltip("Time in seconds to allow the gun to be springy")]
         public float RecoilDuration = 0.3f;
-
-        Rigidbody weaponRigid;
+        private Rigidbody weaponRigid;
 
         [Header("Raycast Options : ")]
         public LayerMask ValidLayers;
@@ -193,7 +192,7 @@ namespace BNG {
         /// <summary>
         /// How close to the origin is considered valid.
         /// </summary>
-        float minSlideDistance = 0.001f;
+        private float minSlideDistance = 0.001f;
 
         [Header("Inputs : ")]
         [Tooltip("Controller Input used to eject clip")]
@@ -247,7 +246,7 @@ namespace BNG {
 
         protected bool readyToShoot = true;
 
-        void Start() {
+        private void Start() {
             weaponRigid = GetComponent<Rigidbody>();
 
             if (MuzzleFlashObject) {
@@ -294,7 +293,7 @@ namespace BNG {
             base.OnTrigger(triggerValue);
         }
 
-        void checkSlideInput() {
+        private void checkSlideInput() {
             // Check for bound controller button to release the charging mechanism
             for (int x = 0; x < ReleaseSlideInput.Count; x++) {
                 if (InputBridge.Instance.GetGrabbedControllerBinding(ReleaseSlideInput[x], thisGrabber.HandSide)) {
@@ -304,7 +303,7 @@ namespace BNG {
             }
         }
 
-        void checkEjectInput() {
+        private void checkEjectInput() {
             // Check for bound controller button to eject magazine
             for (int x = 0; x < EjectInput.Count; x++) {
                 if (InputBridge.Instance.GetGrabbedControllerBinding(EjectInput[x], thisGrabber.HandSide)) {
@@ -562,13 +561,13 @@ namespace BNG {
             InternalAmmo = MaxInternalAmmo;
         }
 
-        void updateChamberedBullet() {
+        private void updateChamberedBullet() {
             if (ChamberedBullet != null) {
                 ChamberedBullet.gameObject.SetActive(BulletInChamber || EmptyBulletInChamber);
             }
         }
 
-        void chamberRound() {
+        private void chamberRound() {
 
             int currentBulletCount = GetBulletCount();
 
@@ -585,10 +584,10 @@ namespace BNG {
             }
         }
 
-        protected IEnumerator shotRoutine;        
+        protected IEnumerator shotRoutine;
 
         // Randomly scale / rotate to make them seem different
-        void randomizeMuzzleFlashScaleRotation() {
+        private void randomizeMuzzleFlashScaleRotation() {
             MuzzleFlashObject.transform.localScale = Vector3.one * Random.Range(0.75f, 1.5f);
             MuzzleFlashObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0, 90f));
         }       

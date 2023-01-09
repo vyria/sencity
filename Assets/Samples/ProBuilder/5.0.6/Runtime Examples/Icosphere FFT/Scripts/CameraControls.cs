@@ -6,11 +6,11 @@ namespace ProBuilder.Examples
 {
 	public class CameraControls : MonoBehaviour
 	{
-		const string k_InputMouseScroll = "Mouse ScrollWheel";
-		const string k_InputMouseHorizontal = "Mouse X";
-		const string k_InputMouseVertical = "Mouse Y";
-		const float k_MinCameraDistance = 10f;
-		const float k_MaxCameraDistance = 40f;
+        private const string k_InputMouseScroll = "Mouse ScrollWheel";
+        private const string k_InputMouseHorizontal = "Mouse X";
+        private const string k_InputMouseVertical = "Mouse Y";
+        private const float k_MinCameraDistance = 10f;
+        private const float k_MaxCameraDistance = 40f;
 
 		[Tooltip("How fast the camera should rotate around the sphere.")]
 		[Range(2f, 15f)]
@@ -22,16 +22,15 @@ namespace ProBuilder.Examples
 
 		[Tooltip("How fast the camera should rotate around the sphere when idle.")]
 		public float idleRotation = 1f;
+        private float m_Distance = 0f;
+        private Vector2 m_LookDirection = new Vector2(.8f, .2f);
 
-		float m_Distance = 0f;
-		Vector2 m_LookDirection = new Vector2(.8f, .2f);
-
-		void Start()
+        private void Start()
 		{
 			m_Distance = Vector3.Distance(transform.position, Vector3.zero);
 		}
 
-		void LateUpdate()
+        private void LateUpdate()
 		{
 			Vector3 eulerRotation = transform.localRotation.eulerAngles;
 			eulerRotation.z = 0f;

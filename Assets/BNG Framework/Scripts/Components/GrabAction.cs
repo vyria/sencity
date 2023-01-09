@@ -12,10 +12,9 @@ namespace BNG {
     public class GrabAction : GrabbableEvents {
 
         public GrabberEvent OnGrabEvent;
-
-        Grabbable g;
-        float lastGrabTime = 0;
-        float minTimeBetweenGrabs = 0.2f; // In Seconds
+        private Grabbable g;
+        private float lastGrabTime = 0;
+        private float minTimeBetweenGrabs = 0.2f; // In Seconds
 
         public override void OnGrab(Grabber grabber) {
 

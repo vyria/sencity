@@ -13,14 +13,14 @@ namespace BNG {
         protected bool wasHoldingObject = false;
 
         // Used to set the handpose depending on if we're holding an object or in the idle state
-        Animator handAnimator;
-        HandPoser handPoser;
-        AutoPoser autoPoser;
+        private Animator handAnimator;
+        private HandPoser handPoser;
+        private AutoPoser autoPoser;
 
         // We can use the HandPoseBlender to blend between an open and closed hand pose, using controller inputs such as grip and trigger as the blend values
-        HandPoseBlender poseBlender;
+        private HandPoseBlender poseBlender;
 
-        void Start() {
+        private void Start() {
             handAnimator = GetComponentInChildren<Animator>();
             handPoser = GetComponentInChildren<HandPoser>();
             autoPoser = GetComponentInChildren<AutoPoser>();
@@ -159,15 +159,15 @@ namespace BNG {
             return HeldObject != null;
         }
 
-        float correctValue(float inputValue) {
+        private float correctValue(float inputValue) {
             return (float)System.Math.Round(inputValue * 1000f) / 1000f;
         }
 
         #region XRInputs
 
         // Used in XRInput
-        static List<InputDevice> devices = new List<InputDevice>();
-        InputDevice controller;
+        private static List<InputDevice> devices = new List<InputDevice>();
+        private InputDevice controller;
 
         public virtual void UpdateXRDevices() {
             // Refresh XR devices
@@ -182,14 +182,14 @@ namespace BNG {
             }
         }
 
-        float getFeatureUsage(InputDevice device, InputFeatureUsage<float> usage) {
+        private float getFeatureUsage(InputDevice device, InputFeatureUsage<float> usage) {
             float val;
             device.TryGetFeatureValue(usage, out val);
 
             return Mathf.Clamp01(val);
         }
 
-        bool getFeatureUsage(InputDevice device, InputFeatureUsage<bool> usage) {
+        private bool getFeatureUsage(InputDevice device, InputFeatureUsage<bool> usage) {
             bool val;
             if (device.TryGetFeatureValue(usage, out val)) {
                 return val;

@@ -14,8 +14,7 @@ namespace TMPro.Examples
         public bool IsTextObjectScaleStatic;
         private TextMeshProFloatingText floatingText_Script;
 
-
-        void Start()
+        private void Start()
         {
 
             for (int i = 0; i < NumberOfNPC; i++)

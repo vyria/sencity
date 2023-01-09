@@ -14,47 +14,44 @@ namespace BNG {
         /// Set this to false if you don't want to use the custom editor :)
         /// </summary>
         public bool UseCustomEditor = true;
+        private Climbable climbable;
+        private SerializedProperty grabButton;
+        private SerializedProperty grabType;
+        private SerializedProperty grabPhysics;
+        private SerializedProperty grabMechanic;
+        private SerializedProperty grabSpeed;
+        private SerializedProperty remoteGrabbable;
+        private SerializedProperty remoteGrabDistance;
+        private SerializedProperty throwForceMultiplier;
+        private SerializedProperty throwForceMultiplierAngular;
+        private SerializedProperty breakDistance;
+        private SerializedProperty hideHandGraphics;
+        private SerializedProperty parentToHands;
+        private SerializedProperty parentHandModel;
+        private SerializedProperty snapHandModel;
+        private SerializedProperty canBeDropped;
+        private SerializedProperty CanBeSnappedToSnapZone;
+        private SerializedProperty ForceDisableKinematicOnDrop;
+        private SerializedProperty CustomHandPose;
+        private SerializedProperty SecondaryGrabBehavior;
+        private SerializedProperty OtherGrabbableMustBeGrabbed;
+        private SerializedProperty SecondaryGrabbable;
+        private SerializedProperty SecondHandLookSpeed;
+        private SerializedProperty CollisionSpring;
+        private SerializedProperty CollisionSlerp;
+        private SerializedProperty CollisionLinearMotionX;
+        private SerializedProperty CollisionLinearMotionY;
+        private SerializedProperty CollisionLinearMotionZ;
+        private SerializedProperty CollisionAngularMotionX;
+        private SerializedProperty CollisionAngularMotionY;
+        private SerializedProperty CollisionAngularMotionZ;
+        private SerializedProperty ApplyCorrectiveForce;
+        private SerializedProperty MoveVelocityForce;
+        private SerializedProperty MoveAngularVelocityForce;
+        private SerializedProperty GrabPoints;
+        private SerializedProperty collisions;
 
-        Climbable climbable;
-
-        SerializedProperty grabButton;
-        SerializedProperty grabType;
-        SerializedProperty grabPhysics;
-        SerializedProperty grabMechanic;
-        SerializedProperty grabSpeed;
-        SerializedProperty remoteGrabbable;
-        SerializedProperty remoteGrabDistance;
-        SerializedProperty throwForceMultiplier;
-        SerializedProperty throwForceMultiplierAngular;
-        SerializedProperty breakDistance;
-        SerializedProperty hideHandGraphics;
-        SerializedProperty parentToHands;
-        SerializedProperty parentHandModel;
-        SerializedProperty snapHandModel;
-        SerializedProperty canBeDropped;
-        SerializedProperty CanBeSnappedToSnapZone;
-        SerializedProperty ForceDisableKinematicOnDrop;
-        SerializedProperty CustomHandPose;
-        SerializedProperty SecondaryGrabBehavior;
-        SerializedProperty OtherGrabbableMustBeGrabbed;
-        SerializedProperty SecondaryGrabbable;
-        SerializedProperty SecondHandLookSpeed;
-        SerializedProperty CollisionSpring;
-        SerializedProperty CollisionSlerp;
-        SerializedProperty CollisionLinearMotionX;
-        SerializedProperty CollisionLinearMotionY;
-        SerializedProperty CollisionLinearMotionZ;
-        SerializedProperty CollisionAngularMotionX;
-        SerializedProperty CollisionAngularMotionY;
-        SerializedProperty CollisionAngularMotionZ;
-        SerializedProperty ApplyCorrectiveForce;
-        SerializedProperty MoveVelocityForce;
-        SerializedProperty MoveAngularVelocityForce;
-        SerializedProperty GrabPoints;
-        SerializedProperty collisions;
-
-
-        void OnEnable() {
+        private void OnEnable() {
             grabButton = serializedObject.FindProperty("GrabButton");
             grabType = serializedObject.FindProperty("Grabtype");
             grabPhysics = serializedObject.FindProperty("GrabPhysics");

@@ -7,7 +7,7 @@ namespace BNG {
 
         public Waypoint Destination;
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             Gizmos.color = Color.cyan;
             Gizmos.DrawSphere(transform.position, 0.1f);
 

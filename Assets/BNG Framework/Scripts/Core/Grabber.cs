@@ -57,7 +57,7 @@ namespace BNG {
         /// </summary>
         [Tooltip("How many seconds to check for grab input while Grip is held down. After grip is held down for this long, grip will need to be repressed in order to pick up an object.")]
         public float GrabCheckSeconds = 0.5f;
-        float currentGrabTime;
+        private float currentGrabTime;
 
         [Header("Equip on Start")]
         /// <summary>
@@ -72,10 +72,9 @@ namespace BNG {
         /// </summary>
         [Tooltip("Root transform that holds hands models. We may want to hide these while holding certain objects, or parent this object to the grabbable so they follow the object perfectly.")]
         public Transform HandsGraphics;
-
-        Transform handsGraphicsParent;
-        Vector3 handsGraphicsPosition;
-        Quaternion handsGraphicsRotation;
+        private Transform handsGraphicsParent;
+        private Vector3 handsGraphicsPosition;
+        private Quaternion handsGraphicsRotation;
 
         [Header("Shown for Debug :")]
         /// <summary>
@@ -98,9 +97,8 @@ namespace BNG {
 
         [Tooltip("Time.time when we last dropped a Grabbable")]
         public float LastDropTime;
-
-        Grabbable previousClosest;
-        Grabbable previousClosestRemote;
+        private Grabbable previousClosest;
+        private Grabbable previousClosestRemote;
 
         /// <summary>
         /// Are we currently holding any valid items?
@@ -120,7 +118,7 @@ namespace BNG {
         /// <summary>
         /// Keep track of all grabbables in trigger
         /// </summary>
-        GrabbablesInTrigger grabsInTrigger;
+        private GrabbablesInTrigger grabsInTrigger;
         public GrabbablesInTrigger GrabsInTrigger {
             get {
                 return grabsInTrigger;
@@ -135,10 +133,11 @@ namespace BNG {
                 return flyingGrabbable;
             }
         }
-        Grabbable flyingGrabbable;
+
+        private Grabbable flyingGrabbable;
 
         // How long the object has been flying at our hand
-        float flyingTime = 0;        
+        private float flyingTime = 0;        
 
         // Offset Hand Models are from Grabber
         public Vector3 handsGraphicsGrabberOffset { get; private set; }
@@ -151,11 +150,10 @@ namespace BNG {
         /// Can be used to position hands independently from model
         /// </summary>
         [HideInInspector]
-        public Transform DummyTransform; 
-
-        Rigidbody rb;
-        InputBridge input;
-        ConfigurableJoint joint;
+        public Transform DummyTransform;
+        private Rigidbody rb;
+        private InputBridge input;
+        private ConfigurableJoint joint;
 
         // Is this a fresh grab / has the control been depressed
         [HideInInspector]
@@ -175,7 +173,7 @@ namespace BNG {
         [HideInInspector]
         public VelocityTracker velocityTracker;
 
-        void Start() {
+        private void Start() {
             rb = GetComponent<Rigidbody>();
             grabsInTrigger = GetComponent<GrabbablesInTrigger>();
             joint = GetComponent<ConfigurableJoint>();
@@ -227,8 +225,8 @@ namespace BNG {
                 velocityTracker.controllerHand = HandSide;
             }
         }
-        
-        void Update() {
+
+        private void Update() {
 
             // Keep track of how long an object has been trying to fly to our hand
             if(flyingGrabbable != null) {
@@ -275,7 +273,7 @@ namespace BNG {
             }
         }
 
-        void checkGrabbableEvents() {
+        private void checkGrabbableEvents() {
 
             // Bail if nothing in our trigger area
             if(grabsInTrigger == null) {
@@ -399,7 +397,7 @@ namespace BNG {
             return false;
         }
 
-        HoldType getHoldType(Grabbable grab) {
+        private HoldType getHoldType(Grabbable grab) {
             HoldType closestHoldType = grab.Grabtype;
 
             // Inherit from Grabber
@@ -433,8 +431,7 @@ namespace BNG {
             return grabButton;
         }
 
-
-        Grabbable getClosestOrRemote() {
+        private Grabbable getClosestOrRemote() {
             if (grabsInTrigger.ClosestGrabbable != null) {
                 return grabsInTrigger.ClosestGrabbable;
             }
@@ -446,7 +443,7 @@ namespace BNG {
         }
 
         // Release conditions are a little different than grab
-        bool inputCheckRelease() {
+        private bool inputCheckRelease() {
 
             var grabbingGrabbable = RemoteGrabbingItem ? flyingGrabbable : HeldGrabbable;
 
@@ -470,7 +467,7 @@ namespace BNG {
             return false;
         }
 
-        float getGrabInput(GrabButton btn) {
+        private float getGrabInput(GrabButton btn) {
             float gripValue = 0;
 
             if(input == null) {
@@ -499,7 +496,7 @@ namespace BNG {
             return gripValue;
         }
 
-        bool getToggleInput(GrabButton btn) {
+        private bool getToggleInput(GrabButton btn) {
 
             if (input == null) {
                 return false;
@@ -626,7 +623,7 @@ namespace BNG {
             resetFlyingGrabbable();
         }
 
-        void resetFlyingGrabbable() {
+        private void resetFlyingGrabbable() {
             // No longer flying at us
             if (flyingGrabbable != null) {
                 flyingGrabbable.ResetGrabbing();

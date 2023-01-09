@@ -10,11 +10,10 @@ namespace BNG {
 
         // Where the local X value should be for the door to be fully open
         public float OpenXValue = -1f;
+        private float targetXPosition = 0;
+        private float smoothedPosition = 0;
 
-        float targetXPosition = 0;
-        float smoothedPosition = 0;
-
-        void Update() {
+        private void Update() {
 
             // Take our target value (0-1) and smooth it
             smoothedPosition = Mathf.Lerp(smoothedPosition, targetXPosition, Time.deltaTime * DoorSpeed);

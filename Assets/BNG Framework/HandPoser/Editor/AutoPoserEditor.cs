@@ -9,32 +9,27 @@ namespace BNG {
     [CustomEditor(typeof(AutoPoser))]
     [CanEditMultipleObjects]
     public class AutoPoserEditor : Editor {
-       
+
         // Auto Pose properties
-        SerializedProperty openHandPose;
-        SerializedProperty closedHandPose;
-        SerializedProperty autoUpdateAutoPose;
-        SerializedProperty idleHandPose;
-        
-        SerializedProperty fingerTipRadius;
-        SerializedProperty collisionLayerMask;
-        SerializedProperty showGizmos;
+        private SerializedProperty openHandPose;
+        private SerializedProperty closedHandPose;
+        private SerializedProperty autoUpdateAutoPose;
+        private SerializedProperty idleHandPose;
+        private SerializedProperty fingerTipRadius;
+        private SerializedProperty collisionLayerMask;
+        private SerializedProperty showGizmos;
+        private SerializedProperty gizmoType;
+        private SerializedProperty gizmoColor;
+        private SerializedProperty thumbCollider;
+        private SerializedProperty indexFingerCollider;
+        private SerializedProperty middleFingerCollider;
+        private SerializedProperty ringFingerCollider;
+        private SerializedProperty pinkyFingerCollider;
+        private AutoPoser poser;
+        private bool showGizmoProps;
+        private bool showColliderOffsets;
 
-        SerializedProperty gizmoType;
-        SerializedProperty gizmoColor;
-
-        SerializedProperty thumbCollider;
-        SerializedProperty indexFingerCollider;
-        SerializedProperty middleFingerCollider;
-        SerializedProperty ringFingerCollider;
-        SerializedProperty pinkyFingerCollider;
-
-        AutoPoser poser;
-        bool showGizmoProps;
-
-        bool showColliderOffsets;
-
-        void OnEnable() {
+        private void OnEnable() {
             openHandPose = serializedObject.FindProperty("OpenHandPose");
             closedHandPose = serializedObject.FindProperty("ClosedHandPose");
             autoUpdateAutoPose = serializedObject.FindProperty("UpdateContinuously");

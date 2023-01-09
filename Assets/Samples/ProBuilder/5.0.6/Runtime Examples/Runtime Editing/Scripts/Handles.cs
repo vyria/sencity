@@ -6,27 +6,27 @@ using UnityEngine.Rendering;
 
 namespace ProBuilder.Examples
 {
-	class Handles : MonoBehaviour
+    internal class Handles : MonoBehaviour
     {
-        static Handles s_Instance;
-		static bool s_Initialized;
+        private static Handles s_Instance;
+        private static bool s_Initialized;
 #pragma warning disable 649
         public Shader m_FaceHighlight;
         public Shader m_LineBillboard;
         public Shader m_PointBillboard;
         public Shader m_VertexShader;
 #pragma warning restore 649
-        static Material s_EdgeMaterial;
-		static Material s_VertMaterial;
-		static Material s_FaceMaterial;
-		static Face[] s_FaceArray = new Face[1];
+        private static Material s_EdgeMaterial;
+        private static Material s_VertMaterial;
+        private static Material s_FaceMaterial;
+        private static Face[] s_FaceArray = new Face[1];
 
-        void Awake()
+        private void Awake()
         {
             s_Instance = this;
         }
 
-        static void Init()
+        private static void Init()
         {
             if (s_Instance == null)
                 Debug.LogError("No Handles object found in scene");

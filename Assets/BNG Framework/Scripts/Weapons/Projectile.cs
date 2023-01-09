@@ -118,7 +118,7 @@ namespace BNG {
             Destroy(this.gameObject);
         }
 
-        IEnumerator CheckForRaycast() {
+        private IEnumerator CheckForRaycast() {
             while(this.gameObject.activeSelf && _checkRaycast) {
                 // Switch to raycast
                 if (Time.timeScale >= 1) {

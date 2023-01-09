@@ -58,8 +58,8 @@ namespace BNG {
         public float ThumbBlendMax = 0;
 
         // Taken from defaults in Demo - offset between "Models" and Grabber
-        Vector3 previewModelOffsetLeft = new Vector3(0.007f, -0.0179f, 0.0071f);// Old Offset = new Vector3(0.007f, -0.0179f, 0.0071f);
-        Vector3 previewModelOffsetRight = new Vector3(-0.029f, 0.0328f, 0.044f);// Old Offset = new Vector3(-0.01f, -0.0179f, 0.0071f);
+        private Vector3 previewModelOffsetLeft = new Vector3(0.007f, -0.0179f, 0.0071f);// Old Offset = new Vector3(0.007f, -0.0179f, 0.0071f);
+        private Vector3 previewModelOffsetRight = new Vector3(-0.029f, 0.0328f, 0.044f);// Old Offset = new Vector3(-0.01f, -0.0179f, 0.0071f);
 
         [Header("Editor")]
         [Tooltip("Show a green arc in the Scene view representing MaxDegreeDifferenceAllowed")]
@@ -69,7 +69,7 @@ namespace BNG {
 #if UNITY_EDITOR
         // Make sure animators update in the editor mode to show hand positions
         // By using OnDrawGizmosSelected we only call this function if the object is selected in the editor
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             DrawEditorArc();
 
             UpdatePreviews();
@@ -105,7 +105,7 @@ namespace BNG {
         }
 #endif
 
-        bool offsetFound = false;
+        private bool offsetFound = false;
 
         public void UpdatePreviewTransforms() {
             Transform leftHandPreview = transform.Find("LeftHandModelsEditorPreview");            

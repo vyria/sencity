@@ -29,7 +29,7 @@ namespace BNG {
             return null;
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
 
             Grabber grab = other.GetComponent<Grabber>();
             if (grab != null) {
@@ -44,7 +44,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             Grabber grab = other.GetComponent<Grabber>();
             if (grab != null) {
 

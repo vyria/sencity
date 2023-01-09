@@ -52,23 +52,21 @@ namespace BNG {
         /// Event called when Joystick value is changed
         /// </summary>
         public Vector2Event onJoystickVectorChange;
-
-
-        Grabbable grab;
-        Rigidbody rb;
+        private Grabbable grab;
+        private Rigidbody rb;
 
         // Keep track of Joystick Rotation
-        Vector3 currentRotation;
+        private Vector3 currentRotation;
         public float angleX;
         public float angleY;
 
-        void Start() {
+        private void Start() {
             grab = GetComponent<Grabbable>();
             rb = GetComponent<Rigidbody>();
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
 
             // Update Kinematic Status.
             if (rb) {
@@ -132,12 +130,12 @@ namespace BNG {
             OnJoystickChange(LeverVector);
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
 
-        void doJoystickLook() {
+        private void doJoystickLook() {
 
             // Do Lever Look
             if (grab != null && grab.BeingHeld) {

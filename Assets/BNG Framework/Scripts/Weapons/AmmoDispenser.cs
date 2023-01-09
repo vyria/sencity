@@ -50,7 +50,7 @@ namespace BNG {
         public int CurrentShotgunShells = 30;
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
             bool weaponEquipped = false;
 
             if (grabberHasWeapon(LeftGrabber) || grabberHasWeapon(RightGrabber)) {
@@ -63,7 +63,7 @@ namespace BNG {
             }
         }
 
-        bool grabberHasWeapon(Grabber g) {
+        private bool grabberHasWeapon(Grabber g) {
 
             if(g == null || g.HeldGrabbable == null) {
                 return false;

@@ -46,11 +46,11 @@ namespace BNG {
 
         public PointerEventData EventData { get; private set; }
 
-        Camera cameraCaster;
+        private Camera cameraCaster;
         
         private GameObject _initialPressObject;
         private bool _lastInputDown;
-        bool inputDown;
+        private bool inputDown;
 
         private static VRUISystem _instance;
         public static VRUISystem Instance {
@@ -109,7 +109,7 @@ namespace BNG {
 #endif
         }
 
-        void init() {
+        private void init() {
             if(cameraCaster == null) {
 
                 // Create the camera required for the caster.

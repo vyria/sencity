@@ -17,7 +17,7 @@ namespace BNG {
         /// <summary>
         /// If RequireHandleTurnToOpen and the handle has not fully opened then the door will be kinematic / immovable
         /// </summary>
-        bool handleLocked = false;
+        private bool handleLocked = false;
 
         /// <summary>
         /// This transform is used to determine how many degrees have been turned. Required if RequireHandleTurnToOpen is true
@@ -35,14 +35,13 @@ namespace BNG {
         /// Rotate this transform with Handle Rotation
         /// </summary>
         public Transform DoorLockTransform;
-        float initialLockPosition;
-
-        HingeJoint hinge;
-        Rigidbody rigid;
-        bool playedOpenSound = false;
+        private float initialLockPosition;
+        private HingeJoint hinge;
+        private Rigidbody rigid;
+        private bool playedOpenSound = false;
 
         // Need to open door up a certain amount before considering playing a close sound afterwards
-        bool readyToPlayCloseSound = false;
+        private bool readyToPlayCloseSound = false;
 
         public float AngularVelocitySnapDoor = 0.2f;
 
@@ -57,10 +56,10 @@ namespace BNG {
         // public string DebugText;
 
         // Cache for GC
-        Vector3 currentRotation;
-        float moveLockAmount, rotateAngles, ratio;
+        private Vector3 currentRotation;
+        private float moveLockAmount, rotateAngles, ratio;
 
-        void Start() {
+        private void Start() {
             hinge = GetComponent<HingeJoint>();
             rigid = GetComponent<Rigidbody>();
 
@@ -69,7 +68,7 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
 
             // Read Angular Velocity used for snapping door shut
             AngularVelocity = rigid.angularVelocity.magnitude;

@@ -6,13 +6,13 @@ namespace BNG {
     public class FollowRigidbody : MonoBehaviour {
 
         public Transform FollowTransform;
-        Rigidbody rigid;
+        private Rigidbody rigid;
 
-        void Start() {
+        private void Start() {
             rigid = GetComponent<Rigidbody>();
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             rigid.MovePosition(FollowTransform.transform.position);
         }
     }

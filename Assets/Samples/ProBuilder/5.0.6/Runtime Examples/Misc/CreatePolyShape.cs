@@ -10,10 +10,9 @@ namespace ProBuilder.Examples
 		public float m_RadiusMax = 2f;
 		public float m_Height = 1f;
 		public bool m_FlipNormals = false;
+        private ProBuilderMesh m_Mesh;
 
-		ProBuilderMesh m_Mesh;
-
-		void Start()
+        private void Start()
 		{
 			// Create a new GameObject
 			var go = new GameObject();
@@ -24,7 +23,7 @@ namespace ProBuilder.Examples
 			InvokeRepeating("Rebuild", 0f, .1f);
 		}
 
-		void Rebuild()
+        private void Rebuild()
 		{
 			// Create a circle of points with randomized distance from origin.
 			Vector3[] points = new Vector3[32];

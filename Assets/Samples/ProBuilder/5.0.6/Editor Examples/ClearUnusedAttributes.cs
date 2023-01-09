@@ -13,7 +13,7 @@ namespace ProBuilder.EditorExamples
 	/// Whenever ProBuilder compiles a mesh it removes the colors, tangents, and uv attributes.
 	/// </summary>
 	[InitializeOnLoad]
-	sealed class ClearUnusedAttributes : Editor
+    internal sealed class ClearUnusedAttributes : Editor
 	{
 		/// <summary>
 		/// Static constructor is called and subscribes to the OnMeshCompiled delegate.
@@ -23,12 +23,12 @@ namespace ProBuilder.EditorExamples
 			EditorMeshUtility.meshOptimized += OnMeshCompiled;
 		}
 
-		/// <summary>
-		/// When a ProBuilder object is compiled to UnityEngine.Mesh this is called.
-		/// </summary>
-		/// <param name="probuilderMesh"></param>
-		/// <param name="mesh"></param>
-		static void OnMeshCompiled(ProBuilderMesh probuilderMesh, Mesh mesh)
+        /// <summary>
+        /// When a ProBuilder object is compiled to UnityEngine.Mesh this is called.
+        /// </summary>
+        /// <param name="probuilderMesh"></param>
+        /// <param name="mesh"></param>
+        private static void OnMeshCompiled(ProBuilderMesh probuilderMesh, Mesh mesh)
 		{
 #if PROBUILDER_API_EXAMPLE
 			mesh.uv = null;

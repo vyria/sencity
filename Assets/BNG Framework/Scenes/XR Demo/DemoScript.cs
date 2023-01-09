@@ -21,8 +21,7 @@ namespace BNG {
         /// Max number of objects to launch from DemoLauncher. Old objects will be destroyed to make room for new.
         /// </summary>
         public int MaxLaunchedObjects = 5;
-
-        List<GameObject> launchedObjects;
+        private List<GameObject> launchedObjects;
 
         /// <summary>
         /// Used in demo scene
@@ -38,17 +37,16 @@ namespace BNG {
         /// Holds all of the grabbable objects in the scene
         /// </summary>
         public Transform ItemsHolder;
-
-        Dictionary<Grabbable, PosRot> _initalGrabbables;
+        private Dictionary<Grabbable, PosRot> _initalGrabbables;
 
         // Strictly used in demo scene
-        Rigidbody cubeRigid;
-        Rigidbody cubeRigid1;
-        Rigidbody cubeRigid2;
-        Rigidbody cubeRigid3;
+        private Rigidbody cubeRigid;
+        private Rigidbody cubeRigid1;
+        private Rigidbody cubeRigid2;
+        private Rigidbody cubeRigid3;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
 
             launchedObjects = new List<GameObject>();
 
@@ -69,7 +67,7 @@ namespace BNG {
         }
 
         // Some example controls useful for testing
-        void Update() {
+        private void Update() {
 
             // Spin Cubes around
             rotateGravityCubes();
@@ -108,7 +106,7 @@ namespace BNG {
             }
         }
 
-        List<Grabbable> demoClips;
+        private List<Grabbable> demoClips;
         public void GrabAmmo(Grabber grabber) {
 
             if(demoClips == null) {
@@ -162,7 +160,7 @@ namespace BNG {
             launchedObjects.Add(DemoLauncher.ShootProjectile(DemoLauncher.ProjectileForce));
         }
 
-        void initGravityCubes() {
+        private void initGravityCubes() {
             // Makes cubes spin in example scene
             if(GameObject.Find("GravityCube 1")) {
                 cubeRigid = GameObject.Find("GravityCube 1").GetComponent<Rigidbody>();
@@ -182,11 +180,12 @@ namespace BNG {
         }
 
         // Cache for performance
-        Vector3 rotateX = new Vector3(0.2f, 0, 0);
-        Vector3 rotateY = new Vector3(0, 0.2f, 0);
-        Vector3 rotateZ = new Vector3(0, 0, 0.2f);
-        Vector3 rotateXYX = new Vector3(0.2f, 0.2f, 0.2f);
-        void rotateGravityCubes() {
+        private Vector3 rotateX = new Vector3(0.2f, 0, 0);
+        private Vector3 rotateY = new Vector3(0, 0.2f, 0);
+        private Vector3 rotateZ = new Vector3(0, 0, 0.2f);
+        private Vector3 rotateXYX = new Vector3(0.2f, 0.2f, 0.2f);
+
+        private void rotateGravityCubes() {
             if (cubeRigid) {
                 cubeRigid.angularVelocity = rotateX;
             }

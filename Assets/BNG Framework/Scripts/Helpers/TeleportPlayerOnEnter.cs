@@ -7,7 +7,7 @@ namespace BNG {
 
         public Transform TeleportDestination;
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             if(other.GetComponent<CharacterController>()) {
                 PlayerTeleport pt = other.transform.GetComponentInParent<PlayerTeleport>();
                 if(pt && TeleportDestination) {

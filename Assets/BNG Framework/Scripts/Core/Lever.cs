@@ -98,18 +98,16 @@ namespace BNG {
         /// </summary>
         [Tooltip("Called if the lever changes position at all")]
         public FloatEvent onLeverChange;
-
-        Grabbable grab;
-        Rigidbody rb;
-        AudioSource audioSource;
-        bool switchedOn;
-
-        ConfigurableJoint configJoint;
-        HingeJoint hingedJoint;
+        private Grabbable grab;
+        private Rigidbody rb;
+        private AudioSource audioSource;
+        private bool switchedOn;
+        private ConfigurableJoint configJoint;
+        private HingeJoint hingedJoint;
 
         private Vector3 _lastLocalAngle;
 
-        void Start() {
+        private void Start() {
             grab = GetComponent<Grabbable>();
             rb = GetComponent<Rigidbody>();
             hingedJoint = GetComponent<HingeJoint>();
@@ -121,11 +119,11 @@ namespace BNG {
             }
         }
 
-        void Awake() {
+        private void Awake() {
             transform.localEulerAngles = new Vector3(InitialXRotation, 0, 0);
         }
 
-        void Update() {
+        private void Update() {
 
             // Update Kinematic Status.
             if (rb) {
@@ -171,15 +169,15 @@ namespace BNG {
             return 0;
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
 
             // Align lever with Grabber
             doLeverLook();
         }
 
-        Quaternion initialOffset = Quaternion.identity;
+        private Quaternion initialOffset = Quaternion.identity;
 
-        void doLeverLook() {
+        private void doLeverLook() {
             // Do Lever Look
             if (grab != null && grab.BeingHeld) {
                 // Use the grabber as our look target. 
@@ -279,7 +277,7 @@ namespace BNG {
         }
 
 #if UNITY_EDITOR
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
 
             if (ShowEditorGizmos && !Application.isPlaying) {
 

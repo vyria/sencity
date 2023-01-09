@@ -11,11 +11,10 @@ namespace BNG {
 
         public Light SpotLight;
         public Transform LightSwitch;
-
-        Vector3 originalSwitchPosition;
+        private Vector3 originalSwitchPosition;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             originalSwitchPosition = LightSwitch.transform.localPosition;
         }
 

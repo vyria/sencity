@@ -7,25 +7,24 @@ namespace BNG {
     /// A Grabbable object that can stick to objects and deal damage
     /// </summary>
     public class Arrow : MonoBehaviour {
-        Rigidbody rb;
-        Grabbable grab;
+        private Rigidbody rb;
+        private Grabbable grab;
         public bool Flying = false;
         public float ZVel = 0;
 
         public Collider ShaftCollider;
-        AudioSource impactSound;
-
-        float flightTime = 0f;
-        float destroyTime = 10f; // Time in seconds to destroy arrow
-        Coroutine queueDestroy;
+        private AudioSource impactSound;
+        private float flightTime = 0f;
+        private float destroyTime = 10f; // Time in seconds to destroy arrow
+        private Coroutine queueDestroy;
 
         public Projectile ProjectileObject;
 
         // Get this value from the ProjectileObject
-        float arrowDamage;
+        private float arrowDamage;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             rb = GetComponent<Rigidbody>();
             impactSound = GetComponent<AudioSource>();
             ShaftCollider = GetComponent<Collider>();
@@ -41,7 +40,7 @@ namespace BNG {
             arrowDamage = ProjectileObject.Damage;
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
 
             bool beingHeld = grab != null && grab.BeingHeld;
 
@@ -78,7 +77,7 @@ namespace BNG {
             queueDestroy = StartCoroutine(QueueDestroy());
         }
 
-        IEnumerator QueueDestroy() {
+        private IEnumerator QueueDestroy() {
             yield return new WaitForSeconds(destroyTime);
 
             if (grab != null && !grab.BeingHeld && transform.parent == null) {
@@ -86,7 +85,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator ReEnableCollider() {
+        private IEnumerator ReEnableCollider() {
 
             // Wait a few frames before re-enabling collider on bow shaft
             // This prevents the arrow from shooting ourselves, the bow, etc.
@@ -165,7 +164,7 @@ namespace BNG {
         }
 
         // Attach to collider
-        void tryStickArrow(Collision collision) {
+        private void tryStickArrow(Collision collision) {
 
             Rigidbody colRigid = collision.collider.GetComponent<Rigidbody>();
             transform.parent = null; // Start out with arrow being in World space
@@ -205,7 +204,7 @@ namespace BNG {
             }
         }
 
-        void playSoundInterval(float fromSeconds, float toSeconds) {
+        private void playSoundInterval(float fromSeconds, float toSeconds) {
             if (impactSound) {
 
                 if (impactSound.isPlaying) {

@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace BNG {
     public class RagdollHelper : MonoBehaviour {
-
-        Transform player;
-        List<Collider> colliders;
-        Collider playerCol;
+        private Transform player;
+        private List<Collider> colliders;
+        private Collider playerCol;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerCol = player.GetComponentInChildren<Collider>();
 

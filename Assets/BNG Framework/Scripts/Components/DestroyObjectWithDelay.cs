@@ -8,7 +8,7 @@ namespace BNG {
         public float DestroySeconds = 0f;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             Destroy(this.gameObject, DestroySeconds);
         }
     }

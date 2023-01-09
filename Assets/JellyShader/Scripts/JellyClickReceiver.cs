@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JellyClickReceiver : MonoBehaviour {
+    private RaycastHit hit;
+    private Ray clickRay;
+    private Renderer modelRenderer;
+    private float controlTime;
 
-    RaycastHit hit;
-    Ray clickRay;
-
-    Renderer modelRenderer;
-    float controlTime;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start () {
         modelRenderer = GetComponent<MeshRenderer>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    private void Update () {
         controlTime += Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0))

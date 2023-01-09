@@ -4,18 +4,18 @@ namespace ProBuilder.Examples
 {
 	[RequireComponent(typeof(MeshFilter))]
 	[RequireComponent(typeof(MeshRenderer))]
-	sealed class SimpleGrid : MonoBehaviour
+    internal sealed class SimpleGrid : MonoBehaviour
 	{
 		public int lines = 10;
 		public float scale = 1f;
 
-		void Start()
+        private void Start()
 		{
 			GetComponent<MeshFilter>().sharedMesh = GridMesh(lines, scale);
 			transform.position = Vector3.zero;
 		}
 
-		Mesh GridMesh(int lineCount, float scale)
+        private Mesh GridMesh(int lineCount, float scale)
 		{
 			float half = (lineCount / 2f) * scale;
 

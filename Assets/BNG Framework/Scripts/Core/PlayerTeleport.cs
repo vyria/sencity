@@ -44,14 +44,14 @@ namespace BNG {
         public Transform TeleportBeginTransformAlt;
 
         // Get the Starting Point of the Teleport transform depending on if left or right handed
-        Transform teleportTransform {
+        private Transform teleportTransform {
             get {
                 return HandSide == ControllerHand.Left ? TeleportBeginTransform : TeleportBeginTransformAlt;
             }
         }
 
         // Get the Thumbstick Axis depending on if left or right handed.
-        Vector2 handedThumbstickAxis {
+        private Vector2 handedThumbstickAxis {
             get {
                 return HandSide == ControllerHand.Left ? input.LeftThumbstickAxis : input.RightThumbstickAxis;
             }
@@ -126,13 +126,12 @@ namespace BNG {
         [Header("Physics Material")]
         [Tooltip("Physics Material to apply to the sphere collider when no controls are being issued.")]
         public PhysicMaterial FrictionMaterial;
-
-        CharacterController controller;
-        BNGPlayerController playerController;
-        Rigidbody playerRigid;
-        InputBridge input;
-        Transform cameraRig;
-        ScreenFader fader;
+        private CharacterController controller;
+        private BNGPlayerController playerController;
+        private Rigidbody playerRigid;
+        private InputBridge input;
+        private Transform cameraRig;
+        private ScreenFader fader;
 
         protected bool aimingTeleport = false;
         public bool AimingTeleport {
@@ -147,7 +146,7 @@ namespace BNG {
         private int _invalidFrames = 0;
 
         // Initial Starting width of Line Renderer
-        float _initialLineWidth;
+        private float _initialLineWidth;
 
         public delegate void OnBeforeTeleportFadeAction();
         public static event OnBeforeTeleportFadeAction OnBeforeTeleportFade;
@@ -158,7 +157,7 @@ namespace BNG {
         public delegate void OnAfterTeleportAction();
         public static event OnAfterTeleportAction OnAfterTeleport;
 
-        void Start() {
+        private void Start() {
             setupVariables();
         }
 
@@ -169,8 +168,9 @@ namespace BNG {
             }
         }
 
-        bool setVariables = false;
-        void setupVariables() {
+        private bool setVariables = false;
+
+        private void setupVariables() {
             input = InputBridge.Instance;
             playerController = GetComponent<BNGPlayerController>();
             playerRigid = GetComponent<Rigidbody>();
@@ -203,7 +203,7 @@ namespace BNG {
             setVariables = true;
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
 
             // Are we pressing button to check for teleport?
             aimingTeleport = KeyDownForTeleport();            
@@ -272,15 +272,15 @@ namespace BNG {
         }
 
         // gameobject we're actually pointing at (may be useful for highlighting a target, etc.)
-        Collider _hitObject;
+        private Collider _hitObject;
         private Vector3 _hitVector;
-        float _hitAngle;
-        RaycastHit hit;
-        Vector3[] segments;
-        Vector3 segVelocity;
-        float segTime;
-        int segCount;
-        bool isDestination = false;
+        private float _hitAngle;
+        private RaycastHit hit;
+        private Vector3[] segments;
+        private Vector3 segVelocity;
+        private float segTime;
+        private int segCount;
+        private bool isDestination = false;
 
         protected virtual void calculateParabola() {
 
@@ -559,7 +559,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator doTeleport(Vector3 playerDestination, Quaternion playerRotation, bool rotatePlayer) {
+        private IEnumerator doTeleport(Vector3 playerDestination, Quaternion playerRotation, bool rotatePlayer) {
 
             if(!setVariables) {
                 setupVariables();
@@ -635,7 +635,7 @@ namespace BNG {
             StartCoroutine(doTeleport(destination.position, destination.rotation, true));
         }
 
-        Vector2 teleportAxis = Vector2.zero;
+        private Vector2 teleportAxis = Vector2.zero;
 
         // Are we pressing proper key to initiate teleport?
         public virtual bool KeyDownForTeleport() {
@@ -709,7 +709,7 @@ namespace BNG {
             return true;
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             if (controller != null && TeleportDestination.gameObject.activeSelf) {
                 Color gizColor = Color.red;
                 gizColor.a = 0.9f;

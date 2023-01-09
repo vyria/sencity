@@ -79,26 +79,19 @@ namespace BNG {
 
         [Tooltip("Unity Input Action used to mimic having your thumb near a button")]
         public InputActionReference RightThumbNearAction;
-
-       
-
-        float mouseRotationX;
-        float mouseRotationY;
-
-        Transform mainCameraTransform;
-        Transform leftControllerTranform;
-        Transform rightControllerTranform;
-
-        Transform leftHandAnchor;
-        Transform rightHandAnchor;
-
-        BNGPlayerController player;
-        SmoothLocomotion smoothLocomotion;
-        PlayerTeleport playerTeleport;
-        bool didFirstActivate = false;
-
-        Grabber grabberLeft;
-        Grabber grabberRight;
+        private float mouseRotationX;
+        private float mouseRotationY;
+        private Transform mainCameraTransform;
+        private Transform leftControllerTranform;
+        private Transform rightControllerTranform;
+        private Transform leftHandAnchor;
+        private Transform rightHandAnchor;
+        private BNGPlayerController player;
+        private SmoothLocomotion smoothLocomotion;
+        private PlayerTeleport playerTeleport;
+        private bool didFirstActivate = false;
+        private Grabber grabberLeft;
+        private Grabber grabberRight;
 
         private float _originalPlayerYOffset = 1.65f;
 
@@ -107,10 +100,9 @@ namespace BNG {
 
         public Vector3 LeftControllerPosition = new Vector3(-0.2f, -0.2f, 0.5f);
         public Vector3 RightControllerPosition = new Vector3(0.2f, -0.2f, 0.5f);
+        private bool priorStraightSetting;
 
-        bool priorStraightSetting;
-
-        void Start() {
+        private void Start() {
 
             if(GameObject.Find("CameraRig")) {
                 mainCameraTransform = GameObject.Find("CameraRig").transform;
@@ -163,13 +155,13 @@ namespace BNG {
             }
         }
 
-        void onFirstActivate() {
+        private void onFirstActivate() {
             UpdateControllerPositions();            
 
             didFirstActivate = true;
         }
 
-        void Update() {
+        private void Update() {
 
             //// Considerd absent if specified or unknown status
             // bool userAbsent = XRDevice.userPresence == UserPresenceState.NotPresent || XRDevice.userPresence == UserPresenceState.Unknown;
@@ -244,9 +236,9 @@ namespace BNG {
                     Cursor.visible = true;
                 }
             }
-        }        
+        }
 
-        float prevVal;
+        private float prevVal;
         /// <summary>
         /// Overwrite InputBridge inputs with our own bindings
         /// </summary>
@@ -341,7 +333,7 @@ namespace BNG {
             }
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             // Player Move Forward / Back, Snap Turn
             //if (smoothLocomotion != null && smoothLocomotion.enabled == false && smoothLocomotion.ControllerType == PlayerControllerType.Rigidbody) {
             //    smoothLocomotion.MoveRigidCharacter();
@@ -356,7 +348,7 @@ namespace BNG {
             rightControllerTranform.transform.localEulerAngles = Vector3.zero;
         }
 
-        void checkGrabbers() {
+        private void checkGrabbers() {
             // Find Grabber Left
             if (grabberLeft == null || !grabberLeft.isActiveAndEnabled) {
                 Grabber[] grabbers = FindObjectsOfType<Grabber>();
@@ -407,7 +399,7 @@ namespace BNG {
             didFirstActivate = false;
         }
 
-        void OnEnable() {
+        private void OnEnable() {
 
             if (EmulatorActionSet != null) {
                 foreach (var map in EmulatorActionSet.actionMaps) {
@@ -425,7 +417,7 @@ namespace BNG {
             Application.onBeforeRender += OnBeforeRender;
         }
 
-        void OnDisable() {
+        private void OnDisable() {
 
             // Disable Input Actions
             if (EmulatorActionSet != null) {
@@ -451,8 +443,9 @@ namespace BNG {
             InputBridge.OnInputsUpdated -= UpdateInputs;
         }
 
-        bool isQuitting = false;
-        void OnApplicationQuit() {
+        private bool isQuitting = false;
+
+        private void OnApplicationQuit() {
             isQuitting = true;
         }
     }

@@ -10,20 +10,20 @@ namespace BNG {
     /// A simple script to display FPS onto a Text label
     /// </summary>
     public class FPSText : MonoBehaviour {
-        Text text;
-        float deltaTime = 0.0f;
+        private Text text;
+        private float deltaTime = 0.0f;
 
-        void Start() {
+        private void Start() {
             text = GetComponent<Text>();
         }
 
-        void Update() {
+        private void Update() {
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 
             text.text = Math.Ceiling(1.0f / deltaTime) + " FPS";
         }
 
-        void OnGUI() {
+        private void OnGUI() {
             text.text = Math.Ceiling(1.0f / deltaTime) + " FPS";
         }
     }

@@ -17,7 +17,7 @@ namespace BNG {
 
         public AudioClip InsertSound;
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
 
             Grabbable grab = other.GetComponent<Grabbable>();
             if (grab != null) {

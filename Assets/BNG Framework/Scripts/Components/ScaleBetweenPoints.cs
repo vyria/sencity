@@ -16,19 +16,19 @@ namespace BNG {
 
         public bool LookAtTarget = false;
 
-        void Update() {
+        private void Update() {
             if(DoUpdate) {
                 doScale();
             }
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
             if (DoLateUpdate) {
                 doScale();
             }
         }
 
-        void doScale() {
+        private void doScale() {
 
             if(LookAtTarget) {
                 transform.position = Begin.position;

@@ -20,14 +20,13 @@ namespace BNG {
 
         public float LocalYMin = 215f;
         public float LocalYMax = 270f;
+        private Vector3 initialRot;
 
-        Vector3 initialRot;
-
-        void Start() {
+        private void Start() {
             initialRot = transform.localEulerAngles;
         }
 
-        void Update() {
+        private void Update() {
 
             // Something is holding the handle. Point at the Grabber
             if(HandleGrabbable != null && HandleGrabbable.BeingHeld) {

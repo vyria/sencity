@@ -39,16 +39,14 @@ namespace BNG {
 
         [Tooltip("Thumbstick X axis must be >= this amount to be considered an input event")]
         public float SmoothTurnMinInput = 0.1f;
-
-        float recentSnapTurnTime;        
+        private float recentSnapTurnTime;
 
         /// <summary>
         /// How much to rotate this frame
         /// </summary>
-        float rotationAmount = 0;
-
-        float xAxis;
-        float previousXInput;
+        private float rotationAmount = 0;
+        private float xAxis;
+        private float previousXInput;
 
         #region Events
         public delegate void OnBeforeRotateAction();
@@ -58,7 +56,7 @@ namespace BNG {
         public static event OnAfterRotateAction OnAfterRotate;
         #endregion
 
-        void Update() {
+        private void Update() {
 
             if(!AllowInput) {
                 return;

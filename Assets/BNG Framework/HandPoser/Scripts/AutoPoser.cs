@@ -55,9 +55,10 @@ namespace BNG {
         public HandPoser InspectedPose;
 
         // Where our hand currently is this frame
-        HandPoseDefinition currentPose;
+        private HandPoseDefinition currentPose;
+
         // Used to store temp poses and prevent GC
-        HandPoseDefinition tempPose;
+        private HandPoseDefinition tempPose;
 
         // Where our hand would after checking for collisions
         public HandPoseDefinition CollisionPose {
@@ -65,7 +66,8 @@ namespace BNG {
                 return collisionPose;
             }
         }
-        HandPoseDefinition collisionPose;
+
+        private HandPoseDefinition collisionPose;
 
         public bool CollisionDetected {
             get {
@@ -82,13 +84,13 @@ namespace BNG {
         private bool _pinkyHit = false;
         #endregion
 
-        void Start() {
+        private void Start() {
             if(InspectedPose == null) {
                 InspectedPose = GetComponent<HandPoser>();
             }
         }
 
-        void OnEnable() {
+        private void OnEnable() {
             if(Application.isEditor && OpenHandPose == null && ClosedHandPose == null) {
                 // Try to auto fill open / closed hand pose
                 OpenHandPose = (HandPose)Resources.Load("Default", typeof(HandPose));
@@ -97,7 +99,7 @@ namespace BNG {
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
             // Auto Update Auto Pose
             if (UpdateContinuously) {
 
@@ -128,7 +130,7 @@ namespace BNG {
             StartCoroutine(updateAutoPoseRoutine());
         }
 
-        IEnumerator updateAutoPoseRoutine() {
+        private IEnumerator updateAutoPoseRoutine() {
             
             UpdateContinuously = true;
 
@@ -322,7 +324,7 @@ namespace BNG {
 
         #region EditorGizmos
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
 
             // Don't draw gizmos if this component has been disabled
             if(!this.isActiveAndEnabled) {

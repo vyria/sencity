@@ -14,27 +14,19 @@ namespace BNG {
         public Transform LeftHandFollow;
 
         public Vector3 HandRotationOffset = Vector3.zero;
-
-        Animator animator;
-        Transform headBone;
-
-        Transform leftHandDummy;
-        Transform rightHandDummy;
-
-
-        Transform leftHandOnPlayer;
-        Transform rightHandOnPlayer;
-
-
-        Transform lookatDummy;
-
-        Vector3 localPos;
-        Quaternion localRot;
-
-        Transform cam;
+        private Animator animator;
+        private Transform headBone;
+        private Transform leftHandDummy;
+        private Transform rightHandDummy;
+        private Transform leftHandOnPlayer;
+        private Transform rightHandOnPlayer;
+        private Transform lookatDummy;
+        private Vector3 localPos;
+        private Quaternion localRot;
+        private Transform cam;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             cam = Camera.main.transform;
             animator = GetComponent<Animator>();
             headBone = animator.GetBoneTransform(HumanBodyBones.Head);
@@ -64,11 +56,11 @@ namespace BNG {
             return theTransform;
         }
 
-        Vector3 leftHandLocalPos, rightHandLocalPos;
-        Quaternion leftHandLocalRot, rightHandLocalRot;
+        private Vector3 leftHandLocalPos, rightHandLocalPos;
+        private Quaternion leftHandLocalRot, rightHandLocalRot;
 
         // Update is called once per frame
-        void LateUpdate() {
+        private void LateUpdate() {
 
             if(HeadFollow == null || PlayerTransform == null) {
                 return;
@@ -106,7 +98,7 @@ namespace BNG {
         public Vector3 LeftHandsOffset = Vector3.zero;
         public Vector3 RightHandsOffset = Vector3.zero;
 
-        void OnAnimatorIK() {
+        private void OnAnimatorIK() {
             if(animator == null) {
                 return;
             }

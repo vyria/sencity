@@ -21,8 +21,7 @@ namespace BNG {
 
         protected Vector3 currentLocalPosition;
         protected Quaternion currentLocalRotation;
-
-        static List<InputDevice> devices = new List<InputDevice>();
+        private static List<InputDevice> devices = new List<InputDevice>();
 
         protected virtual void Awake() {
             initialLocalPosition = transform.localPosition;

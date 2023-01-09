@@ -24,7 +24,7 @@ namespace BNG {
         private float _initialProjectileForce;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             // Setup initial velocity for launcher so we can modify it later
             _initialProjectileForce = ProjectileForce;
         }

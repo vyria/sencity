@@ -48,14 +48,14 @@ namespace BNG {
         /// <summary>
         /// Calls Events
         /// </summary>
-        VRUISystem uiSystem;
-        PointerEvents selectedPointerEvents;
-        PointerEventData data;
+        private VRUISystem uiSystem;
+        private PointerEvents selectedPointerEvents;
+        private PointerEventData data;
 
         [Tooltip("LineRenderer to use when showing a valid UI Canvas. Leave null to attempt a GetComponent<> on this object.")]
         public LineRenderer lineRenderer;
 
-        void Awake() {
+        private void Awake() {
 
             if(cursor) {
                 _cursor = GameObject.Instantiate(cursor);
@@ -122,7 +122,7 @@ namespace BNG {
         }
 #endif
 
-        void OnEnable() {
+        private void OnEnable() {
 #if XRIT_INTEGRATION
             if (VRUISystem.Instance.UseXRInteractionToolkitUISystem) {
 
@@ -135,7 +135,7 @@ namespace BNG {
 #endif
         }
 
-        void updateUITransforms() {
+        private void updateUITransforms() {
             // Automatically update VR System with our transforms
             if (AutoUpdateUITransforms && ControllerSide == ControllerHand.Left) {
                 uiSystem.LeftPointerTransform = this.transform;

@@ -13,12 +13,11 @@ namespace BNG {
         public Transform ZiplineEnd;
         public float ZiplineSpeed = 1;
         public bool UseLinearMovement = true;
+        private float lastMoveTime = -1f;
+        private bool movingForward = true;
+        private AudioSource audioSource;
 
-        float lastMoveTime = -1f;
-        bool movingForward = true;
-        AudioSource audioSource;
-
-        void Start() {
+        private void Start() {
             // Start off by orienting the zipline holder
             if(ZiplineEnd != null) {
                 transform.LookAt(ZiplineEnd.position);
@@ -27,7 +26,7 @@ namespace BNG {
             audioSource = GetComponent<AudioSource>();
         }
 
-        void Update() {           
+        private void Update() {           
 
             // Play vs. stop sound
             if (Time.time - lastMoveTime < 0.1f) {
@@ -50,7 +49,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             if (ZiplineStart != null && ZiplineEnd != null) {
                 // Draws a blue line from this transform to the target
                 Gizmos.color = Color.green;
@@ -79,7 +78,7 @@ namespace BNG {
             base.OnButton2();
         }
 
-        void moveTowards(Vector3 pos, bool forwardDirection) {
+        private void moveTowards(Vector3 pos, bool forwardDirection) {
 
             lastMoveTime = Time.time;
             movingForward = forwardDirection;

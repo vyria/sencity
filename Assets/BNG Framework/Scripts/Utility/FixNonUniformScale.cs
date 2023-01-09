@@ -7,11 +7,10 @@ using UnityEngine;
 /// </summary>
 public class FixNonUniformScale : MonoBehaviour
 {
-
-    bool running = false;
+    private bool running = false;
 
     // Only call on selected
-    void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected() {
         if(running) {
             return;
         }

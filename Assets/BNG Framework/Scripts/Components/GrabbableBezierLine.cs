@@ -15,12 +15,10 @@ namespace BNG {
 
         public float LerpAmount = 0.5f;
         public float HeightAdjustment = 0.5f;
+        private Grabber lineToGrabber;
+        private Grabber lineRemoteGrabbing;
 
-        Grabber lineToGrabber;
-
-        Grabber lineRemoteGrabbing;
-
-        void Start() {
+        private void Start() {
             if(LineToDraw == null) {
                 LineToDraw = transform.GetComponent<LineRenderer>();
             }

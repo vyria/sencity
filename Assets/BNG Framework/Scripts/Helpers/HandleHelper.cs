@@ -15,13 +15,12 @@ namespace BNG {
         /// The Transform that is following us
         /// </summary>
         public Transform HandleTransform;
+        private Grabbable thisGrab;
+        private Rigidbody rb;
+        private bool didRelease = false;
+        private Collider col;
 
-        Grabbable thisGrab;
-        Rigidbody rb;
-        bool didRelease = false;
-        Collider col;
-
-        void Start() {
+        private void Start() {
             thisGrab = GetComponent<Grabbable>();
             thisGrab.CanBeSnappedToSnapZone = false;
             rb = GetComponent<Rigidbody>();
@@ -33,9 +32,9 @@ namespace BNG {
             }
         }
 
-        Vector3 lastAngularVelocity;
+        private Vector3 lastAngularVelocity;
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
 
             if(!thisGrab.BeingHeld) {
                 if(!didRelease) {
@@ -77,7 +76,7 @@ namespace BNG {
             Physics.IgnoreCollision(col, collision.collider, true);
         }
 
-        IEnumerator doRelease() {
+        private IEnumerator doRelease() {
 
             //for(int x = 0; x < 120; x++) {
             //    ParentRigid.angularVelocity = new Vector3(10, 1000f, 50);

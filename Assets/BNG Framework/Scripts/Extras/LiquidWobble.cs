@@ -6,22 +6,22 @@ namespace BNG {
 
     // This is a wobble effect based on Minions Art Tutorial found : https://www.patreon.com/posts/quick-game-art-18245226
     public class LiquidWobble : MonoBehaviour {
-        Renderer rend;
-        Vector3 lastPos;
-        Vector3 velocity;
-        Vector3 lastRot;
-        Vector3 angularVelocity;
+        private Renderer rend;
+        private Vector3 lastPos;
+        private Vector3 velocity;
+        private Vector3 lastRot;
+        private Vector3 angularVelocity;
         public float MaxWobble = 0.03f;
         public float WobbleSpeed = 1f;
         public float Recovery = 1f;
-        float wobbleAmountX;
-        float wobbleAmountZ;
-        float wobbleAmountToAddX;
-        float wobbleAmountToAddZ;
-        float pulse;
-        float time = 0.5f;
+        private float wobbleAmountX;
+        private float wobbleAmountZ;
+        private float wobbleAmountToAddX;
+        private float wobbleAmountToAddZ;
+        private float pulse;
+        private float time = 0.5f;
 
-        void Start() {
+        private void Start() {
             rend = GetComponent<Renderer>();
         }
         private void Update() {

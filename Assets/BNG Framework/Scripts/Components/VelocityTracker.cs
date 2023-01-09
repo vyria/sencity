@@ -27,22 +27,21 @@ namespace BNG {
         // Used for manual velocity tracking
         private Vector3 _lastPosition;
         private Quaternion _lastRotation;
-
-        List<Vector3> previousVelocities = new List<Vector3>();
-        List<Vector3> previousAngularVelocities = new List<Vector3>();
+        private List<Vector3> previousVelocities = new List<Vector3>();
+        private List<Vector3> previousAngularVelocities = new List<Vector3>();
 
         // Used in out variables to calculate angleaxis
-        float angle;
-        Vector3 axis;
+        private float angle;
+        private Vector3 axis;
 
         // Used for tracking playspace rotation which may be needed to determine velocity of thrown objects
-        GameObject playSpace;
+        private GameObject playSpace;
 
-        void Start() {
+        private void Start() {
             playSpace = GameObject.Find("TrackingSpace");
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             UpdateVelocities();
 
             // Save our last position / rotation so we can use it for velocity calculations

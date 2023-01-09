@@ -8,15 +8,14 @@ namespace BNG {
     /// Spawn an arrow if Trigger is grabbed
     /// </summary>
     public class ArrowGrabArea : MonoBehaviour {
-
-        Bow theBow;
+        private Bow theBow;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             theBow = transform.parent.GetComponent<Bow>();
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
 
             // Grabber entered grab area. We can potentially grab an arrow
             Grabber grabObject = other.GetComponent<Grabber>();
@@ -39,7 +38,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             // Grabber exited grab area. No longer able to grab an arrow
             Grabber grabObject = other.GetComponent<Grabber>();
             if (theBow.ClosestGrabber != null &&  grabObject != null && theBow.ClosestGrabber == grabObject) {

@@ -15,21 +15,18 @@ namespace BNG {
         public bool DestroyJointOnBreak = true;
 
         public GrabberEvent OnBreakEvent;
-
-        Joint theJoint;
-
-        Vector3 startPos;
-
-        bool brokeJoint = false;
+        private Joint theJoint;
+        private Vector3 startPos;
+        private bool brokeJoint = false;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             startPos = transform.localPosition;
             theJoint = GetComponent<Joint>();
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
             JointDistance = Vector3.Distance(transform.localPosition, startPos);
 
             if(!brokeJoint && JointDistance > BreakDistance) {

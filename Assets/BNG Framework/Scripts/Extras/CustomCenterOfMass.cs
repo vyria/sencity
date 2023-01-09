@@ -16,11 +16,10 @@ namespace BNG {
         [Header("Debug Options")]
         [Tooltip("If true a red sphere will in the editor show where the center of mass will be positioned")]
         public bool ShowGizmo = true;
-
-        Rigidbody rigid;
+        private Rigidbody rigid;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             rigid = GetComponent<Rigidbody>();
             SetCenterOfMass(getThisCenterOfMass());
         }
@@ -40,7 +39,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
             if(ShowGizmo) {
                 Gizmos.color = Color.red;
                 if(rigid) {

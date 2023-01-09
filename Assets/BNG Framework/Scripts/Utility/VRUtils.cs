@@ -31,18 +31,17 @@ namespace BNG {
         public Color ErrTextColor = Color.red;
 
         public Transform DebugTextHolder;
-        
+
         /// <summary>
         /// Maximum number of Text lines before we start removing them
         /// </summary>
-        float MaxTextEntries = 10;
+        private float MaxTextEntries = 10;
 
         // Store so we can compare against future entries
         public string LastDebugMsg;
-        int lastDebugMsgCount;
+        private int lastDebugMsgCount;
 
-
-        void Awake() {
+        private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(this);
                 return;
@@ -138,7 +137,7 @@ namespace BNG {
             return source;
         }
 
-        float getRandomizedPitch(float randomAmount) {
+        private float getRandomizedPitch(float randomAmount) {
 
             if(randomAmount != 0) {
                 float randomPitch = Random.Range(-randomAmount, randomAmount);

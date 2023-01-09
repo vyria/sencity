@@ -24,23 +24,21 @@ namespace BNG {
         /// Scale in Dynamic Pixels Per Unit
         /// </summary>
         public float ValidSnapScale = 800f;
-
-        CanvasScaler ringCanvas;
-        Text ringText;
-        GrabbablesInTrigger nearbyGrabbables;
-
-        bool validSnap = false;
+        private CanvasScaler ringCanvas;
+        private Text ringText;
+        private GrabbablesInTrigger nearbyGrabbables;
+        private bool validSnap = false;
 
         public float ScaleSpeed = 50f;
 
-        void Start() {
+        private void Start() {
             ringCanvas = GetComponent<CanvasScaler>();
             ringText = GetComponent<Text>();
             nearbyGrabbables = Snap.GetComponent<GrabbablesInTrigger>();
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
 
             validSnap = checkIsValidSnap();
 
@@ -52,7 +50,7 @@ namespace BNG {
             ringText.color = validSnap ? ValidSnapColor : RestingColor;
         }
 
-        bool checkIsValidSnap() {
+        private bool checkIsValidSnap() {
             if(nearbyGrabbables != null) {
 
                 // Invalid if we are already  holding something

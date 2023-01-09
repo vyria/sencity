@@ -20,7 +20,7 @@ namespace BNG {
         public float MaxLocalZ = 0;
 
         // Keep track of which way we are sliding
-        bool slidingBack = true;
+        private bool slidingBack = true;
 
         /// <summary>
         /// Is the Slide locked back due to last shot
@@ -41,25 +41,25 @@ namespace BNG {
         /// When true, the slide will be set to 0 mass when not being held. This fixes jitter caused by the slide having a configurable joint attached to the weapon
         /// </summary>
         public bool ZeroMassWhenNotHeld = true;
-
-        RaycastWeapon parentWeapon;
-        Grabbable parentGrabbable;
-        Vector3 initialLocalPos;
-        Grabbable thisGrabbable;
-        AudioSource audioSource;
-        Rigidbody rigid;
-        float initialMass;
+        private RaycastWeapon parentWeapon;
+        private Grabbable parentGrabbable;
+        private Vector3 initialLocalPos;
+        private Grabbable thisGrabbable;
+        private AudioSource audioSource;
+        private Rigidbody rigid;
+        private float initialMass;
 
         /// <summary>
         /// Lock the slide position in place
         /// </summary>
-        Vector3 _lockPosition;
+        private Vector3 _lockPosition;
+
         /// <summary>
         /// If true then the slides position is locked in Update and cannot be moved
         /// </summary>
-        bool lockSlidePosition;
+        private bool lockSlidePosition;
 
-        void Start() {
+        private void Start() {
             initialLocalPos = transform.localPosition;
             audioSource = GetComponent<AudioSource>();
             parentWeapon = transform.parent.GetComponent<RaycastWeapon>();
@@ -88,10 +88,10 @@ namespace BNG {
 
             //PlayerRotation.OnBeforeRotate += LockSlidePosition;
             //PlayerRotation.OnAfterRotate += UnlockSlidePosition;
-        }        
+        }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
 
             // If our slide is currently locked just set it and return early
             if(lockSlidePosition) {
@@ -129,7 +129,7 @@ namespace BNG {
             }
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             // Change mass of slider rigidbody. This prevents stuttering when the object is not held and the slide is back
             if (ZeroMassWhenNotHeld && parentGrabbable.BeingHeld && rigid) {
                 rigid.mass = initialMass;
@@ -167,7 +167,7 @@ namespace BNG {
             }
         }
 
-        void onSlideBack() {
+        private void onSlideBack() {
 
             if (thisGrabbable.BeingHeld || parentGrabbable.BeingHeld) {
                 playSoundInterval(0, 0.2f, 0.9f);
@@ -180,7 +180,7 @@ namespace BNG {
             slidingBack = false;
         }
 
-        void onSlideForward() {
+        private void onSlideForward() {
 
             if (thisGrabbable.BeingHeld || parentGrabbable.BeingHeld) {
                 playSoundInterval(0.2f, 0.35f, 1f);
@@ -208,7 +208,7 @@ namespace BNG {
             lockSlidePosition = false;
         }
 
-        void playSoundInterval(float fromSeconds, float toSeconds, float volume) {
+        private void playSoundInterval(float fromSeconds, float toSeconds, float volume) {
             if (audioSource) {
 
                 if (audioSource.isPlaying) {

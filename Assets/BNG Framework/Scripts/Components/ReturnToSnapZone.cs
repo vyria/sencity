@@ -17,24 +17,23 @@ namespace BNG {
 
         [Tooltip("How long to wait before starting to Lerp the object back towards the SnapZone. In Seconds.")]
         public float ReturnDelay = 0.1f;
-        
-        // How long we've been waiting
-        float currentDelay = 0;
 
-        Grabbable grab;
-        Rigidbody rigid;
-        bool useGravityInitial;
+        // How long we've been waiting
+        private float currentDelay = 0;
+        private Grabbable grab;
+        private Rigidbody rigid;
+        private bool useGravityInitial;
 
         [Tooltip("Initiate snap if distance between the Grabbable and SnapZone is <= SnapDistance")]
         public float SnapDistance = 0.05f;
 
-        void Start() {
+        private void Start() {
             grab = GetComponent<Grabbable>();
             rigid = GetComponent<Rigidbody>();
             useGravityInitial = rigid.useGravity;
         }
 
-        void Update() {
+        private void Update() {
 
             // Reset the counter if we're holding the item
             if(grab.BeingHeld) {
@@ -54,7 +53,7 @@ namespace BNG {
             }
         }
 
-        void moveToSnapZone() {
+        private void moveToSnapZone() {
             
             rigid.useGravity = false;
             

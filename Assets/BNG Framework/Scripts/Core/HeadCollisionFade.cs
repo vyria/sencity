@@ -5,8 +5,7 @@ using UnityEngine;
 namespace BNG {
 
     public class HeadCollisionFade : MonoBehaviour {
-
-        ScreenFader fader;
+        private ScreenFader fader;
 
         public float FadeDistance = 0.1f;
         public float FadeOutDistance = 0.045f;
@@ -29,13 +28,13 @@ namespace BNG {
 
         public List<Collider> collisions;
 
-        void Start() {
+        private void Start() {
             if(Camera.main) {
                 fader = Camera.main.transform.GetComponent<ScreenFader>();
             }
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
 
             bool headColliding = false;
 
@@ -93,7 +92,7 @@ namespace BNG {
             }
         }
 
-        void OnCollisionEnter(Collision col) {
+        private void OnCollisionEnter(Collision col) {
             if(collisions == null) {
                 collisions = new List<Collider>();
             }
@@ -122,7 +121,7 @@ namespace BNG {
             }
         }
 
-        void OnCollisionExit(Collision col) {
+        private void OnCollisionExit(Collision col) {
             if (collisions == null) {
                 collisions = new List<Collider>();
             }

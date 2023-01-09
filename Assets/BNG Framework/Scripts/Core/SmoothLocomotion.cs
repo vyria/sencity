@@ -99,27 +99,26 @@ namespace BNG {
 
         [Tooltip("How fast the player can move in the air if AirControl = true. Example : 0.5 = Player will move at half the speed of MovementSpeed")]
         public float AirControlSpeed = 1f;
-
-        BNGPlayerController playerController;
-        CharacterController characterController;
-        Rigidbody playerRigid;
-        SphereCollider playerSphere;
+        private BNGPlayerController playerController;
+        private CharacterController characterController;
+        private Rigidbody playerRigid;
+        private SphereCollider playerSphere;
 
         // Left / Right
-        float movementX;
+        private float movementX;
 
         // Up / Down
-        float movementY;
+        private float movementY;
 
         // Forwards / Backwards
-        float movementZ;
+        private float movementZ;
 
         private float _verticalSpeed = 0; // Keep track of vertical speed
 
         /// <summary>
         /// Any movement to apply after controller movement has been calculated
         /// </summary>
-        Vector3 additionalMovement;
+        private Vector3 additionalMovement;
 
         #region Events
         public delegate void OnBeforeMoveAction();
@@ -147,7 +146,7 @@ namespace BNG {
             }
         }
 
-        bool playerInitialized = false;
+        private bool playerInitialized = false;
 
         public virtual void CheckControllerReferences() {
             // Component may be called while disabled, so check for references here
@@ -223,8 +222,8 @@ namespace BNG {
             }            
         }
 
-        float lastJumpTime;
-        float lastMoveTime;
+        private float lastJumpTime;
+        private float lastMoveTime;
 
         public virtual void DoRigidBodyJump() {
 
@@ -570,8 +569,8 @@ namespace BNG {
         //        GroundContacts--;
         //    }
         //}
-        
-        void OnCollisionStay(Collision collisionInfo) {
+
+        private void OnCollisionStay(Collision collisionInfo) {
             if (ControllerType == PlayerControllerType.Rigidbody) {
                 //= collisionInfo.contacts.Length;
 

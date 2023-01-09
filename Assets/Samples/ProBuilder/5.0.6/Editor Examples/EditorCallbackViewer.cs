@@ -8,29 +8,29 @@ using EditorUtility = UnityEditor.ProBuilder.EditorUtility;
 
 namespace ProBuilder.EditorExamples
 {
-	sealed class EditorCallbackViewer : EditorWindow
+    internal sealed class EditorCallbackViewer : EditorWindow
 	{
-		List<string> m_Logs = new List<string>();
-		Vector2 m_Scroll = Vector2.zero;
-		bool m_Collapse = true;
+        private List<string> m_Logs = new List<string>();
+        private Vector2 m_Scroll = Vector2.zero;
+        private bool m_Collapse = true;
 
 		[MenuItem("Tools/ProBuilder/API Examples/Log Callbacks Window")]
-		static void MenuInitEditorCallbackViewer()
+        private static void MenuInitEditorCallbackViewer()
 		{
 			GetWindow<EditorCallbackViewer>(true, "ProBuilder Callbacks", true).Show();
 		}
 
-		static Color logBackgroundColor
+        private static Color logBackgroundColor
 		{
 			get { return EditorGUIUtility.isProSkin ? new Color(.15f, .15f, .15f, .5f) : new Color(.8f, .8f, .8f, 1f); }
 		}
 
-		static Color disabledColor
+        private static Color disabledColor
 		{
 			get { return EditorGUIUtility.isProSkin ? new Color(.3f, .3f, .3f, .5f) : new Color(.8f, .8f, .8f, 1f); }
 		}
 
-		void OnEnable()
+        private void OnEnable()
 		{
 			ProBuilderEditor.selectModeChanged += SelectModeChanged;
 			EditorUtility.meshCreated += MeshCreated;
@@ -40,7 +40,7 @@ namespace ProBuilder.EditorExamples
 			EditorMeshUtility.meshOptimized += MeshOptimized;
 		}
 
-		void OnDisable()
+        private void OnDisable()
 		{
 			ProBuilderEditor.selectModeChanged -= SelectModeChanged;
 			EditorUtility.meshCreated -= MeshCreated;
@@ -50,43 +50,43 @@ namespace ProBuilder.EditorExamples
 			EditorMeshUtility.meshOptimized -= MeshOptimized;
 		}
 
-		void BeforeMeshModification(IEnumerable<ProBuilderMesh> selection)
+        private void BeforeMeshModification(IEnumerable<ProBuilderMesh> selection)
 		{
 			AddLog("Began Moving Vertices");
 		}
 
-		void AfterMeshModification(IEnumerable<ProBuilderMesh> selection)
+        private void AfterMeshModification(IEnumerable<ProBuilderMesh> selection)
 		{
 			AddLog("Finished Moving Vertices");
 		}
 
-		void SelectModeChanged(SelectMode mode)
+        private void SelectModeChanged(SelectMode mode)
 		{
 			AddLog("Selection Mode Changed: " + mode);
 		}
 
-		void MeshCreated(ProBuilderMesh mesh)
+        private void MeshCreated(ProBuilderMesh mesh)
 		{
 			AddLog("Instantiated new ProBuilder Object: " + mesh.name);
 		}
 
-		void SelectionUpdated(IEnumerable<ProBuilderMesh> selection)
+        private void SelectionUpdated(IEnumerable<ProBuilderMesh> selection)
 		{
 			AddLog("Selection Updated: " + string.Format("{0} objects selected.", selection != null ? selection.Count() : 0));
 		}
 
-		void MeshOptimized(ProBuilderMesh pmesh, Mesh umesh)
+        private void MeshOptimized(ProBuilderMesh pmesh, Mesh umesh)
 		{
 			AddLog(string.Format("Mesh {0} rebuilt", pmesh.name));
 		}
 
-		void AddLog(string summary)
+        private void AddLog(string summary)
 		{
 			m_Logs.Add(summary);
 			Repaint();
 		}
 
-		void OnGUI()
+        private void OnGUI()
 		{
 			GUILayout.BeginHorizontal(EditorStyles.toolbar);
 

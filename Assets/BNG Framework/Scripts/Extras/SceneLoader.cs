@@ -14,8 +14,7 @@ namespace BNG {
 
         [Tooltip("Wait this long in seconds before attempting to load the scene. Useful if you need to fade the screen out before attempting to load the level.")]
         public float ScreenFadeTime = 0.5f;
-
-        ScreenFader sf;
+        private ScreenFader sf;
 
         private string _loadSceneName = string.Empty;
 

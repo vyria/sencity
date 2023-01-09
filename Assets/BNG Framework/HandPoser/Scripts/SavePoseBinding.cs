@@ -23,10 +23,9 @@ namespace BNG {
         [Header("Debug : ")]
         [Tooltip("If true, the SaveInput binding will be shown on the screen gui. Will not show in VR.")]
         public bool ShowKeybindingToolTip = true;
+        private HandPoser handPoser;
 
-        HandPoser handPoser;
-
-        void Start() {
+        private void Start() {
             handPoser = GetComponent<HandPoser>();
 
 #if ENABLE_INPUT_SYSTEM
@@ -37,7 +36,7 @@ namespace BNG {
 #endif
         }
 
-        void Update() {
+        private void Update() {
 #if ENABLE_INPUT_SYSTEM
             // New Input Save
             if (SaveInput != null && SaveInput.triggered) {
@@ -53,7 +52,7 @@ namespace BNG {
 #endif
         }
 
-        void OnGUI() {
+        private void OnGUI() {
             if(ShowKeybindingToolTip) {
 #if ENABLE_INPUT_SYSTEM
                 GUI.Box(new Rect(20, 20, 480, 24), "Press '<b>" + SaveInput.bindings[0].path + "</b>' to save the current hand pose");

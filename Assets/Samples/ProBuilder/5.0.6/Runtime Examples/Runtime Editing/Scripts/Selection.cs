@@ -4,9 +4,9 @@ using UnityEngine.ProBuilder;
 
 namespace ProBuilder.Examples
 {
-	static class Selection
+    internal static class Selection
 	{
-		static HashSet<ProBuilderMesh> s_Selection = new HashSet<ProBuilderMesh>();
+        private static HashSet<ProBuilderMesh> s_Selection = new HashSet<ProBuilderMesh>();
 
 		public static bool Add(ProBuilderMesh mesh)
 		{

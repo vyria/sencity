@@ -19,22 +19,19 @@ namespace BNG {
 
         [Tooltip("If true the button can be pressed by physical object by utiizing a Spring Joint. Set to false if you don't need / want physics interactions, or are using this on a moving platform.")]
         public bool AllowPhysicsForces = true;
-
-        List<Grabber> grabbers = new List<Grabber>(); // Grabbers in our trigger
-        List<UITrigger> uiTriggers = new List<UITrigger>(); // UITriggers in our trigger
-        SpringJoint joint;
-
-        bool clickingDown = false;
+        private List<Grabber> grabbers = new List<Grabber>(); // Grabbers in our trigger
+        private List<UITrigger> uiTriggers = new List<UITrigger>(); // UITriggers in our trigger
+        private SpringJoint joint;
+        private bool clickingDown = false;
         public AudioClip ButtonClick;
         public AudioClip ButtonClickUp;
 
         public UnityEvent onButtonDown;
         public UnityEvent onButtonUp;
+        private AudioSource audioSource;
+        private Rigidbody rigid;
 
-        AudioSource audioSource;
-        Rigidbody rigid;
-
-        void Start() {
+        private void Start() {
             joint = GetComponent<SpringJoint>();
             rigid = GetComponent<Rigidbody>();
 
@@ -50,13 +47,12 @@ namespace BNG {
         }
 
         // These have been hard coded for hand speed
-        float ButtonSpeed = 15f;
-        float SpringForce = 1500f;
-        Vector3 buttonDownPosition;
-        Vector3 buttonUpPosition;
+        private float ButtonSpeed = 15f;
+        private float SpringForce = 1500f;
+        private Vector3 buttonDownPosition;
+        private Vector3 buttonUpPosition;
 
-
-        void Update() {
+        private void Update() {
 
             buttonDownPosition = GetButtonDownPosition();
             buttonUpPosition = GetButtonUpPosition();
@@ -155,7 +151,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             // Check Grabber
             Grabber grab = other.GetComponent<Grabber>();
             if (grab != null) {
@@ -181,7 +177,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             Grabber grab = other.GetComponent<Grabber>();
             if (grab != null) {
                 if (grabbers.Contains(grab)) {
@@ -197,7 +193,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             // Show Grip Point
             Gizmos.color = Color.blue;
 

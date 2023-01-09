@@ -27,7 +27,7 @@ namespace BNG {
 
         private float _initialOffset = 0;
 
-        void Start() {
+        private void Start() {
 
             if(CalibrateHeightAction != null) {
                 CalibrateHeightAction.Enable();
@@ -72,7 +72,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator setupInitialOffset() {
+        private IEnumerator setupInitialOffset() {
             // Give slight delay before calibrating height
             yield return new WaitForSeconds(0.1f);
 

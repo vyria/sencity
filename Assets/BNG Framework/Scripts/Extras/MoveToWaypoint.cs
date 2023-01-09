@@ -15,24 +15,22 @@ namespace BNG {
 
         [Tooltip("Delay in seconds to way before starting movement towards Destination")]
         public float StartDelay = 0f;
-        bool reachedDelay = false;
-        float delayedTime = 0;
-
-        Vector3 previousPosition;
+        private bool reachedDelay = false;
+        private float delayedTime = 0;
+        private Vector3 previousPosition;
         public Vector3 PositionDifference;
 
         public bool MoveInUpdate = true;
         public bool MoveInFixedUpdate = true;
-
-        Rigidbody rigid;
+        private Rigidbody rigid;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             rigid = GetComponent<Rigidbody>();
             rigid.isKinematic = true;
         }
 
-        void Update() {
+        private void Update() {
             // Update delay status
             if(!reachedDelay) {
                 delayedTime += Time.deltaTime;
@@ -50,13 +48,13 @@ namespace BNG {
             previousPosition = transform.position;
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             if (MoveInFixedUpdate) {
                 movePlatform(Time.fixedDeltaTime);
             }
         }
 
-        void movePlatform(float timeDelta) {
+        private void movePlatform(float timeDelta) {
             if (IsActive && !ReachedDestination && reachedDelay && Destination != null) {
                 Vector3 direction = Destination.transform.position - transform.position;
                 rigid.MovePosition(transform.position + (direction.normalized * MovementSpeed * timeDelta));
@@ -77,7 +75,7 @@ namespace BNG {
             }
         }
 
-        void resetDelayStatus() {
+        private void resetDelayStatus() {
             reachedDelay = false;
             delayedTime = 0;
         }

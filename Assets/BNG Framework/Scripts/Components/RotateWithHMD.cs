@@ -29,17 +29,15 @@ namespace BNG {
 
         [Tooltip("If true this transform will be parented to the characterController. Set this to true if you want the position and rotation to align with the character controller without delay.")]
         public bool ParentToCharacter = false;
-
-        Transform originalParent;
+        private Transform originalParent;
 
         /// <summary>
         /// This object will be used as a reference to follow
         /// </summary>
-        Transform followTransform;
+        private Transform followTransform;
+        private Transform camTransform;
 
-        Transform camTransform;
-
-        void Start() {
+        private void Start() {
             originalParent = transform.parent;
             followTransform = new GameObject().transform;
             followTransform.name = "RotateReferenceObject";
@@ -63,10 +61,11 @@ namespace BNG {
             }
         }
 
-        void LateUpdate() {
+        private void LateUpdate() {
             UpdatePosition();
         }
-        void UpdatePosition() {
+
+        private void UpdatePosition() {
 
             // Find Main Camera Object if it changed or not yet been fou nd
             // Use the transform with the "MainCamera" tag, instead of Camera.main, as the Camera component could be disabled when using dual eye cameras.

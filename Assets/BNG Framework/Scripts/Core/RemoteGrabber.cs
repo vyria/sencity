@@ -32,7 +32,7 @@ namespace BNG {
 
         private Collider _lastColliderHit = null;
 
-        void Start() {
+        private void Start() {
             if(PhysicsCheckType == RemoteGrabType.Trigger && GetComponent<Collider>() == null) {
                 Debug.LogWarning("Remote Grabber set to 'Trigger', but no Trigger Collider was found. You may need to add a collider, or switch to a different physics check type.");
             }
@@ -107,7 +107,7 @@ namespace BNG {
             _lastColliderHit = null;
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             
             // Skip check for other PhysicsCheckTypes
             if (ParentGrabber == null || PhysicsCheckType != RemoteGrabType.Trigger) {
@@ -134,7 +134,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
 
             // Skip check for other PhysicsCheckTypes
             if (ParentGrabber == null || PhysicsCheckType != RemoteGrabType.Trigger) {
@@ -160,7 +160,7 @@ namespace BNG {
         public bool ShowGizmos = true;
 
 #if UNITY_EDITOR
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
 
             // Don't draw gizmos if this component has been disabled
             if (!this.isActiveAndEnabled) {

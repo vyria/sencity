@@ -6,13 +6,13 @@ using PMath = UnityEngine.ProBuilder.Math;
 
 namespace ProBuilder.Examples
 {
-    class MeshEditor : MonoBehaviour
+    internal class MeshEditor : MonoBehaviour
     {
-        Camera m_SceneCamera;
-        CameraMotion m_CameraMotion;
-        MeshAndFace m_Selection;
+        private Camera m_SceneCamera;
+        private CameraMotion m_CameraMotion;
+        private MeshAndFace m_Selection;
 
-        class MeshState
+        private class MeshState
         {
             public ProBuilderMesh mesh;
             public Vector3[] vertices;
@@ -31,7 +31,7 @@ namespace ProBuilder.Examples
             }
         }
 
-        class DragState
+        private class DragState
         {
             public bool active;
             public Ray constraint;
@@ -39,21 +39,21 @@ namespace ProBuilder.Examples
             public MeshState meshState;
         }
 
-        DragState m_DragState = new DragState();
+        private DragState m_DragState = new DragState();
 
-        void Awake()
+        private void Awake()
         {
             m_SceneCamera = Camera.main;
             m_CameraMotion = m_SceneCamera.GetComponent<CameraMotion>();
             Camera.onPostRender += DrawSelection;
         }
 
-        void Start()
+        private void Start()
         {
             m_CameraMotion.Focus(Vector3.zero, 10f);
         }
 
-        void Update()
+        private void Update()
         {
             if(!m_DragState.active)
                 m_Selection = Utility.PickFace(m_SceneCamera, Input.mousePosition);
@@ -61,7 +61,7 @@ namespace ProBuilder.Examples
             HandleInput();
         }
 
-        void DrawSelection(Camera cam)
+        private void DrawSelection(Camera cam)
         {
             if (m_CameraMotion.active)
                 return;
@@ -76,13 +76,13 @@ namespace ProBuilder.Examples
             }
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (!m_DragState.active)
                 m_CameraMotion.DoLateUpdate();
         }
 
-        void HandleInput()
+        private void HandleInput()
         {
             if (m_CameraMotion.active)
                 return;
@@ -108,7 +108,7 @@ namespace ProBuilder.Examples
             }
         }
 
-        void BeginDrag()
+        private void BeginDrag()
         {
             if (m_DragState.active || m_Selection.mesh == null || m_Selection.face == null)
                 return;
@@ -126,12 +126,12 @@ namespace ProBuilder.Examples
             m_DragState.offset = GetDragDistance();
         }
 
-        void EndDrag()
+        private void EndDrag()
         {
             m_DragState.active = false;
         }
 
-        void UpdateDrag()
+        private void UpdateDrag()
         {
             var distance = GetDragDistance() - m_DragState.offset;
 
@@ -150,7 +150,7 @@ namespace ProBuilder.Examples
             mesh.Refresh();
         }
 
-        float GetDragDistance()
+        private float GetDragDistance()
         {
             Ray constraint = m_DragState.constraint;
             Ray mouse = m_SceneCamera.ScreenPointToRay(Input.mousePosition);

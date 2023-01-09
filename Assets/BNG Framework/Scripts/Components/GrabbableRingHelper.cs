@@ -14,7 +14,7 @@ namespace BNG {
 
         public float RingHelperScale = 0.2f;
 
-        void Start() {
+        private void Start() {
             // Set up Ring
             if (RingOnValidPickup) {
                 RingHelper rh = GetComponentInChildren<RingHelper>();

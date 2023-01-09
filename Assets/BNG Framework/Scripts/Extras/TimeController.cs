@@ -44,16 +44,16 @@ namespace BNG {
         {
             get { return _slowingTime;  }
         }
-        bool _slowingTime = false;
-        bool routineRunning = false;
 
-        float originalFixedDelta;
-        AudioSource audioSource;
+        private bool _slowingTime = false;
+        private bool routineRunning = false;
+        private float originalFixedDelta;
+        private AudioSource audioSource;
 
         public bool ForceTimeScale = false;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             
             if(SetFixedDelta) {
                 Time.fixedDeltaTime = (Time.timeScale / UnityEngine.XR.XRDevice.refreshRate);
@@ -64,7 +64,7 @@ namespace BNG {
             audioSource = GetComponent<AudioSource>();
         }
 
-        void Update() {
+        private void Update() {
 
             if(CheckInput) {
                 if (SlowTimeInputDown() || ForceTimeScale) {
@@ -131,7 +131,7 @@ namespace BNG {
             }
         }
 
-        IEnumerator resumeTimeRoutine() {
+        private IEnumerator resumeTimeRoutine() {
             routineRunning = true;
 
             audioSource.clip = SpeedupTimeClip;

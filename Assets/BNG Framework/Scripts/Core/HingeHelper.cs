@@ -32,17 +32,16 @@ namespace BNG {
         [Header("Change Events")]
         public FloatEvent onHingeChange;
         public FloatEvent onHingeSnapChange;
-
-        Rigidbody rigid;
+        private Rigidbody rigid;
 
         private float _lastDegrees = 0;
         private float _lastSnapDegrees = 0;
 
-        void Start() {
+        private void Start() {
             rigid = GetComponent<Rigidbody>();
         }
 
-        void Update() {
+        private void Update() {
 
             // Update degrees our transform is representing
             float degrees = getSmoothedValue(transform.localEulerAngles.y);
@@ -108,7 +107,7 @@ namespace BNG {
             }
         }
 
-        float getSmoothedValue(float val) {
+        private float getSmoothedValue(float val) {
             if (val < 0) {
                 val = 360 - val;
             }

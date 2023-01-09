@@ -20,12 +20,12 @@ namespace ProBuilder.ExampleActions
 		public override Texture2D icon { get { return null; } }
 		public override TooltipContent tooltip { get { return k_Tooltip; } }
 
-		/// <summary>
-		/// What to show in the hover tooltip window.
-		/// TooltipContent is similar to GUIContent, with the exception that it also includes an optional params[]
-		/// char list in the constructor to define shortcut keys (ex, CMD_CONTROL, K).
-		/// </summary>
-		static readonly TooltipContent k_Tooltip = new TooltipContent
+        /// <summary>
+        /// What to show in the hover tooltip window.
+        /// TooltipContent is similar to GUIContent, with the exception that it also includes an optional params[]
+        /// char list in the constructor to define shortcut keys (ex, CMD_CONTROL, K).
+        /// </summary>
+        private static readonly TooltipContent k_Tooltip = new TooltipContent
 		(
 			"Set Double-Sided",
 			"Adds another face to the back of the selected faces."

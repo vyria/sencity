@@ -3,13 +3,13 @@ using UnityEngine.ProBuilder;
 
 namespace ProBuilder.Examples
 {
-	struct MeshAndFace
+    internal struct MeshAndFace
 	{
 		public ProBuilderMesh mesh;
 		public Face face;
 	}
 
-	static class Utility
+    internal static class Utility
 	{
 		internal static GameObject PickObject(Camera camera, Vector2 mousePosition)
 		{

@@ -15,10 +15,10 @@ namespace BNG {
         protected RaycastHit groundHit;
 
         // Use smooth movement if available
-        SmoothLocomotion smoothLocomotion;
+        private SmoothLocomotion smoothLocomotion;
 
         // Move characterController with platform if smoothlocomotion is not available
-        CharacterController characterController;
+        private CharacterController characterController;
 
         private Transform _initialCharacterParent;
 
@@ -30,24 +30,24 @@ namespace BNG {
         public MovingPlatform CurrentPlatform;
 
         // Were we on the platform last frame
-        bool wasOnPlatform;
-        bool requiresReparent; // Should we reparent the player after we hop off?
+        private bool wasOnPlatform;
+        private bool requiresReparent; // Should we reparent the player after we hop off?
 
         // Cache last object we raycasted so we can save a lookup
         private GameObject _lastHitObject;
 
-        void Start() {
+        private void Start() {
             smoothLocomotion = GetComponentInChildren<SmoothLocomotion>();
             characterController = GetComponentInChildren<CharacterController>();
 
             _initialCharacterParent = transform.parent;
         }
 
-        void Update() {
+        private void Update() {
             CheckMovingPlatform();
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             UpdateDistanceFromGround();
         }
 

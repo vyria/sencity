@@ -9,7 +9,7 @@ namespace BNG {
         public RaycastWeapon Weapon;
         public Text AmmoLabel;
 
-        void OnGUI() {
+        private void OnGUI() {
             string loadedShot = Weapon.BulletInChamber ? "1" : "0";
             AmmoLabel.text = loadedShot + " / " + Weapon.GetBulletCount();
         }

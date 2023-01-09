@@ -44,20 +44,19 @@ namespace BNG {
         public List<Transform> RingJoints;
         public List<Transform> PinkyJoints;
         public List<Transform> OtherJoints;
-
-        HandPose previousPose;
-        bool doSingleAnimation;
+        private HandPose previousPose;
+        private bool doSingleAnimation;
 
         // Continuously update pose state
         public bool ContinuousUpdate = false;
 
-        void Start() {
+        private void Start() {
             // Trigger a pose change to start the animation
             OnPoseChanged();
         }
 
         // This is also run in the editor
-        void Update() {
+        private void Update() {
 
             // Check for pose change event
             CheckForPoseChange();
@@ -373,8 +372,8 @@ namespace BNG {
 
 
         // How long to check for animations while in the editor mode
-        float editorAnimationTime = 0f;
-        float maxEditorAnimationTime = 2f;
+        private float editorAnimationTime = 0f;
+        private float maxEditorAnimationTime = 2f;
 
         public virtual void DoPoseUpdate() {
 
@@ -403,7 +402,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmos() {
+        private void OnDrawGizmos() {
 #if UNITY_EDITOR
             // Update every frame even while in editor
             if (!Application.isPlaying) {

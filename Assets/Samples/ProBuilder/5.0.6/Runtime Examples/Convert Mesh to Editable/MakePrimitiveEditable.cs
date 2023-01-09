@@ -9,7 +9,7 @@ namespace ProBuilder.Examples
 	[RequireComponent(typeof(MeshFilter))]
 	public class MakePrimitiveEditable : MonoBehaviour
 	{
-		void Start()
+        private void Start()
 		{
 			// Import from a GameObject. In this case we're loading and assigning to the same GameObject, but you may
 			// load and apply to different Objects as well.

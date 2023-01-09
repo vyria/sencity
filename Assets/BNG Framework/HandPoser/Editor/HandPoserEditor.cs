@@ -9,31 +9,28 @@ namespace BNG {
     [CustomEditor(typeof(HandPoser))]
     [CanEditMultipleObjects]
     public class HandPoserEditor : Editor {
-
-        SerializedProperty currentPose;
-        SerializedProperty animationSpeed;
-
-        SerializedProperty updateJointRotations;
-        SerializedProperty updateJointPositions;
-        SerializedProperty updateWristPosition;
+        private SerializedProperty currentPose;
+        private SerializedProperty animationSpeed;
+        private SerializedProperty updateJointRotations;
+        private SerializedProperty updateJointPositions;
+        private SerializedProperty updateWristPosition;
 
         // Auto Pose properties
-        SerializedProperty openHandPose;
-        SerializedProperty closedHandPose;
-        SerializedProperty autoUpdateAutoPose;
-        SerializedProperty fingerTipRadius;
-        SerializedProperty fingerTipOffsets;
+        private SerializedProperty openHandPose;
+        private SerializedProperty closedHandPose;
+        private SerializedProperty autoUpdateAutoPose;
+        private SerializedProperty fingerTipRadius;
+        private SerializedProperty fingerTipOffsets;
+        private SerializedProperty WristJoint;
+        private SerializedProperty ThumbJoints;
+        private SerializedProperty IndexJoints;
+        private SerializedProperty MiddleJoints;
+        private SerializedProperty RingJoints;
+        private SerializedProperty PinkyJoints;
+        private SerializedProperty OtherJoints;
+        private HandPoser poser;
 
-        SerializedProperty WristJoint;
-        SerializedProperty ThumbJoints;
-        SerializedProperty IndexJoints;
-        SerializedProperty MiddleJoints;
-        SerializedProperty RingJoints;
-        SerializedProperty PinkyJoints;
-        SerializedProperty OtherJoints;
-
-        HandPoser poser;
-        void OnEnable() {
+        private void OnEnable() {
             currentPose = serializedObject.FindProperty("CurrentPose");
             animationSpeed = serializedObject.FindProperty("AnimationSpeed");
             updateJointRotations = serializedObject.FindProperty("UpdateJointRotations");
@@ -55,7 +52,7 @@ namespace BNG {
             OtherJoints = serializedObject.FindProperty("OtherJoints");
         }
 
-        bool showTransformProps, showAnimationProps;       
+        private bool showTransformProps, showAnimationProps;       
 
         public override void OnInspectorGUI() {
             poser = (HandPoser)target;

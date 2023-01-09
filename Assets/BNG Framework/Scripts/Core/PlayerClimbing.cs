@@ -29,14 +29,12 @@ namespace BNG {
         public float VibrateDuration = 0.1f;
 
         // Any climber grabbers in use
-        List<Grabber> climbers;
-
-        bool wasGrippingClimbable;
-
-        CharacterController characterController;
-        SmoothLocomotion smoothLocomotion;
-        PlayerGravity playerGravity;
-        Rigidbody playerRigid;
+        private List<Grabber> climbers;
+        private bool wasGrippingClimbable;
+        private CharacterController characterController;
+        private SmoothLocomotion smoothLocomotion;
+        private PlayerGravity playerGravity;
+        private Rigidbody playerRigid;
 
         public bool IsRigidbodyPlayer {
             get {
@@ -51,8 +49,8 @@ namespace BNG {
             }
         }
 
-        bool _checkedRigidPlayer = false;
-        bool _isRigidPlayer = false;
+        private bool _checkedRigidPlayer = false;
+        private bool _isRigidPlayer = false;
 
         [Header("Shown for Debug : ")]
         /// <summary>
@@ -61,11 +59,9 @@ namespace BNG {
         public bool GrippingClimbable = false;
 
         private Vector3 moveDirection = Vector3.zero;
-
-        Vector3 previousLeftControllerPosition;
-        Vector3 previousRightControllerPosition;
-
-        Vector3 controllerMoveAmount;
+        private Vector3 previousLeftControllerPosition;
+        private Vector3 previousRightControllerPosition;
+        private Vector3 controllerMoveAmount;
 
         // Start is called before the first frame update
         public void Start() {
@@ -221,7 +217,7 @@ namespace BNG {
             wasGrippingClimbable = GrippingClimbable;
         }
 
-        void DoPhysicalClimbing() {
+        private void DoPhysicalClimbing() {
             int count = 0;
             float length = climbers.Count;
 
@@ -250,7 +246,7 @@ namespace BNG {
             }
         }
 
-        void onGrabbedClimbable() {
+        private void onGrabbedClimbable() {
             
             // Don't allow player movement while climbing
             if (smoothLocomotion) {
@@ -263,7 +259,7 @@ namespace BNG {
             }
         }
 
-        void onReleasedClimbable() {
+        private void onReleasedClimbable() {
             // Reset back to our original values
             if (smoothLocomotion) {
                 smoothLocomotion.EnableMovement();

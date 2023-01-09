@@ -68,8 +68,7 @@ namespace BNG {
         private Dictionary<Collider, Grabbable> _filtered;
         private Transform _eyeTransform;
 
-
-        void Start() {
+        private void Start() {
             NearbyGrabbables = new Dictionary<Collider, Grabbable>();
             ValidGrabbables = new Dictionary<Collider, Grabbable>();
             ValidRemoteGrabbables = new Dictionary<Collider, Grabbable>();
@@ -80,13 +79,13 @@ namespace BNG {
             }
         }
 
-        void Update() {
+        private void Update() {
             // Sort Grabbales by Distance so we can use that information later if we need it
             updateClosestGrabbable();
             updateClosestRemoteGrabbables();
         }
 
-        void updateClosestGrabbable() {
+        private void updateClosestGrabbable() {
 
             // Remove any Grabbables that may have been destroyed, deactivated, etc.
             NearbyGrabbables = SanitizeGrabbables(NearbyGrabbables);
@@ -98,7 +97,7 @@ namespace BNG {
             ClosestGrabbable = GetClosestGrabbable(ValidGrabbables);
         }
 
-        void updateClosestRemoteGrabbables() {
+        private void updateClosestRemoteGrabbables() {
 
             // Assign closest remote grabbable
             ClosestRemoteGrabbable = GetClosestGrabbable(ValidRemoteGrabbables, true, RaycastRemoteGrabbables);
@@ -308,7 +307,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
 
             // Check for standard Grabbables first
             Grabbable g = other.GetComponent<Grabbable>();
@@ -325,7 +324,7 @@ namespace BNG {
             }
         }
 
-        void OnTriggerExit(Collider other) {
+        private void OnTriggerExit(Collider other) {
             Grabbable g = other.GetComponent<Grabbable>();
             if (g != null) {
                 RemoveNearbyGrabbable(other, g);

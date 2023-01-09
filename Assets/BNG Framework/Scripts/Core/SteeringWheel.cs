@@ -103,7 +103,7 @@ namespace BNG {
         /// </summary>
         protected float smoothedAngle;
 
-        void Update() {
+        private void Update() {
 
             // Calculate rotation if being held or returning to center
             if (grab.BeingHeld) {

@@ -8,8 +8,7 @@ namespace BNG {
     [CustomEditor(typeof(Explosive))]
     [CanEditMultipleObjects]
     public class ExplosiveEditor : Editor {
-
-        Explosive explosive;
+        private Explosive explosive;
 
         public override void OnInspectorGUI() {
 

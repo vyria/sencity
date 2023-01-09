@@ -50,19 +50,17 @@ namespace BNG {
 
         [Header("Wheel Configuration")]
         public List<WheelObject> Wheels;
+        private Vector3 initialPosition;
+        private Rigidbody rb;
+        private bool wasHoldingSteering, isHoldingSteering;
 
-        Vector3 initialPosition;
-        Rigidbody rb;
-
-        bool wasHoldingSteering, isHoldingSteering;
-
-        void Start() {
+        private void Start() {
             rb = GetComponent<Rigidbody>();
             initialPosition = transform.position;
         }
 
         // Update is called once per frame
-        void Update() {
+        private void Update() {
 
             isHoldingSteering = SteeringGrabbable != null && SteeringGrabbable.BeingHeld;
 
@@ -103,7 +101,7 @@ namespace BNG {
 
         protected bool crankingEngine = false;
 
-        IEnumerator crankEngine() {
+        private IEnumerator crankEngine() {
             crankingEngine = true;
 
             if(CrankSound != null) {
@@ -144,8 +142,8 @@ namespace BNG {
                 SetMotorTorqueInput(0);
             }
         }
-        
-        void FixedUpdate() {
+
+        private void FixedUpdate() {
 
             // Update speedometer
             CurrentSpeed = correctValue(rb.velocity.magnitude * 3.6f);
@@ -224,14 +222,14 @@ namespace BNG {
             }
         }
 
-        void OnCollisionEnter(Collision collision) {
+        private void OnCollisionEnter(Collision collision) {
             float colVelocity = collision.relativeVelocity.magnitude;
             if(colVelocity > 0.1f) {
                 VRUtils.Instance.PlaySpatialClipAt(CollisionSound, collision.GetContact(0).point, 1f);
             }
         }
 
-        float correctValue(float inputValue) {
+        private float correctValue(float inputValue) {
             return (float)System.Math.Round(inputValue * 1000f) / 1000f;
         }
     }

@@ -10,8 +10,7 @@ namespace BNG {
     /// Press X to activate while in hand
     /// </summary>
     public class LaserSword : GrabbableEvents {
-
-        Grabbable grabbable;
+        private Grabbable grabbable;
 
         // Enable this when toggled on
         public Transform BladeTransform;
@@ -20,8 +19,7 @@ namespace BNG {
         public ParticleSystem CollisionParticle;        
 
         public bool BladeEnabled = false;
-
-        bool SaberSwitchOn = false;
+        private bool SaberSwitchOn = false;
 
         public float LaserLength = 1f;
         public float LaserActivateSpeed = 10f;
@@ -30,7 +28,7 @@ namespace BNG {
         public bool Colliding = false;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
             grabbable = GetComponent<Grabbable>();
 
             if(CollisionParticle != null) {
@@ -38,7 +36,7 @@ namespace BNG {
             }            
         }
 
-        void Update() {
+        private void Update() {
 
             // Toggle Saber
             if (grabbable.BeingHeld && input.BButtonDown) {
@@ -73,7 +71,7 @@ namespace BNG {
             base.OnTrigger(triggerValue);
         }
 
-        void checkCollision() {
+        private void checkCollision() {
 
             Colliding = false;
 
@@ -112,7 +110,7 @@ namespace BNG {
             }
         }
 
-        void OnDrawGizmosSelected() {
+        private void OnDrawGizmosSelected() {
             if (RaycastTransform != null) {
                 // Draws a blue line from this transform to the target
                 Gizmos.color = Color.blue;

@@ -8,26 +8,26 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 namespace ProBuilder.Examples
 {
-	/// <summary>
-	/// Do a snake-like thing with a quad and some extrudes.
-	/// </summary>
-	class ExtrudeRandomEdges : MonoBehaviour
+    /// <summary>
+    /// Do a snake-like thing with a quad and some extrudes.
+    /// </summary>
+    internal class ExtrudeRandomEdges : MonoBehaviour
 	{
-		ProBuilderMesh m_Mesh;
-		Face m_LastExtrudedFace = null;
+        private ProBuilderMesh m_Mesh;
+        private Face m_LastExtrudedFace = null;
 		public float distance = 1f;
 
-		/// <summary>
-		/// Build a starting point (in this case, a quad)
-		/// </summary>
-		void Start()
+        /// <summary>
+        /// Build a starting point (in this case, a quad)
+        /// </summary>
+        private void Start()
 		{
 			m_Mesh = ShapeGenerator.GeneratePlane(PivotLocation.Center, 1, 1, 0, 0, Axis.Up);
 			m_Mesh.GetComponent<MeshRenderer>().sharedMaterial = BuiltinMaterials.defaultMaterial;
 			m_LastExtrudedFace = m_Mesh.faces[0];
 		}
 
-		void OnGUI()
+        private void OnGUI()
 		{
 			if (GUILayout.Button("Extrude Random Edge"))
 			{
@@ -35,7 +35,7 @@ namespace ProBuilder.Examples
 			}
 		}
 
-		void ExtrudeEdge()
+        private void ExtrudeEdge()
 		{
 			// fetch a random perimeter edge connected to the last face extruded
 			List<WingedEdge> wings = WingedEdge.GetWingedEdges(m_Mesh);

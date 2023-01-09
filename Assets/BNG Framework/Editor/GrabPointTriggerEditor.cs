@@ -9,8 +9,7 @@ namespace BNG {
     [CustomEditor(typeof(GrabPointTrigger))]
     [CanEditMultipleObjects]
     public class GrabPointTriggerEditor : Editor {
-
-        GrabPointTrigger grabTrigger;
+        private GrabPointTrigger grabTrigger;
 
         public override void OnInspectorGUI() {
 

@@ -7,19 +7,16 @@ namespace BNG {
 
     [CustomEditor(typeof(InputBridge))]
     public class InputBridgeEditor : Editor {
+        private InputBridge inputBridge;
+        private SerializedProperty inputSource;
+        private SerializedProperty actionSet;
+        private SerializedProperty trackingOrigin;
+        private SerializedProperty ThumbstickDeadzoneX;
+        private SerializedProperty ThumbstickDeadzoneY;
+        private bool steamVRSupport = false;
+        private bool ovrSupport = false;
 
-        InputBridge inputBridge;
-
-        SerializedProperty inputSource;
-        SerializedProperty actionSet;
-        SerializedProperty trackingOrigin;
-        SerializedProperty ThumbstickDeadzoneX;
-        SerializedProperty ThumbstickDeadzoneY;
-
-        bool steamVRSupport = false;
-        bool ovrSupport = false;
-
-        void OnEnable() {
+        private void OnEnable() {
             inputSource = serializedObject.FindProperty("InputSource");
             actionSet = serializedObject.FindProperty("actionSet");
             trackingOrigin = serializedObject.FindProperty("TrackingOrigin");
@@ -146,8 +143,8 @@ namespace BNG {
             serializedObject.ApplyModifiedProperties();
         }
 
-        GUIStyle rt;
-        GUIStyle bold;
+        private GUIStyle rt;
+        private GUIStyle bold;
 
 
         public void DrawLabelFloat(string labelName, float value) {

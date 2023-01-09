@@ -11,17 +11,16 @@ public class AutomaticDoor : MonoBehaviour
     public float maximumClosing = 0f;
 
     public float movementSpeed = 5f;
-
-    bool playerIsHere;
+    private bool playerIsHere;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         playerIsHere = false;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (playerIsHere)
         {

@@ -23,11 +23,11 @@ namespace BNG {
         [SerializeField]
         private Transform centerEyeAnchor;
 
-        void Start() {
+        private void Start() {
             
         }
 
-        void OnCollisionStay(Collision collision) {
+        private void OnCollisionStay(Collision collision) {
 
             // Component may not be enabled
             if (!CollisionEnabled) {
@@ -42,7 +42,7 @@ namespace BNG {
             StartCoroutine(PushBackPlayer());
         }
 
-        void OnCollisionExit(Collision collision) {
+        private void OnCollisionExit(Collision collision) {
             if (OnlyCollideAgainstWorld && !collision.collider.CompareTag(worldTag)) {
                 return;
             }
@@ -50,7 +50,7 @@ namespace BNG {
             StopCoroutine(PushBackPlayer());
         }
 
-        IEnumerator PushBackPlayer() {
+        private IEnumerator PushBackPlayer() {
             if (!CollisionEnabled) {
                 yield break;
             }

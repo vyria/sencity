@@ -12,43 +12,44 @@ namespace ProBuilder.Examples
 	[RequireComponent(typeof(AudioSource))]
 	public class IcoBumpin : MonoBehaviour
 	{
-		// A reference to the ProBuilderMesh component
-		ProBuilderMesh m_ProBuilderMesh;
-		// A reference to the MeshFilter.sharedMesh
-		Mesh m_UnityMesh;
-		Transform m_Transform;
-		AudioSource m_AudioSource;
-		Vector3 m_StartingPosition = Vector3.zero;
-		float m_FaceLength;
-		const float k_TwoPi = 6.283185f;
-		// How many samples make up the waveform ring.
-		const int k_WaveformSampleCount = 1024;
-		// How many samples are used in the FFT. More means higher resolution.
-		const int k_FftSamples = 4096;
+        // A reference to the ProBuilderMesh component
+        private ProBuilderMesh m_ProBuilderMesh;
 
-		// Keep copy of the last frame's sample data to average with the current when calculating
-		// deformation amounts. Smooths the visual effect.
-		int m_FrameIndex;
+        // A reference to the MeshFilter.sharedMesh
+        private Mesh m_UnityMesh;
+        private Transform m_Transform;
+        private AudioSource m_AudioSource;
+        private Vector3 m_StartingPosition = Vector3.zero;
+        private float m_FaceLength;
+        private const float k_TwoPi = 6.283185f;
 
-		float[][] m_FourierSamples = new float[2][]
+        // How many samples make up the waveform ring.
+        private const int k_WaveformSampleCount = 1024;
+
+        // How many samples are used in the FFT. More means higher resolution.
+        private const int k_FftSamples = 4096;
+
+        // Keep copy of the last frame's sample data to average with the current when calculating
+        // deformation amounts. Smooths the visual effect.
+        private int m_FrameIndex;
+        private float[][] m_FourierSamples = new float[2][]
 		{
 			new float[k_FftSamples],
 			new float[k_FftSamples]
 		};
-
-		float[][] m_RawSamples = new float[2][]
+        private float[][] m_RawSamples = new float[2][]
 		{
 			new float[k_WaveformSampleCount],
 			new float[k_WaveformSampleCount]
 		};
 
-		// Root mean square of raw data (volume, but not in dB).
-		float[] m_Rms = new float[2];
+        // Root mean square of raw data (volume, but not in dB).
+        private float[] m_Rms = new float[2];
 
-		/// <summary>
-		/// This is the container for each extruded column. We'll use it to apply offsets per-extruded face.
-		/// </summary>
-		struct ExtrudedSelection
+        /// <summary>
+        /// This is the container for each extruded column. We'll use it to apply offsets per-extruded face.
+        /// </summary>
+        private struct ExtrudedSelection
 		{
 			/// <value>
 			/// The direction in which to move this selection when animating.
@@ -68,11 +69,11 @@ namespace ProBuilder.Examples
 			}
 		}
 
-		// All faces that have been extruded
-		ExtrudedSelection[] m_AnimatedSelections;
+        // All faces that have been extruded
+        private ExtrudedSelection[] m_AnimatedSelections;
 
-		// Keep a copy of the original vertex array to calculate the distance from origin.
-		Vector3[] m_OriginalVertexPositions, m_DisplacedVertexPositions;
+        // Keep a copy of the original vertex array to calculate the distance from origin.
+        private Vector3[] m_OriginalVertexPositions, m_DisplacedVertexPositions;
 
 		// The radius of the sphere on instantiation.
 		[Range(1f, 10f)]
@@ -122,10 +123,10 @@ namespace ProBuilder.Examples
 
 		public GameObject missingClipWarning;
 
-		/// <summary>
-		/// Creates the sphere and loads all the cache information.
-		/// </summary>
-		void Start()
+        /// <summary>
+        /// Creates the sphere and loads all the cache information.
+        /// </summary>
+        private void Start()
 		{
 			m_AudioSource = GetComponent<AudioSource>();
 
@@ -184,7 +185,7 @@ namespace ProBuilder.Examples
 			m_AudioSource.Play();
 		}
 
-		void Update()
+        private void Update()
 		{
 			int currentFrame = m_FrameIndex;
 			int previousFrame = (m_FrameIndex + 1) % 2;
@@ -250,12 +251,12 @@ namespace ProBuilder.Examples
 			m_UnityMesh.vertices = m_DisplacedVertexPositions;
 		}
 
-		/// <summary>
-		/// Root mean square is a good approximation of perceived loudness.
-		/// </summary>
-		/// <param name="arr"></param>
-		/// <returns></returns>
-		static float CalculateLoudness(float[] arr)
+        /// <summary>
+        /// Root mean square is a good approximation of perceived loudness.
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        private static float CalculateLoudness(float[] arr)
 		{
 			float v = 0f,
 				len = (float) arr.Length;

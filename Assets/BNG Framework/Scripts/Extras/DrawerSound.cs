@@ -11,9 +11,8 @@ namespace BNG {
 
         public AudioClip DrawerCloseSound;
         public float DrawerCloseValue = 20f;
-
-        bool playedOpenSound = false;
-        bool playedCloseSound = false;
+        private bool playedOpenSound = false;
+        private bool playedCloseSound = false;
 
         public void OnDrawerUpdate(float drawerValue) {
             

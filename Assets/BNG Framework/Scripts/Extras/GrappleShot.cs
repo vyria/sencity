@@ -36,37 +36,35 @@ namespace BNG {
         public AudioClip GrappleShotSound;
 
         // Are we currently grappling towards an object
-        bool grappling = false;
+        private bool grappling = false;
+
         // Were we grappling last frame
-        bool wasGrappling = false;
-
-        CharacterController characterController;
-        SmoothLocomotion smoothLocomotion;
-        PlayerGravity playerGravity;
-        PlayerClimbing playerClimbing;
-        Rigidbody playerRigid;
-
-        AudioSource audioSource;
+        private bool wasGrappling = false;
+        private CharacterController characterController;
+        private SmoothLocomotion smoothLocomotion;
+        private PlayerGravity playerGravity;
+        private PlayerClimbing playerClimbing;
+        private Rigidbody playerRigid;
+        private AudioSource audioSource;
 
         // How far away the grapple is in meters
         [Header("Shown for Debug :")]
 
         public float currentGrappleDistance = 0;
+        private bool validTargetFound = false;// Is there something valid to grapple on to
 
-        bool validTargetFound = false;// Is there something valid to grapple on to
-        
-        bool isDynamic = false; // Can we reel the object in
-        Rigidbody grappleTargetRigid; // Object we're grappling
-        Collider grappleTargetCollider; // Collider we're grappling
-        Transform grappleTargetParent; // Store original parent
-        bool requireRelease = false; // Require release to be pressed before continuing
-        bool climbing = false; // Have we transitioned to climbing?
+        private bool isDynamic = false; // Can we reel the object in
+        private Rigidbody grappleTargetRigid; // Object we're grappling
+        private Collider grappleTargetCollider; // Collider we're grappling
+        private Transform grappleTargetParent; // Store original parent
+        private bool requireRelease = false; // Require release to be pressed before continuing
+        private bool climbing = false; // Have we transitioned to climbing?
 
         // We will use the climbable as our means of moving and pulling the character around
         public Climbable ClimbHelper;
 
         // Start is called before the first frame update
-        void Start() {
+        private void Start() {
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player) {
@@ -129,7 +127,7 @@ namespace BNG {
             base.OnTrigger(triggerValue);
         }
 
-        void updateGrappleDistance() {
+        private void updateGrappleDistance() {
             // Update Distance
             if (grappling) {
                 currentGrappleDistance = Vector3.Distance(MuzzleTransform.position, HitTargetPrefab.position);
@@ -150,7 +148,7 @@ namespace BNG {
         }
 
         // Called when grappling previous frame, but not this one
-        void onReleaseGrapple() {
+        private void onReleaseGrapple() {
 
             // Reset gravity back to normal
             changeGravity(true);
@@ -178,7 +176,7 @@ namespace BNG {
         }
 
         // Draw area where Grapple will land
-        void drawGrappleHelper() {
+        private void drawGrappleHelper() {
 
             if (HitTargetPrefab) {
 
@@ -230,19 +228,19 @@ namespace BNG {
             }
         }
 
-        void drawGrappleLine() {
+        private void drawGrappleLine() {
             GrappleLine.gameObject.SetActive(true);
             GrappleLine.SetPosition(0, MuzzleTransform.position);
             GrappleLine.SetPosition(1, HitTargetPrefab.position);
         }
 
-        void hideGrappleLine() {            
+        private void hideGrappleLine() {            
             if (GrappleLine && GrappleLine.gameObject.activeSelf) {
                 GrappleLine.gameObject.SetActive(false);
             }
         }
 
-        void showGrappleHelper(Vector3 pos, Quaternion rot) {
+        private void showGrappleHelper(Vector3 pos, Quaternion rot) {
 
             HitTargetPrefab.gameObject.SetActive(true);
 
@@ -257,7 +255,7 @@ namespace BNG {
             }
         }
 
-        void hideGrappleHelper() {
+        private void hideGrappleHelper() {
             if(HitTargetPrefab && HitTargetPrefab.gameObject.activeSelf) {
                 HitTargetPrefab.gameObject.SetActive(false);
             }
@@ -267,7 +265,7 @@ namespace BNG {
             }
         }
 
-        void reelInGrapple(float triggerValue) {
+        private void reelInGrapple(float triggerValue) {
 
             // Has the collider been destroyed or disabled?
             if(validTargetFound && grappleTargetCollider != null && !grappleTargetCollider.enabled) {
@@ -333,7 +331,7 @@ namespace BNG {
         }
 
         // Shoot the valid out if valid target
-        void shootGrapple() {
+        private void shootGrapple() {
            
             if(validTargetFound) {
 
@@ -350,14 +348,14 @@ namespace BNG {
             }
         }
 
-        void dropGrapple() {
+        private void dropGrapple() {
             grappling = false;
             validTargetFound = false;
             isDynamic = false;
             wasGrappling = false;
         }
 
-        void changeGravity(bool gravityOn) {
+        private void changeGravity(bool gravityOn) {
             if(playerGravity) {
                 playerGravity.ToggleGravity(gravityOn);
             }

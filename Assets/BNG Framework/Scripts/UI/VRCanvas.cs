@@ -11,8 +11,7 @@ namespace BNG {
     [RequireComponent(typeof(GraphicRaycaster))]
     [RequireComponent(typeof(Canvas))]
     public class VRCanvas : MonoBehaviour {
-
-        void Start() {
+        private void Start() {
             VRUISystem.Instance.AddCanvas(GetComponent<Canvas>());
         }
     }
