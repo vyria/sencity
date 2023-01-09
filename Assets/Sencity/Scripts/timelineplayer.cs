@@ -5,21 +5,13 @@ using UnityEngine.Playables;
 
 public class timelineplayer : MonoBehaviour
 {
-    public PlayableDirector AfterHackingTimeline;
-    public PlayableDirector OpeningTimeline;
+    public PlayableDirector HackingTimeline;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            AfterHackingTimeline.Play();
-        }
-    }
-    void OnTriggerExis(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            AfterHackingTimeline.Play();
+            HackingTimeline.Play();
         }
     }
 }

@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: apartment
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -75,6 +76,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TerrainHolesTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Amplitude: 1
     - _BumpScale: 1
@@ -88,7 +94,14 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.394
     - _GlossyReflections: 1
+    - _HaloPower: 32
+    - _HaloSpeed: 1
+    - _HaloWidth: 2
     - _ImpactSpeed: 0.5
+    - _LightSweepAmp: 1
+    - _LightSweepExp: 10
+    - _LightSweepInterval: 20
+    - _LightSweepSpeed: 10
     - _MaxWaveDistortion: 1
     - _Metallic: 0.387
     - _Mode: 0
@@ -97,6 +110,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.25
     - _Parallax: 0.02
+    - _Radius: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0.25
@@ -106,12 +120,17 @@ Material:
     - _WaveSpeed: -5
     - _ZWrite: 1
     m_Colors:
+    - _Center: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.7000712, g: 0.7180555, b: 0.8679245, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlowDirection: {r: 1, g: 0, b: 0, a: 0}
     - _FlowDirection1: {r: 0.05, g: 0, b: 0, a: 1}
     - _FlowDirection2: {r: 0, g: 0.05, b: 0, a: 1}
+    - _HaloColor: {r: 0.17676401, g: 0, b: 1, a: 1}
     - _ImpactOrigin: {r: -5, g: 0, b: 0, a: 0}
+    - _LightSweepAddColor: {r: 0, g: 0, b: 0, a: 0}
+    - _LightSweepColor: {r: 1, g: 0, b: 0, a: 0}
+    - _LightSweepVector: {r: 0, g: 0, b: 1, a: 0}
     - _ModelOrigin: {r: 0, g: 0, b: 0, a: 0}
     - _MovementDirection: {r: 0, g: -1, b: 0, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
